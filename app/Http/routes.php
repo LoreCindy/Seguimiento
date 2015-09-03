@@ -13,9 +13,27 @@
 
 Route::get('/', 'WelcomeController@index');
 
-Route::get('home', 'HomeController@index');
+//Route::get('home', 'HomeController@index');
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',
+]);
+
+
+
+
+Route::resource('proyectos', 'proyectoController');
+
+Route::get('proyectos/{id}/delete', [
+    'as' => 'proyectos.delete',
+    'uses' => 'proyectoController@destroy',
+]);
+
+
+Route::resource('formatolistas', 'formatolistaController');
+
+Route::get('formatolistas/{id}/delete', [
+    'as' => 'formatolistas.delete',
+    'uses' => 'formatolistaController@destroy',
 ]);
