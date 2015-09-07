@@ -18,8 +18,8 @@
 
 <!--- Nombre Tipocontratacion Field --->
 <div class="form-group col-sm-6 col-lg-4">
-    {!! Form::label('nombre_tipoContratacion', 'Nombre Tipocontratacion:') !!}
-    {!! Form::text('nombre_tipoContratacion', null, ['class' => 'form-control']) !!}
+   {!! Form::label('nombre_tipoContratacion', 'Nombre Tipocontratacion:') !!}
+   {!! Form::select('nombre_tipoContratacion', ['Contrato' => 'Contrato', 'Convenio' => 'Convenio'], null, ['class' => 'form-control']) !!}
 </div>
 
 

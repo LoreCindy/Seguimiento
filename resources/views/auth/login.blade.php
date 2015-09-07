@@ -24,14 +24,15 @@
 	<![endif]-->
 </head>
 <body>
-<div class="container">
-<div class="container-fluid">
-	<div class="row">
-		<div class="col-md-8 col-md-offset-2">
-			<div class="panel panel-default">
-				<div class="panel-heading">Login</div>
-				<div class="panel-body">
-					@if (count($errors) > 0)
+<div id="loginModal" class="modal show" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+  <div class="modal-content">
+      <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <h1 class="text-center">Login</h1>
+      </div>
+      <div class="modal-body">
+      @if (count($errors) > 0)
 						<div class="alert alert-danger">
 							<strong>Whoops!</strong> There were some problems with your input.<br><br>
 							<ul>
@@ -41,24 +42,14 @@
 							</ul>
 						</div>
 					@endif
-
-					<form class="form-horizontal" role="form" method="POST" action="/auth/login">
+          <form class="form-horizontal" role="form" method="POST" action="/contratacion/public/auth/login">
 						<input type="hidden" name="_token" value="{{ csrf_token() }}">
-
 						<div class="form-group">
-							<label class="col-md-4 control-label">E-Mail Address</label>
-							<div class="col-md-6">
-								<input type="email" class="form-control" name="email" value="{{ old('email') }}">
-							</div>
+							<input type="email" class="form-control input-lg" name="email" value="{{ old('email') }}" placeholder="Email">
 						</div>
-
 						<div class="form-group">
-							<label class="col-md-4 control-label">Password</label>
-							<div class="col-md-6">
-								<input type="password" class="form-control" name="password">
-							</div>
+							<input type="password" class="form-control input-lg" name="password" placeholder="password">
 						</div>
-
 						<div class="form-group">
 							<div class="col-md-6 col-md-offset-4">
 								<div class="checkbox">
@@ -68,24 +59,22 @@
 								</div>
 							</div>
 						</div>
-
 						<div class="form-group">
-							<div class="col-md-6 col-md-offset-4">
-								<button type="submit" class="btn btn-primary" style="margin-right: 15px;">
-									Login
-								</button>
-
-								<a href="/password/email">Forgot Your Password?</a>
-							</div>
+								<button type="submit" class="btn btn-primary btn-lg btn-block" style="margin-right: 15px;">Login</button>
+								<span class="pull-right"><a href="register">Register</a></span>
+								<span><a href="/contratacion/public/password/email">Forgot Your Password?</a></span>
+							
 						</div>
 					</form>
-				</div>
-			</div>
-		</div>
-	</div>
+      </div>
+
+  </div>
+  </div>
 </div>
-</div>
+
 
 </body>
 </html>
+
+
 
