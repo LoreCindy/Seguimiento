@@ -39,9 +39,6 @@
 				<ul class="nav navbar-nav">
 					<li><a href="/">Home</a></li>
 					<li><a href="proyectos">proyecto</a></li>
-					<li><a href="formatolistas">formato Lista</a></li>
-					<li><a href="formatoLegalizacions">formato legalizacion</a></li>
-					<li><a href="chequeos">Chequeo</a></li>
 				</ul>
 
 				<ul class="nav navbar-nav navbar-right">
