@@ -7,7 +7,7 @@
 <!--- Fecha Formato Field --->
 <div class="form-group col-sm-6 col-lg-4">
     {!! Form::label('fecha_formato', 'Fecha Formato:') !!}
-    {!! Form::text('fecha_formato', null, ['class' => 'form-control']) !!}
+   {!! Form::input('date', 'fecha_formato', date('Y-m-d'), ['class' => 'form-control']) !!}
 </div>
 
 

@@ -35,3 +35,35 @@ Route::get('formatolistas/{id}/delete', [
     'as' => 'formatolistas.delete',
     'uses' => 'formatolistaController@destroy',
 ]);
+
+
+Route::resource('students', 'StudentController');
+
+Route::get('students/{id}/delete', [
+    'as' => 'students.delete',
+    'uses' => 'StudentController@destroy',
+]);
+
+
+Route::resource('formatoLegalizacions', 'FormatoLegalizacionController');
+
+Route::get('formatoLegalizacions/{id}/delete', [
+    'as' => 'formatoLegalizacions.delete',
+    'uses' => 'FormatoLegalizacionController@destroy',
+]);
+
+
+Route::resource('chequeos', 'chequeoController');
+
+Route::get('chequeos/{id}/delete', [
+    'as' => 'chequeos.delete',
+    'uses' => 'chequeoController@destroy',
+]);
+
+
+Route::resource('datosGenerales', 'datosGeneralesController');
+
+Route::get('datosGenerales/{id}/delete', [
+    'as' => 'datosGenerales.delete',
+    'uses' => 'datosGeneralesController@destroy',
+]);
