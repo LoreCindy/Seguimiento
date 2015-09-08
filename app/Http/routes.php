@@ -67,3 +67,11 @@ Route::get('datosGenerales/{id}/delete', [
     'as' => 'datosGenerales.delete',
     'uses' => 'datosGeneralesController@destroy',
 ]);
+
+
+Route::resource('detalleRevisions', 'detalleRevisionController');
+
+Route::get('detalleRevisions/{id}/delete', [
+    'as' => 'detalleRevisions.delete',
+    'uses' => 'detalleRevisionController@destroy',
+]);

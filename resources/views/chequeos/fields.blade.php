@@ -6,8 +6,9 @@
 
 <!--- Legalizacion Id Field --->
 <div class="form-group col-sm-6 col-lg-4">
-    {!! Form::label('legalizacion_id', 'Legalizacion Id:') !!}
+  {!! Form::label('legalizacion_id', 'Legalizacion Id:') !!}
     {!! Form::text('legalizacion_id', null, ['class' => 'form-control']) !!}
+
 </div>
 
 <!--- Nombre Supervisor Field --->
