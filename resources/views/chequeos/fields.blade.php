@@ -1,13 +1,7 @@
 <!--- Legalizacion Id Field --->
 <div class="form-group col-sm-6 col-lg-4">
-    {!! Form::label('legalizacion_id', 'Legalizacion Id:') !!}
-    {!! Form::text('legalizacion_id', null, ['class' => 'form-control']) !!}
-</div>
-
-<!--- Legalizacion Id Field --->
-<div class="form-group col-sm-6 col-lg-4">
-  {!! Form::label('legalizacion_id', 'Legalizacion Id:') !!}
-    {!! Form::text('legalizacion_id', null, ['class' => 'form-control']) !!}
+  {!! Form::label('legalizacion_id', 'Legalizacion:') !!}
+  {!! Form::select('formatoLegalizacion_id', $legal, null, ['class' => 'form-control']) !!}
 
 </div>
 
@@ -19,7 +13,7 @@
 
 <!--- Dac Field --->
 <div class="form-group col-sm-6 col-lg-4">
-    {!! Form::label('dac', 'Dac:') !!}
+    {!! Form::label('dac', 'DAC:') !!}
     {!! Form::text('dac', null, ['class' => 'form-control']) !!}
 </div>
 

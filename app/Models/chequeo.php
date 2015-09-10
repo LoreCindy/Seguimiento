@@ -12,7 +12,6 @@ class chequeo extends Model
 	public $timestamps = true;
 
 	public $fillable = [
-	    "legalizacion_id",
 		"legalizacion_id",
 		"nombre_supervisor",
 		"dac",
@@ -21,7 +20,6 @@ class chequeo extends Model
 
 	public static $rules = [
 	    "legalizacion_id" => "required",
-		"legalizacion_id" => "required",
 		"nombre_supervisor" => "required",
 		"dac" => "required",
 		"observaciones" => "required"

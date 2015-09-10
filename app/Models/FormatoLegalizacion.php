@@ -12,12 +12,12 @@ class FormatoLegalizacion extends Model
 	public $timestamps = true;
 
 	public $fillable = [
-	    "nombreDato",
+	    "documentos_legalizacion",
 		"formatoLista_id"
 	];
 
 	public static $rules = [
-	    "nombreDato" => "required",
+	    "documentos_legalizacion" => "required",
 		"formatoLista_id" => "required"
 	];
 
