@@ -49,8 +49,7 @@ class chequeoController extends AppBaseController
 	 */
 	public function create()
 	{
-		$data= ['legal'=>\DB::table('formato_legalizacions')->lists('documentos_legalizacion', 'id')];
-		return view('chequeos.create', $data);
+		return view('chequeos.create');
 	}
 
 	/**
@@ -100,16 +99,14 @@ class chequeoController extends AppBaseController
 	public function edit($id)
 	{
 		$chequeo = chequeo::find($id);
-		$data= ['legal'=>\DB::table('formato_legalizacions')->lists('documentos_legalizacion', 'id')];
+
 		if(empty($chequeo))
 		{
 			Flash::error('chequeo not found');
 			return redirect(route('chequeos.index'));
 		}
 
-		return view('chequeos.edit')->with('chequeo', $chequeo)
-		 ->with($data);
-
+		return view('chequeos.edit')->with('chequeo', $chequeo);
 	}
 
 	/**

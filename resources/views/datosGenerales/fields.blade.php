@@ -7,9 +7,8 @@
 <!--- Formatolista Id Field --->
  
 <div class="form-group col-sm-6 col-lg-4">
-    {!! Form::label('formatolista_id', 'Formato Lista:') !!}
+    {!! Form::label('formatolista_id', 'Formatolista Id:') !!}
 	{!! Form::select('formatolista_id', $formatolistas,null, ['class' => 'form-control']) !!}
-    
 </div>
  
 

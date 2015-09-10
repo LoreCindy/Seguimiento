@@ -26,7 +26,7 @@ return [
 	|
 	*/
 
-	'url' => 'http://localhost:8080/contratacion/public',
+	'url' => 'http://localhost:8080/',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -136,7 +136,6 @@ return [
 		'Illuminate\Validation\ValidationServiceProvider',
 		'Illuminate\View\ViewServiceProvider',
 
-		
 		'Illuminate\Html\HtmlServiceProvider',
 		'Laracasts\Flash\FlashServiceProvider',
 		'Mitul\Generator\GeneratorServiceProvider',

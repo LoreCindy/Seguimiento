@@ -13,21 +13,20 @@
 <!--- Nombre Modalidad Field --->
 <div class="form-group col-sm-6 col-lg-4">
     {!! Form::label('nombre_modalidad', 'Nombre Modalidad:') !!}
-   
-    {!! Form::select('nombre_modalidad', ['Seleccion abreviada' => 'Selección Abreviada', 'Concurso_meritos' 
-    => 'Concurso Meritos', 'Licitacion Pública'  => 'Licitacion Pública', 'Minima Cuantia' 
-    => 'Minima Cuantía', 'Regimen Especial' => 'Regimen Especial', 'Contratación Directa' => 'Contratación Directa'], null, ['class' => 'form-control']) !!}
-
+    {!! Form::text('nombre_modalidad', null, ['class' => 'form-control']) !!}
 </div>
 
 <!--- Nombre Tipocontratacion Field --->
 <div class="form-group col-sm-6 col-lg-4">
-   {!! Form::label('nombre_tipoContratacion', 'Nombre Tipocontratacion:') !!}
+   {!! Form::label('nombre_tipoContratacion', 'Tipo Contratacion:') !!}
    {!! Form::select('nombre_tipoContratacion', ['Contrato' => 'Contrato', 'Convenio' => 'Convenio'], null, ['class' => 'form-control']) !!}
 </div>
 
 
 <!--- Submit Field --->
 <div class="form-group col-sm-12">
-    {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
+    {!! Form::submit('Guardar', ['class' => 'btn btn-primary']) !!}
+    {!! link_to(URL::previous(), 'Cancelar', ['class' => 'btn btn-danger']) !!}
 </div>
+
+

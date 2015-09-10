@@ -9,6 +9,7 @@ use Response;
 use Flash;
 use Schema;
 
+
 class proyectoController extends AppBaseController
 {
 
@@ -31,6 +32,8 @@ class proyectoController extends AppBaseController
 	 */
 	public function index(Request $request)
 	{
+		$proyectos = \DB::table('proyectos')->paginate(5);
+
 		$query = proyecto::query();
         $columns = Schema::getColumnListing('$TABLE_NAME$');
         $attributes = array();
@@ -45,11 +48,12 @@ class proyectoController extends AppBaseController
             }
         };
 
-        $proyectos = $query->get();
+      //  $proyectos = $query->get();
 
         return view('proyectos.index')
-            ->with('proyectos', $proyectos)
-            ->with('attributes', $attributes);
+            //->with('proyectos', $proyectos)
+            ->with('attributes', $attributes)
+            ->with('proyectos',$proyectos);
 	}
 
 	/**

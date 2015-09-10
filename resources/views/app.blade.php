@@ -39,14 +39,15 @@
 				<ul class="nav navbar-nav">
 					<li><a href="/">Home</a></li>
 					<li><a href="proyectos">proyecto</a></li>
-						<li><a href="formatolistas">Formato lista</a></li>
-				<li><a href="datosGenerales">datos generales</a></li>
-				<li><a href="formatoLegalizacions">Legalizacion</a></li>
-				<li><a href="chequeos">Chequeo</a></li>
-				<li><a href="revisions">Revisiones</a></li>
-				<li><a href="detalleRevisions">Detallelle revision</a></li>
-
-
+					<li class="dropdown">
+		              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Formato<span class="caret"></span></a>
+		              <ul class="dropdown-menu">
+		              	<li><a href="formatolistas">formato Lista</a></li>
+		              	<li><a href="datosGenerales">datos generales</a></li>
+		              	<li><a href="formatoLegalizacions">formato legalizacion</a></li>
+		              </ul>
+            		</li>
+					<li><a href="chequeos">Chequeo</a></li>
 				</ul>
 
 				<ul class="nav navbar-nav navbar-right">

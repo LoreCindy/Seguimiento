@@ -49,8 +49,8 @@ class FormatoLegalizacionController extends AppBaseController
 	 */
 	public function create()
 	{
-		 $datas= ['formatolista' =>\DB::table('formatolistas')->lists('nombre_formato', 'id')];
-		return view('formatoLegalizacions.create', $datas);
+		 $data = ['formatolistas' =>\DB::table('formatolistas')->lists('nombre_formato', 'id')];
+		return view('formatoLegalizacions.create',$data);
 	}
 
 	/**
@@ -100,7 +100,7 @@ class FormatoLegalizacionController extends AppBaseController
 	public function edit($id)
 	{
 		$formatoLegalizacion = FormatoLegalizacion::find($id);
- 		$datas= ['formatolista' =>\DB::table('formatolistas')->lists('nombre_formato', 'id')];
+		 $data = ['formatolistas' =>\DB::table('formatolistas')->lists('nombre_formato', 'id')];
 		if(empty($formatoLegalizacion))
 		{
 			Flash::error('FormatoLegalizacion not found');
@@ -108,7 +108,7 @@ class FormatoLegalizacionController extends AppBaseController
 		}
 
 		return view('formatoLegalizacions.edit')->with('formatoLegalizacion', $formatoLegalizacion)
-		->with($datas);
+												->with($data);
 	}
 
 	/**
