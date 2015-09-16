@@ -7,7 +7,7 @@
         @include('flash::message')
 
         <div class="row">
-            <h1 class="pull-left">formatolistas</h1>
+            <h1 class="pull-left">Formato Listas</h1>
             <a class="btn btn-primary pull-right" style="margin-top: 25px" href="{!! route('formatolistas.create') !!}">Add New</a>
         </div>
 
@@ -19,7 +19,7 @@
                     <thead>
                     <th>Nombre Formato</th>
 			<th>Fecha Formato</th>
-                    <th width="50px">Action</th>
+                    <th width="50px">Opciones</th>
                     </thead>
                     <tbody>
                      
@@ -33,6 +33,7 @@
                             </td>
                         </tr>
                     @endforeach
+                      {!! $formatolistas->render()!!}
                     </tbody>
                 </table>
             @endif

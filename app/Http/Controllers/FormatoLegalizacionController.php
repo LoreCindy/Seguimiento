@@ -35,7 +35,7 @@ class FormatoLegalizacionController extends AppBaseController
             }
         };
 
-        $formatoLegalizacions = $query->get();
+        $formatoLegalizacions = $query->paginate(5);
 
         return view('formatoLegalizacions.index')
             ->with('formatoLegalizacions', $formatoLegalizacions)

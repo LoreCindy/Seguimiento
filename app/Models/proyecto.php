@@ -11,6 +11,11 @@ class proyecto extends Model
     
 	public $timestamps = true;
 
+	public function  revision()
+	{
+		return $this->hasMany('App\Models\revision', 'proyecto_id');
+	}
+
 	public $fillable = [
 	    "fecha_radicacion",
 		"nombre_contratatista",

@@ -35,7 +35,7 @@ class detalleRevisionController extends AppBaseController
             }
         };
 
-        $detalleRevisions = $query->get();
+        $detalleRevisions = $query->paginate(5);
 
         return view('detalleRevisions.index')
             ->with('detalleRevisions', $detalleRevisions)

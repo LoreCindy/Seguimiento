@@ -1,7 +1,7 @@
 <!--- Estado Field --->
 <div class="form-group col-sm-6 col-lg-4">
     {!! Form::label('estado', 'Estado:') !!}
-    {!! Form::text('estado', null, ['class' => 'form-control']) !!}
+    {!! Form::select('estado', ['Recibido' => 'Recibido', 'Devolucion' => 'Devolución', 'Aprobado' => 'Aprobado'], null, ['class' => 'form-control']) !!}
 </div>
 
 <!--- Fecha Field --->
@@ -33,4 +33,5 @@
 <!--- Submit Field --->
 <div class="form-group col-sm-12">
     {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
+       {!! link_to(URL::previous(), 'Cancelar', ['class' => 'btn btn-danger']) !!}
 </div>

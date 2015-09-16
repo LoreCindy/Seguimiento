@@ -7,7 +7,7 @@
         @include('flash::message')
 
         <div class="row">
-            <h1 class="pull-left">chequeos</h1>
+            <h1 class="pull-left">Chequeo</h1>
             <a class="btn btn-primary pull-right" style="margin-top: 25px" href="{!! route('chequeos.create') !!}">Add New</a>
         </div>
 
@@ -17,19 +17,19 @@
             @else
                 <table class="table">
                     <thead>
-                    <th>Legalizacion Id</th>
-			<th>Legalizacion Id</th>
+                    
+			<th>Formato Legalización</th>
 			<th>Nombre Supervisor</th>
-			<th>Dac</th>
+			<th>DAC</th>
 			<th>Observaciones</th>
-                    <th width="50px">Action</th>
+                    <th width="50px">Opciones</th>
                     </thead>
                     <tbody>
                      
                     @foreach($chequeos as $chequeo)
                         <tr>
-                            <td>{!! $chequeo->legalizacion_id !!}</td>
-					<td>{!! $chequeo->legalizacion_id !!}</td>
+                       
+					<td>{!! $chequeo->legalizacion->documentos_legalizacion !!}</td>
 					<td>{!! $chequeo->nombre_supervisor !!}</td>
 					<td>{!! $chequeo->dac !!}</td>
 					<td>{!! $chequeo->observaciones !!}</td>
@@ -39,6 +39,7 @@
                             </td>
                         </tr>
                     @endforeach
+                    {!! $chequeos->render()!!}
                     </tbody>
                 </table>
             @endif

@@ -11,6 +11,37 @@ class revision extends Model
     
 	public $timestamps = true;
 
+
+	public function  detalle()
+	{
+		return $this->hasMany('App\Models\detalleRevision', 'revision_id');
+	}
+
+		public function  proyecto()
+		{
+			return $this->belongsTo('App\Models\proyecto', 'proyecto_id');
+		}
+
+		public function  formato()
+		{
+			return $this->belongsTo('App\Models\formatolista', 'formatoLista_id');
+		}
+
+		public function  general()
+		{
+			return $this->belongsTo('App\Models\datosGenerales', 'datosGenerales_id');
+		}
+
+		public function  legalizacion()
+		{
+			return $this->belongsTo('App\Models\formatoLegalizacion', 'formatoLegalizacion_id');
+		}
+
+		public function  chequeo()
+		{
+			return $this->belongsTo('App\Models\chequeo', 'chequeo_id');
+		}
+
 	public $fillable = [
 	    "nombre_revision",
 		"proyecto_id",
@@ -30,5 +61,7 @@ class revision extends Model
 		"formatoLegalizacion_id" => "required",
 		"chequeo_id" => "required"
 	];
+
+	
 
 }

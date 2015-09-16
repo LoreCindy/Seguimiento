@@ -13,7 +13,10 @@
 <!--- Nombre Modalidad Field --->
 <div class="form-group col-sm-6 col-lg-4">
     {!! Form::label('nombre_modalidad', 'Nombre Modalidad:') !!}
-    {!! Form::text('nombre_modalidad', null, ['class' => 'form-control']) !!}
+    {!! Form::select('nombre_modalidad', ['Seleccion abreviada' => 'Seleccion Abreviada', 'Concurso_meritos' 
+    => 'Concurso Meritos', 'Licitacion Publica'  => 'Licitacion Publica', 'Minima Cuantia' 
+    => 'Minima Cuantia', 'Regimen Especial' => 'Regimen Especial', 'Contratacion Directa' => 'Contratacion Directa'], null, ['class' => 'form-control']) !!}
+
 </div>
 
 <!--- Nombre Tipocontratacion Field --->

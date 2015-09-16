@@ -35,7 +35,8 @@ class datosGeneralesController extends AppBaseController
             }
         };
 
-        $datosGenerales = $query->get();
+        $datosGenerales = $query->paginate(5);
+
 
         return view('datosGenerales.index')
             ->with('datosGenerales', $datosGenerales)

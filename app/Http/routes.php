@@ -59,3 +59,30 @@ Route::get('chequeos/{id}/delete', [
     'as' => 'chequeos.delete',
     'uses' => 'chequeoController@destroy',
 ]);
+
+
+
+
+Route::resource('datosGenerales', 'datosGeneralesController');
+
+Route::get('datosGenerales/{id}/delete', [
+    'as' => 'datosGenerales.delete',
+    'uses' => 'datosGeneralesController@destroy',
+]);
+
+
+Route::resource('revisions', 'revisionController');
+
+Route::get('revisions/{id}/delete', [
+    'as' => 'revisions.delete',
+    'uses' => 'revisionController@destroy',
+]);
+
+
+Route::resource('detalleRevisions', 'detalleRevisionController');
+
+Route::get('detalleRevisions/{id}/delete', [
+    'as' => 'detalleRevisions.delete',
+    'uses' => 'detalleRevisionController@destroy',
+]);
+

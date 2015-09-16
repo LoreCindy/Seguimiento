@@ -44,7 +44,7 @@
 
 <!--- Chequeo Id Field --->
 <div class="form-group col-sm-6 col-lg-4">
-    {!! Form::label('chequeo_id', 'Chequeo:') !!}
+    {!! Form::label('chequeo_id', 'Chequeo(Supervisor):') !!}
    {!! Form::select('chequeo_id', $chequeos, null, ['class' => 'form-control']) !!}
 </div>
 
@@ -52,4 +52,5 @@
 <!--- Submit Field --->
 <div class="form-group col-sm-12">
     {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
+       {!! link_to(URL::previous(), 'Cancelar', ['class' => 'btn btn-danger']) !!}
 </div>

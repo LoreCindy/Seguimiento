@@ -6,6 +6,12 @@ html {
 }
 body {
   margin: 0;
+  background-color:rgb(127,166,243);
+
+}
+
+.fondo{
+background-image: url('images/fondo.jpg');
 }
 article,
 aside,

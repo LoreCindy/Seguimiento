@@ -21,6 +21,7 @@ class formatolistaController extends AppBaseController
 	 */
 	public function index(Request $request)
 	{
+		$formatolista= \DB::table('formatolistas')->paginate(5);
 		$query = formatolista::query();
         $columns = Schema::getColumnListing('$TABLE_NAME$');
         $attributes = array();
@@ -35,10 +36,10 @@ class formatolistaController extends AppBaseController
             }
         };
 
-        $formatolistas = $query->get();
+       // $formatolistas = $query->get();
 
         return view('formatolistas.index')
-            ->with('formatolistas', $formatolistas)
+            ->with('formatolistas', $formatolista)
             ->with('attributes', $attributes);
 	}
 

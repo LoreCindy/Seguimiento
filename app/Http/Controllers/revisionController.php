@@ -21,6 +21,8 @@ class revisionController extends AppBaseController
 	 */
 	public function index(Request $request)
 	{
+		//$revisions= \DB::table('revisions')->paginate();
+
 		$query = revision::query();
         $columns = Schema::getColumnListing('$TABLE_NAME$');
         $attributes = array();
@@ -34,12 +36,11 @@ class revisionController extends AppBaseController
                 $attributes[$attribute] =  null;
             }
         };
-
-        $revisions = $query->get();
-
+		$revisions = $query->paginate(5);
         return view('revisions.index')
-            ->with('revisions', $revisions)
-            ->with('attributes', $attributes);
+           // ->with('revisions', $revisions)
+            ->with('attributes', $attributes)
+            ->with('revisions', $revisions);
 	}
 
 	/**
@@ -178,4 +179,17 @@ class revisionController extends AppBaseController
 
 		return redirect(route('revisions.index'));
 	}
+
+
+	public  function  firstMethod (){ 
+    $formatolistas =  DB :: table ( 'formatolistas' ) -> get (); 
+    return  View :: make ( 'myview' ,[ 'formatolistas'  =>  $formatolistas ]); 
+	}
+
+	public function secondMethod($id){
+    $datosgenerales = DB::table('datos_generales')->where('formatolista_id', $id)->get();
+    return View::make('thisview', ['datosgenerales' => $datosgenerales);
+}
+
+
 }

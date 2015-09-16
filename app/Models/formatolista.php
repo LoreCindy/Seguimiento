@@ -11,6 +11,24 @@ class formatolista extends Model
     
 	public $timestamps = true;
 
+	public function  revision()
+	{
+		return $this->hasMany('App\Models\revision', 'formatoLista_id');
+	}
+
+	public function  legalizacion()
+	{
+		return $this->hasMany('App\Models\FormatoLegalizacion', 'formatoLista_id');
+	}
+
+	public function  datos()
+	{
+		return $this->hasMany('App\Models\datosGenerales', 'formatolista_id');
+	}
+
+
+
+
 	public $fillable = [
 	    "nombre_formato",
 		"fecha_formato"

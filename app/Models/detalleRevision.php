@@ -11,6 +11,13 @@ class detalleRevision extends Model
     
 	public $timestamps = true;
 
+	public function  revision()
+		{
+			return $this->belongsTo('App\Models\revision', 'revision_id');
+		}
+
+		
+
 	public $fillable = [
 	    "estado",
 		"fecha",
@@ -26,5 +33,7 @@ class detalleRevision extends Model
 		"dependencia_responsable" => "required",
 		"revision_id" => "required"
 	];
+
+	
 
 }

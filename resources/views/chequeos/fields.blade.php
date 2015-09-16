@@ -1,13 +1,7 @@
 <!--- Legalizacion Id Field --->
 <div class="form-group col-sm-6 col-lg-4">
-    {!! Form::label('legalizacion_id', 'Legalizacion Id:') !!}
-    {!! Form::text('legalizacion_id', null, ['class' => 'form-control']) !!}
-</div>
-
-<!--- Legalizacion Id Field --->
-<div class="form-group col-sm-6 col-lg-4">
-  {!! Form::label('legalizacion_id', 'Legalizacion Id:') !!}
-    {!! Form::text('legalizacion_id', null, ['class' => 'form-control']) !!}
+  {!! Form::label('legalizacion_id', 'Formato Legalización:') !!}
+ {!! Form::select('legalizacion_id', $legal, null, ['class' => 'form-control']) !!}
 
 </div>
 
@@ -33,4 +27,5 @@
 <!--- Submit Field --->
 <div class="form-group col-sm-12">
     {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
+       {!! link_to(URL::previous(), 'Cancelar', ['class' => 'btn btn-danger']) !!}
 </div>

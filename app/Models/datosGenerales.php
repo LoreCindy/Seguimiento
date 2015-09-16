@@ -11,6 +11,16 @@ class datosGenerales extends Model
     
 	public $timestamps = true;
 
+	public function  revision()
+	{
+		return $this->hasMany('App\Models\revision', 'datosGenerales_id');
+	}
+
+	public function  lista()
+		{
+			return $this->belongsTo('App\Models\formatolista', 'formatolista_id');
+		}
+
 	public $fillable = [
 	    "nombre_dato",
 		"formatolista_id"
@@ -20,5 +30,14 @@ class datosGenerales extends Model
 	    "nombre_dato" => "required",
 		"formatolista_id" => "required"
 	];
+
+
+	// app/models/Empresa.php
+	
+	public function procesos() {
+		return $this->hasMany('datos_generales');
+	}
+
+
 
 }

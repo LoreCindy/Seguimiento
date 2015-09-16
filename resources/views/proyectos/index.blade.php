@@ -9,8 +9,16 @@
         <div class="row">
             <h1 class="pull-left">Proyectos</h1>
             <a class="btn btn-primary pull-right" style="margin-top: 25px" href="{!! route('proyectos.create') !!}">Agregar Nuevo</a>
+           
         </div>
+        <div class="panel-body">
+           
+            <div class="form-group">
+             {!! Form::text('name', null,['class'=>'form-control', 'placenholder'=>'Nombre Proyecto'])!!}
 
+            </div>
+            <button type="submit" class="btn btn-default">Buscar</button>
+        </div>
         <div class="row">
             @if($proyectos->isEmpty())
                 <div class="well text-center">No hay proyectos.</div>
