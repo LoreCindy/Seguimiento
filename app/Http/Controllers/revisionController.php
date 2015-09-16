@@ -188,7 +188,7 @@ class revisionController extends AppBaseController
 
 	public function secondMethod($id){
     $datosgenerales = DB::table('datos_generales')->where('formatolista_id', $id)->get();
-    return View::make('thisview', ['datosgenerales' => $datosgenerales);
+    return View::make('thisview', ['datosgenerales' => $datosgenerales]);
 }
 
 

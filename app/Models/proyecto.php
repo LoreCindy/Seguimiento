@@ -16,6 +16,13 @@ class proyecto extends Model
 		return $this->hasMany('App\Models\revision', 'proyecto_id');
 	}
 
+	public function scopeName($query, $name)
+    {
+    
+	if(trim($name['name'])!= "" && trim($name['tipo'])!= "" && $name['tipo']!='0')
+   	$query->where($name['tipo'],"LIKE",$name['name']);
+    }
+
 	public $fillable = [
 	    "fecha_radicacion",
 		"nombre_contratatista",

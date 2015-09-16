@@ -8,6 +8,8 @@ use Mitul\Controller\AppBaseController;
 use Response;
 use Flash;
 use Schema;
+use Illuminate\Support\Facade\Session;
+use Illuminate\Pagination\Paginator;
 
 
 class proyectoController extends AppBaseController
@@ -32,9 +34,11 @@ class proyectoController extends AppBaseController
 	 */
 	public function index(Request $request)
 	{
-		$proyectos = \DB::table('proyectos')->paginate(5);
-
-		$query = proyecto::query();
+		//$proyectos = \DB::table('proyectos')->paginate(5);
+		$query = proyecto::name($request->only('name', 'tipo'));
+		$proyectos = $query->paginate(5);
+		$proyectos->setPath('/contratacion/public/proyectos');
+		//$query = proyecto::query();
         $columns = Schema::getColumnListing('$TABLE_NAME$');
         $attributes = array();
 

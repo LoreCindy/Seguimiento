@@ -7,17 +7,19 @@
         @include('flash::message')
 
         <div class="row">
-            <h1 class="pull-left">Proyectos</h1>
-            <a class="btn btn-primary pull-right" style="margin-top: 25px" href="{!! route('proyectos.create') !!}">Agregar Nuevo</a>
-           
-        </div>
-        <div class="panel-body">
-           
-            <div class="form-group">
-             {!! Form::text('name', null,['class'=>'form-control', 'placenholder'=>'Nombre Proyecto'])!!}
+         <a class="btn btn-primary pull-left" style="margin-top: 10px" href="{!! route('proyectos.create') !!}"><i class="glyphicon glyphicon-plus"></i> &nbsp; Agregar Proyecto</a>
+        
 
-            </div>
-            <button type="submit" class="btn btn-default">Buscar</button>
+           {!! Form::open(['route' => 'proyectos.index', 'method' => 'GET', 'class' => 'navbar-form navbar-right', 'role' => 'search']) !!}
+                <div class="form-group">
+                    {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'busqueda']) !!}
+                    {!! Form::select('tipo', ['0'=>'seleccione campo','nombre_contratatista' => 'nombre contratatista','nombre_modalidad'=>'nombre modalidad','fecha_radicacion'=>'fecha radicacion', 'nombre_tipoContratacion'=>'tipo Contratacion'], null, ['class' => 'form-control'])!!}
+                </div>
+                <button type="submit" class="btn search-button t5 btn-primary"><i class="glyphicon glyphicon-search"></i></button>
+            {!! Form::close() !!}
+           <!-- <h1 class="pull-left">Proyectos</h1>
+            <a class="btn btn-primary pull-right" style="margin-top: 25px" href="{!! route('proyectos.create') !!}">Agregar Nuevo</a>
+           -->
         </div>
         <div class="row">
             @if($proyectos->isEmpty())
@@ -46,7 +48,7 @@
                         </tr>
 
                     @endforeach
-                     {!! $proyectos->render()!!}
+                         {!! $proyectos->appends(Request::only(['name','tipo']))->render()!!} 
                     </tbody>
                 </table>
             @endif
