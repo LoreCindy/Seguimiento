@@ -11,6 +11,29 @@
 |
 */
 
+
+// app/routes.php
+    Route::get('dropdown', function(){
+    $id = Input::get('option');
+    $formatolista = datosGenerales::find($id)->formatolistas;
+    return $formatolista->lists('formatolistas', 'id');});
+
+//-------------------------------------
+
+// Esta ruta es para cargar los estados en el primer select
+Route::get('lista-formatos','revisionController@listaFormatos');
+// Esta ruta es para cargar las ciudades que pertenecen al  estado que seleciono con anterioridad
+Route::get('lista-datos','revisionController@listaDatos');
+//--------------------------------------
+   
+
+
+Route::get ('/', 'revisionController @ firstMethod');
+
+Route::get('loadsubcat/{id}','revisionController@secondMethod');
+
+
+
 Route::get('/', 'WelcomeController@index');
 
 Route::get('home', 'HomeController@index');
@@ -34,6 +57,7 @@ Route::resource('formatolistas', 'formatolistaController');
 Route::get('formatolistas/{id}/delete', [
     'as' => 'formatolistas.delete',
     'uses' => 'formatolistaController@destroy',
+
 ]);
 
 
@@ -85,4 +109,8 @@ Route::get('detalleRevisions/{id}/delete', [
     'as' => 'detalleRevisions.delete',
     'uses' => 'detalleRevisionController@destroy',
 ]);
+
+
+
+
 

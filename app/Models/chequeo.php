@@ -21,6 +21,14 @@ class chequeo extends Model
 			return $this->belongsTo('App\Models\formatoLegalizacion', 'legalizacion_id');
 		}
 
+		public function scopeName($query, $name)
+    {
+    
+	if(trim($name['name'])!= "" && trim($name['tipo'])!= "" && $name['tipo']!='0')
+   	$query->where($name['tipo'],"LIKE",$name['name']);
+    }
+
+
 	public $fillable = [
 	    "legalizacion_id",
 		"nombre_supervisor",

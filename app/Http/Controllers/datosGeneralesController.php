@@ -21,7 +21,9 @@ class datosGeneralesController extends AppBaseController
 	 */
 	public function index(Request $request)
 	{
-		$query = datosGenerales::query();
+		$query = datosGenerales::name($request->only('name', 'tipo'));
+		$datosGenerales = $query->paginate(5);
+		$datosGenerales->setPath('/contratacion/public/datosGenerales');
         $columns = Schema::getColumnListing('$TABLE_NAME$');
         $attributes = array();
 
@@ -35,7 +37,7 @@ class datosGeneralesController extends AppBaseController
             }
         };
 
-        $datosGenerales = $query->paginate(5);
+       
 
 
         return view('datosGenerales.index')

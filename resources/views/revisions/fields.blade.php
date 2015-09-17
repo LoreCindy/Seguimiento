@@ -18,6 +18,9 @@
         {!! Form::select('formatoLista_id', $formatolista, null, ['class' => 'form-control']) !!}
 </div>
 
+
+
+
 <!--- Observaciones Field --->
 <div class="form-group col-sm-6 col-lg-4">
     {!! Form::label('observaciones', 'Observaciones:') !!}

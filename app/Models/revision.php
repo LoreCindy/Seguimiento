@@ -41,6 +41,16 @@ class revision extends Model
 		{
 			return $this->belongsTo('App\Models\chequeo', 'chequeo_id');
 		}
+		
+	public function scopeName($query, $name)
+    {
+    
+	if(trim($name['name'])!= "" && trim($name['tipo'])!= "" && $name['tipo']!='0')
+   	$query->where($name['tipo'],"LIKE",$name['name']);
+    }
+
+
+
 
 	public $fillable = [
 	    "nombre_revision",

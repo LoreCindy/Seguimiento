@@ -48,6 +48,7 @@
                         </tr>
 
                     @endforeach
+                    <td> 
                          {!! $proyectos->appends(Request::only(['name','tipo']))->render()!!} 
                     </tbody>
                 </table>

@@ -21,7 +21,9 @@ class detalleRevisionController extends AppBaseController
 	 */
 	public function index(Request $request)
 	{
-		$query = detalleRevision::query();
+		$query = detalleRevision::name($request->only('name', 'tipo', 'nombre_revision'));
+		$detalleRevisions = $query->paginate(5);
+		$detalleRevisions->setPath('/contratacion/public/detalleRevisions');
         $columns = Schema::getColumnListing('$TABLE_NAME$');
         $attributes = array();
 
@@ -35,7 +37,7 @@ class detalleRevisionController extends AppBaseController
             }
         };
 
-        $detalleRevisions = $query->paginate(5);
+        
 
         return view('detalleRevisions.index')
             ->with('detalleRevisions', $detalleRevisions)

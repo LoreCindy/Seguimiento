@@ -21,6 +21,15 @@ class datosGenerales extends Model
 			return $this->belongsTo('App\Models\formatolista', 'formatolista_id');
 		}
 
+
+	public function scopeName($query, $name)
+    {
+    
+	if(trim($name['name'])!= "" && trim($name['tipo'])!= "" && $name['tipo']!='0')
+   	$query->where($name['tipo'],"LIKE",$name['name']);
+    }
+
+
 	public $fillable = [
 	    "nombre_dato",
 		"formatolista_id"

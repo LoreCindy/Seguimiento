@@ -26,6 +26,12 @@ class formatolista extends Model
 		return $this->hasMany('App\Models\datosGenerales', 'formatolista_id');
 	}
 
+public function scopeName($query, $name)
+    {
+    
+	if(trim($name['name'])!= "" && trim($name['tipo'])!= "" && $name['tipo']!='0')
+   	$query->where($name['tipo'],"LIKE",$name['name']);
+    }
 
 
 

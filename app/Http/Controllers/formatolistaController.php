@@ -21,8 +21,13 @@ class formatolistaController extends AppBaseController
 	 */
 	public function index(Request $request)
 	{
-		$formatolista= \DB::table('formatolistas')->paginate(5);
-		$query = formatolista::query();
+		//$formatolista= \DB::table('formatolistas')->paginate(5);
+		//$query = formatolista::query();
+
+		$query = formatolista::name($request->only('name', 'tipo'));
+		$formatolistas = $query->paginate(5);
+		$formatolistas->setPath('/contratacion/public/formatolistas');
+
         $columns = Schema::getColumnListing('$TABLE_NAME$');
         $attributes = array();
 
@@ -39,7 +44,7 @@ class formatolistaController extends AppBaseController
        // $formatolistas = $query->get();
 
         return view('formatolistas.index')
-            ->with('formatolistas', $formatolista)
+            ->with('formatolistas', $formatolistas)
             ->with('attributes', $attributes);
 	}
 

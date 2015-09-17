@@ -5,13 +5,26 @@
     <div class="container">
 
         @include('flash::message')
+       
 
+ 
         <div class="row">
-            <h1 class="pull-left">Revisión</h1>
-            <a class="btn btn-primary pull-right" style="margin-top: 25px" href="{!! route('revisions.create') !!}">Add New</a>
+             <a class="btn btn-primary pull-left" style="margin-top: 10px" href="{!! route('revisions.create') !!}"><i class="glyphicon glyphicon-plus"></i> &nbsp;Agregar Revisión</a>
+             {!! Form::open(['route' => 'revisions.index', 'method' => 'GET', 'class' => 'navbar-form navbar-right', 'role' => 'search']) !!}
+                <div class="form-group" >
+                    {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'busqueda']) !!}
+                    {!! Form::select('tipo', ['0'=>'seleccione campo','nombre_revision' => 'Nombre Revision'], null, ['class' => 'form-control'])!!}
+                <button type="submit" class="btn search-button t5 btn-primary"><i class="glyphicon glyphicon-search"></i></button>
+            {!! Form::close() !!}
+
+
+
+
+    
         </div>
 
-        <div class="row">
+       
+         <div class="row">
             @if($revisions->isEmpty())
                 <div class="well text-center">No revisions found.</div>
             @else
@@ -47,10 +60,11 @@
                             </td>
                         </tr>
                     @endforeach
-                     {!! $revisions->render()!!}
+                    <td> 
+                     {!! $revisions->appends(Request::only(['name','tipo']))->render()!!}
                     </tbody>
                 </table>
-            @endif
+            @endif  
         </div>
     </div>
 @endsection

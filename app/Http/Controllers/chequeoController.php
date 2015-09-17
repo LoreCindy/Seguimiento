@@ -21,7 +21,9 @@ class chequeoController extends AppBaseController
 	 */
 	public function index(Request $request)
 	{
-		$query = chequeo::query();
+		$query = chequeo::name($request->only('name', 'tipo'));
+		$chequeos = $query->paginate(5);
+		$chequeos ->setPath('/contratacion/public/chequeos');
         $columns = Schema::getColumnListing('$TABLE_NAME$');
         $attributes = array();
 

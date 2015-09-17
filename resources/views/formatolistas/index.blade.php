@@ -7,8 +7,16 @@
         @include('flash::message')
 
         <div class="row">
-            <h1 class="pull-left">Formato Listas</h1>
-            <a class="btn btn-primary pull-right" style="margin-top: 25px" href="{!! route('formatolistas.create') !!}">Add New</a>
+            <a class="btn btn-primary pull-left" style="margin-top: 10px"href="{!! route('formatolistas.create') !!}"><i class="glyphicon glyphicon-plus"></i> &nbsp; Agregar Formato Lista</a>
+
+
+             {!! Form::open(['route' => 'formatolistas.index', 'method' => 'GET', 'class' => 'navbar-form navbar-right', 'role' => 'search']) !!}
+                <div class="form-group">
+                    {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'busqueda']) !!}
+                    {!! Form::select('tipo', ['0'=>'seleccione campo','nombre_formato' => 'nombre Formato','fecha_formato'=>'Fecha formato'], null, ['class' => 'form-control'])!!}
+                </div>
+                <button type="submit" class="btn search-button t5 btn-primary"><i class="glyphicon glyphicon-search"></i></button>
+            {!! Form::close() !!}
         </div>
 
         <div class="row">
@@ -33,7 +41,8 @@
                             </td>
                         </tr>
                     @endforeach
-                      {!! $formatolistas->render()!!}
+                    <td> 
+                      {!! $formatolistas->appends(Request::only(['name','tipo']))->render()!!}
                     </tbody>
                 </table>
             @endif

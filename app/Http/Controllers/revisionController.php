@@ -23,7 +23,9 @@ class revisionController extends AppBaseController
 	{
 		//$revisions= \DB::table('revisions')->paginate();
 
-		$query = revision::query();
+		$query = revision::name($request->only('name', 'tipo'));
+		$revisions = $query->paginate(5);
+		$revisions->setPath('/contratacion/public/revisions');
         $columns = Schema::getColumnListing('$TABLE_NAME$');
         $attributes = array();
 
@@ -36,7 +38,7 @@ class revisionController extends AppBaseController
                 $attributes[$attribute] =  null;
             }
         };
-		$revisions = $query->paginate(5);
+	
         return view('revisions.index')
            // ->with('revisions', $revisions)
             ->with('attributes', $attributes)
@@ -183,13 +185,33 @@ class revisionController extends AppBaseController
 
 	public  function  firstMethod (){ 
     $formatolistas =  DB :: table ( 'formatolistas' ) -> get (); 
-    return  View :: make ( 'myview' ,[ 'formatolistas'  =>  $formatolistas ]); 
+    return  View :: make ( '/contratacion/public/revisions' ,[ 'formatolistas'  =>  $formatolistas ]); 
 	}
 
 	public function secondMethod($id){
     $datosgenerales = DB::table('datos_generales')->where('formatolista_id', $id)->get();
-    return View::make('thisview', ['datosgenerales' => $datosgenerales]);
+    return View::make('/contratacion/public/revisions', ['datosgenerales' => $datosgenerales]);
 }
+
+    // funcion para regresar la información de los estados al Select de los estados
+	public function listaFormatos()
+    {
+    	// Buscamos todos los estados de nuetra base
+        $formatolistas = State::all();
+        // Regresamos los estados obtenidos de la consulta
+        return Response::json($formatolistas);
+    }
+// funcion para regresar la información de las ciudades que pertenecen al estado selecionado
+    public function listaDatos()
+    {
+    	// Recibimos ID del estado selecionado
+        $id = Request::input('id');
+        // buscamos las ciudades que pertenecen al estado
+        $datosgenerales = datosgenerales::where('formatolista_id',$id)->get();
+	//  Regresamos las ciudades obtenidas de la consulta
+        return Response::json($datosgenerales);
+    }
+
 
 
 }

@@ -7,8 +7,14 @@
         @include('flash::message')
 
         <div class="row">
-            <h1 class="pull-left">Detalle Revisión</h1>
-            <a class="btn btn-primary pull-right" style="margin-top: 25px" href="{!! route('detalleRevisions.create') !!}">Add New</a>
+         <a class="btn btn-primary pull-left" style="margin-top: 10px" href="{!! route('detalleRevisions.create') !!}"><i class="glyphicon glyphicon-plus"></i> &nbsp;Agregar detalles Revisión</a>
+             {!! Form::open(['route' => 'detalleRevisions.index', 'method' => 'GET', 'class' => 'navbar-form navbar-right', 'role' => 'search']) !!}
+                <div class="form-group">
+                    {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'busqueda']) !!}
+                     {!! Form::select('tipo', ['0'=>'seleccione campo','estado' => 'estado','nombre_responsable' => 'Nombre Responsable', 'dependencia_responsable'=> 'Dependencia Responsable'], null, ['class' => 'form-control'])!!}
+
+                <button type="submit" class="btn search-button t5 btn-primary"><i class="glyphicon glyphicon-search"></i></button>
+            {!! Form::close() !!}
         </div>
 
 
@@ -41,7 +47,8 @@
                             </td>
                         </tr>
                     @endforeach
-                     {!! $detalleRevisions->render()!!}
+                    <td> 
+                     {!! $detalleRevisions->appends(Request::only(['name','tipo']))->render()!!}
                     </tbody>
                 </table>
             @endif
