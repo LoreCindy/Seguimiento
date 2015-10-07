@@ -5,6 +5,9 @@
 | Application Routes
 |--------------------------------------------------------------------------
 |
+
+
+
 | Here is where you can register all of the routes for an application.
 | It's a breeze. Simply tell Laravel the URIs it should respond to
 | and give it the controller to call when that URI is requested.
@@ -12,27 +15,12 @@
 */
 
 
-// app/routes.php
-    Route::get('dropdown', function(){
-    $id = Input::get('option');
-    $formatolista = datosGenerales::find($id)->formatolistas;
-    return $formatolista->lists('formatolistas', 'id');});
 
-//-------------------------------------
 
-// Esta ruta es para cargar los estados en el primer select
-Route::get('lista-formatos','revisionController@listaFormatos');
-// Esta ruta es para cargar las ciudades que pertenecen al  estado que seleciono con anterioridad
-Route::get('lista-datos','revisionController@listaDatos');
 //--------------------------------------
-   
+Route::get('formato','revisionController@formato_lista');
 
-
-Route::get ('/', 'revisionController @ firstMethod');
-
-Route::get('loadsubcat/{id}','revisionController@secondMethod');
-
-
+Route::get('legal','revisionController@formato_legalizacion');
 
 Route::get('/', 'WelcomeController@index');
 
@@ -51,6 +39,9 @@ Route::get('proyectos/{id}/delete', [
     'uses' => 'proyectoController@destroy',
 ]);
 
+Route::get('formatolista','formatolistaController@listaformatos');
+// Esta ruta es para cargar las ciudades que pertenecen al  estado que seleciono con anterioridad
+Route::get('datosGenerales','datosGeneralesController@listaDatos');
 
 Route::resource('formatolistas', 'formatolistaController');
 

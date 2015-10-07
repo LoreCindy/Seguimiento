@@ -10,5 +10,7 @@
         @include('revisions.fields')
 
     {!! Form::close() !!}
+
+
 </div>
 @endsection

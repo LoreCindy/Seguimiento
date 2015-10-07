@@ -4,6 +4,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class formatolista extends Model
 {
+
     
 	public $table = "formatolistas";
 

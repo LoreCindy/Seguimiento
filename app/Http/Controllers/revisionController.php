@@ -3,6 +3,8 @@
 use App\Http\Requests;
 use App\Http\Requests\CreaterevisionRequest;
 use App\Models\revision;
+use App\Models\formatolista;
+use App\Models\FormatoLegalizacion;
 use Illuminate\Http\Request;
 use Mitul\Controller\AppBaseController;
 use Response;
@@ -56,12 +58,45 @@ class revisionController extends AppBaseController
 		$datoo= ['legal'=>\DB::table('formato_legalizacions')->lists('documentos_legalizacion', 'id')];
 		 $dato= ['datosgenerales'=>\DB::table('datos_generales')->lists('nombre_dato', 'id')];
 		 $datas= ['formatolista' =>\DB::table('formatolistas')->lists('nombre_formato', 'id')];
+		 
 		 $data = ['proyectos' =>\DB::table('proyectos')->lists('nombre_contratatista', 'id')];
-		return view('revisions.create',$data, $datas)
+		return view('revisions.create', $data, $datas)
 		->with($dato)
 		->with($datoo)
 		->with($datoos);
 	}
+
+
+// funcion para regresar la información de las ciudades que pertenecen al estado selecionado
+    public function listaDatos()
+    {	
+    	// Recibimos ID del estado selecionado
+        $id = Request::input('id');
+        // buscamos las ciudades que pertenecen al estado
+        $datosgenerales = datos_generales::where('formatolista_id',$id)->get();
+	//  Regresamos las ciudades obtenidas de la consulta
+        return Response::json($datosgenerales);
+    }
+// funcion para el combo dependiente  de formato lista y datos generales
+    public function formato_lista(Request $request)
+    {
+	   $input  =  $request->get( 'option' );
+
+	   $formatolista  =  formatolista::find($input);
+	   //dd($formatolista);
+	   $datosGenerales =  $formatolista->datos(); 
+	   return  Response::make( $datosGenerales->get([ 'id' , 'nombre_dato' ])); 
+    }
+// funcion para el combo dependiente  de formato lista y formato legalizacion
+    public function formato_legalizacion(Request $request)
+    {
+     	$input  =  $request->get( 'option' );
+     	 $formatolista=  formatolista::find($input);
+	   //dd($formatolista);
+	   $FormatoLegalizacion =  $formatolista->legalizacion(); 
+	 
+	   return  Response::make(  $FormatoLegalizacion->get([ 'id' , 'documentos_legalizacion' ])); 
+    }
 
 	/**
 	 * Store a newly created revision in storage.
@@ -183,34 +218,8 @@ class revisionController extends AppBaseController
 	}
 
 
-	public  function  firstMethod (){ 
-    $formatolistas =  DB :: table ( 'formatolistas' ) -> get (); 
-    return  View :: make ( '/contratacion/public/revisions' ,[ 'formatolistas'  =>  $formatolistas ]); 
-	}
 
-	public function secondMethod($id){
-    $datosgenerales = DB::table('datos_generales')->where('formatolista_id', $id)->get();
-    return View::make('/contratacion/public/revisions', ['datosgenerales' => $datosgenerales]);
-}
 
-    // funcion para regresar la información de los estados al Select de los estados
-	public function listaFormatos()
-    {
-    	// Buscamos todos los estados de nuetra base
-        $formatolistas = State::all();
-        // Regresamos los estados obtenidos de la consulta
-        return Response::json($formatolistas);
-    }
-// funcion para regresar la información de las ciudades que pertenecen al estado selecionado
-    public function listaDatos()
-    {
-    	// Recibimos ID del estado selecionado
-        $id = Request::input('id');
-        // buscamos las ciudades que pertenecen al estado
-        $datosgenerales = datosgenerales::where('formatolista_id',$id)->get();
-	//  Regresamos las ciudades obtenidas de la consulta
-        return Response::json($datosgenerales);
-    }
 
 
 

@@ -14,10 +14,46 @@
 
 <!--- Formatolista Id Field --->
 <div class="form-group col-sm-6 col-lg-4">
-    {!! Form::label('formatoLista_id', 'Formato lista:') !!}
-        {!! Form::select('formatoLista_id', $formatolista, null, ['class' => 'form-control']) !!}
+    {!! Form::label('formatoLista_id', 'Formato lista:') !!}          
+    {!!  Form::select('formatoLista_id', $formatolista, null, ['class' => 'form-control', 'id' => 'nombre_formato'])  !!}
+   
 </div>
 
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+
+
+  <script>
+  $(document).ready(function(){
+    $('#nombre_formato').change(function(){
+
+      $.get("{{ url('formato')}}",
+      { option: $(this).val() },
+      function(data) {
+        $('#nombre_dato').empty();
+        $.each(data, function(key, element) {
+          $('#nombre_dato').append("<option value='" + element.id + "'>" + element.nombre_dato + "</option>");
+        });
+      });
+    });
+  });   
+
+  $(document).ready(function(){
+    $('#nombre_formato').change(function(){
+
+      $.get("{{ url('legal')}}",
+      { option: $(this).val() },
+      function(data) {
+     
+        $('#nombre_legal').empty();
+
+        $.each(data, function(key, element) {
+          $('#nombre_legal').append("<option value='" + element.id + "'>" + element.documentos_legalizacion + "</option>");
+        });
+      });
+    });
+  });   
+</script>
 
 
 
@@ -31,16 +67,15 @@
 <!--- Datosgenerales Id Field --->
 <div class="form-group col-sm-6 col-lg-4">
     {!! Form::label('datosGenerales_id', 'Datos generales:') !!}
-    {!! Form::select('datosGenerales_id', $datosgenerales, null, ['class' => 'form-control']) !!}
+    {!! Form::select('datosGenerales_id', $datosgenerales, null, ['class' => 'form-control', 'id' => 'nombre_dato']) !!}
 
-    
-</div>
+    </div>
 
 
 <!--- Formatolegalizacion Id Field --->
 <div class="form-group col-sm-6 col-lg-4">
     {!! Form::label('formatoLegalizacion_id', 'Formato legalizacion:') !!}
-    {!! Form::select('formatoLegalizacion_id', $legal, null, ['class' => 'form-control']) !!}
+    {!! Form::select('formatoLegalizacion_id', $legal, null, ['class' => 'form-control', 'id' => 'nombre_legal']) !!}
 
 </div>
 
@@ -57,3 +92,5 @@
     {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
        {!! link_to(URL::previous(), 'Cancelar', ['class' => 'btn btn-danger']) !!}
 </div>
+
+
