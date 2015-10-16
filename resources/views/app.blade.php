@@ -47,7 +47,7 @@
 				<li><a href="formatoLegalizacions">Legalizacion</a></li>
 				<li><a href="chequeos">Chequeo</a></li>
 				<li><a href="revisions">Revisiones</a></li>
-				<li><a href="detalleRevisions">Detallelle revision</a></li>
+				<li><a href="detalleRevisions">Detalle revision</a></li>
 				</ul>
 
 				<ul class="nav navbar-nav navbar-right">

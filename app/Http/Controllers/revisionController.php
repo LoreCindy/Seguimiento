@@ -67,16 +67,6 @@ class revisionController extends AppBaseController
 	}
 
 
-// funcion para regresar la información de las ciudades que pertenecen al estado selecionado
-    public function listaDatos()
-    {	
-    	// Recibimos ID del estado selecionado
-        $id = Request::input('id');
-        // buscamos las ciudades que pertenecen al estado
-        $datosgenerales = datos_generales::where('formatolista_id',$id)->get();
-	//  Regresamos las ciudades obtenidas de la consulta
-        return Response::json($datosgenerales);
-    }
 // funcion para el combo dependiente  de formato lista y datos generales
     public function formato_lista(Request $request)
     {

@@ -7,7 +7,10 @@
         @include('flash::message')
 
         <div class="row">
-         <a class="btn btn-primary pull-left" style="margin-top: 10px" href="{!! route('detalleRevisions.create') !!}"><i class="glyphicon glyphicon-plus"></i> &nbsp;Agregar detalles Revisión</a>
+            <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+
+
+            <a class="btn btn-primary pull-left" style="margin-top: 10px" href="{!! route('detalleRevisions.create') !!}"><i class="glyphicon glyphicon-plus"></i> &nbsp;Agregar detalles Revisión</a>
              {!! Form::open(['route' => 'detalleRevisions.index', 'method' => 'GET', 'class' => 'navbar-form navbar-right', 'role' => 'search']) !!}
                 <div class="form-group">
                     {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'busqueda']) !!}
@@ -22,7 +25,7 @@
             @if($detalleRevisions->isEmpty())
                 <div class="well text-center">No detalleRevisions found.</div>
             @else
-                <table class="table">
+                <table class="table" onload="celdaColor()">
                     <thead>
                     <th>Estado</th>
 			<th>Fecha</th>
@@ -34,14 +37,24 @@
                     <tbody>
                      
                     @foreach($detalleRevisions as $detalleRevision)
-                        <tr>
-                            <td>{!! $detalleRevision->estado !!}</td>
-					<td>{!! $detalleRevision->fecha !!}</td>
+
+                     <tr>
+                     @if($detalleRevision->estado=='Recibido')
+                       <td> <div style = "color:black ; background-color:blue" > Recibido</div></td>
+                       @elseif($detalleRevision->estado=='Devolucion')
+                        <td> <div style = "color: black ; background-color:red"> Devolucion </div></td>
+                       @else 
+                       <td><div style = "color:black ; background-color:whitek"> Aprobado </div></td>
+                      @endif
+
+                    
+                	<td>{!! $detalleRevision->fecha !!}</td>
 					<td>{!! $detalleRevision->nombre_responsable !!}</td>
 					<td>{!! $detalleRevision->dependencia_responsable !!}</td>
 					<td>{!! $detalleRevision->revision->nombre_revision !!}</td>
 					
                             <td>
+
                                 <a href="{!! route('detalleRevisions.edit', [$detalleRevision->id]) !!}"><i class="glyphicon glyphicon-edit"></i></a>
                                 <a href="{!! route('detalleRevisions.delete', [$detalleRevision->id]) !!}" onclick="return confirm('Are you sure wants to delete this detalleRevision?')"><i class="glyphicon glyphicon-remove"></i></a>
                             </td>
@@ -49,6 +62,8 @@
                     @endforeach
                     <td> 
                      {!! $detalleRevisions->appends(Request::only(['name','tipo']))->render()!!}
+
+                      
                     </tbody>
                 </table>
             @endif

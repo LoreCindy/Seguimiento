@@ -83,6 +83,7 @@ class detalleRevisionController extends AppBaseController
 	public function show($id)
 	{
 		$detalleRevision = detalleRevision::find($id);
+		
 
 		if(empty($detalleRevision))
 		{
@@ -164,4 +165,8 @@ class detalleRevisionController extends AppBaseController
 
 		return redirect(route('detalleRevisions.index'));
 	}
+
+
+
+    
 }

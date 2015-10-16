@@ -1,8 +1,11 @@
 <!--- Estado Field --->
 <div class="form-group col-sm-6 col-lg-4">
+
     {!! Form::label('estado', 'Estado:') !!}
-    {!! Form::select('estado', ['Recibido' => 'Recibido', 'Devolucion' => 'Devolución', 'Aprobado' => 'Aprobado'], null, ['class' => 'form-control']) !!}
+    {!! Form::select('estado', ['Recibido' => 'Recibido', 'Devolucion' => 'Devolución', 'Aprobado' => 'Aprobado'], null, ['class' => 'form-control', 'id' => 'nombre']) !!}
 </div>
+
+
 
 <!--- Fecha Field --->
 <div class="form-group col-sm-6 col-lg-4">

@@ -16,8 +16,9 @@
 
 
 
-
+Route::get('estad/{$value}','detalleRevisionController@cambio_estado');
 //--------------------------------------
+
 Route::get('formato','revisionController@formato_lista');
 
 Route::get('legal','revisionController@formato_legalizacion');
