@@ -2,13 +2,30 @@
 
 @section('content')
 
+  <script type="text/javascript">
+        $(document).ready(function(){
+          alert("hola");
+          $(".con").parentNode.css("background-color:yellow;");
+        });
+        
+       </script>
     <div class="container">
 
         @include('flash::message')
 
-        <div class="row">
+   <style>
+       {
+        background-color: yellow;
+       }
+       </style>
+
+
+         <div class="row">
          <a class="btn btn-primary pull-left" style="margin-top: 10px" href="{!! route('proyectos.create') !!}"><i class="glyphicon glyphicon-plus"></i> &nbsp; Agregar Proyecto</a>
-        
+         <a class="btn btn-default"   href="proyectoExcel" style="margin-top: 8px; margin-left:40%"data-url="">
+               <i class="glyphicon glyphicon-download-alt"></i>
+               <span class="hidden-xs floatL l5">Exportar</span>
+           </a>
 
            {!! Form::open(['route' => 'proyectos.index', 'method' => 'GET', 'class' => 'navbar-form navbar-right', 'role' => 'search']) !!}
                 <div class="form-group">
@@ -27,7 +44,7 @@
             @else
                 <table class="table">
                     <thead>
-                    <th>Fecha Radicacion</th>
+                    <th class="con">Fecha Radicacion</th>
 			<th>Nombre Contratatista</th>
 			<th>Nombre Modalidad</th>
 			<th>Tipo Contratacion</th>
@@ -37,7 +54,9 @@
                      
                     @foreach($proyectos as $proyecto)
                         <tr>
-                    <td>{!! $proyecto->fecha_radicacion !!}</td>
+
+
+          <td>{!! $proyecto->fecha_radicacion !!}</td>
 					<td>{!! $proyecto->nombre_contratatista !!}</td>
 					<td>{!! $proyecto->nombre_modalidad !!}</td>
 					<td>{!! $proyecto->nombre_tipoContratacion !!}</td>

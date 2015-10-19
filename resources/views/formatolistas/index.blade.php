@@ -3,13 +3,25 @@
 @section('content')
 
     <div class="container">
-
+     <ul class="nav nav-tabs">
+      <li role="presentation"class="active"><a href="{!! asset('formatolistas')!!}">Nombre Formato</a></li>
+      @if($formatolistas->isEmpty())
+      <li role="presentation"><a class="btn btn-primary btn-lg disabled" href="{!! asset('datosGenerales')!!}">Datos Generales</a></li>
+      <li role="presentation"><a class="btn btn-primary btn-lg disabled" href="{!! asset('formatoLegalizacions')!!}">Datos Legalizacion</a></li>
+     @else
+     <li role="presentation"><a href="{!! asset('datosGenerales')!!}">Datos Generales</a></li>
+      <li role="presentation"><a href="{!! asset('formatoLegalizacions')!!}">Datos Legalizacion</a></li>
+       @endif
+    </ul>
         @include('flash::message')
 
         <div class="row">
             <a class="btn btn-primary pull-left" style="margin-top: 10px"href="{!! route('formatolistas.create') !!}"><i class="glyphicon glyphicon-plus"></i> &nbsp; Agregar Formato Lista</a>
-
-
+              
+            <a class="btn btn-default"   href="formatoExcel" style="margin-top: 8px; margin-left:38%" data-url="">
+               <i class="glyphicon glyphicon-download-alt"></i>
+               <span class="hidden-xs floatL l5">Exportar</span>
+           </a>
              {!! Form::open(['route' => 'formatolistas.index', 'method' => 'GET', 'class' => 'navbar-form navbar-right', 'role' => 'search']) !!}
                 <div class="form-group">
                     {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'busqueda']) !!}

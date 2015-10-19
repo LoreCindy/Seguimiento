@@ -8,6 +8,10 @@
 
         <div class="row">
             <a class="btn btn-primary pull-left" style="margin-top: 10px"href="{!! route('chequeos.create') !!}"><i class="glyphicon glyphicon-plus"></i> &nbsp;Agregar Chequeo</a>
+             <a class="btn btn-default"   href="chequeosExcel" style="margin-top: 8px; margin-left:40%"data-url="">
+               <i class="glyphicon glyphicon-download-alt"></i>
+               <span class="hidden-xs floatL l5">Exportar</span>
+           </a>
             {!! Form::open(['route' => 'chequeos.index', 'method' => 'GET', 'class' => 'navbar-form navbar-right', 'role' => 'search']) !!}
                 <div class="form-group">
                     {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'busqueda']) !!}

@@ -26,6 +26,7 @@ class datosGenerales extends Model
     {
     
 	if(trim($name['name'])!= "" && trim($name['tipo'])!= "" && $name['tipo']!='0')
+   
    	$query->where($name['tipo'],"LIKE",$name['name']);
     }
 
@@ -47,6 +48,12 @@ class datosGenerales extends Model
 		return $this->hasMany('datos_generales');
 	}
 
+	public function whereFormato($id){
+        return DB::table('datos_generales')
+            ->select('nombre_dato', 'id')
+            ->where('formatolista_id', '=', $id)
+            ->get();
+    }
 
 
 

@@ -10,6 +10,7 @@ use Mitul\Controller\AppBaseController;
 use Response;
 use Flash;
 use Schema;
+use Maatwebsite\Excel\Facades\Excel;
 
 class revisionController extends AppBaseController
 {
@@ -56,17 +57,25 @@ class revisionController extends AppBaseController
 	{	
 		$datoos= ['chequeos'=>\DB::table('chequeos')->lists('nombre_supervisor', 'id')];
 		$datoo= ['legal'=>\DB::table('formato_legalizacions')->lists('documentos_legalizacion', 'id')];
-		 $dato= ['datosgenerales'=>\DB::table('datos_generales')->lists('nombre_dato', 'id')];
+		 $dato= ['datos'=>\DB::table('datos_generales')->lists('nombre_dato', 'id')];
 		 $datas= ['formatolista' =>\DB::table('formatolistas')->lists('nombre_formato', 'id')];
-		 
 		 $data = ['proyectos' =>\DB::table('proyectos')->lists('nombre_contratatista', 'id')];
-		return view('revisions.create', $data, $datas)
+		return view('revisions.create',$data, $datas)
 		->with($dato)
 		->with($datoo)
 		->with($datoos);
 	}
 
-
+	// funcion para regresar la información de las ciudades que pertenecen al estado selecionado
+    public function listaDatos()
+    {	
+    	// Recibimos ID del estado selecionado
+        $id = Request::input('id');
+        // buscamos las ciudades que pertenecen al estado
+        $datosgenerales = datos_generales::where('formatolista_id',$id)->get();
+	//  Regresamos las ciudades obtenidas de la consulta
+        return Response::json($datosgenerales);
+    }
 // funcion para el combo dependiente  de formato lista y datos generales
     public function formato_lista(Request $request)
     {
@@ -74,8 +83,12 @@ class revisionController extends AppBaseController
 
 	   $formatolista  =  formatolista::find($input);
 	   //dd($formatolista);
+
 	   $datosGenerales =  $formatolista->datos(); 
-	   return  Response::make( $datosGenerales->get([ 'id' , 'nombre_dato' ])); 
+	   
+	   return  Response::make( $datosGenerales->get([ 'id' , 'nombre_dato' ]));
+	   
+
     }
 // funcion para el combo dependiente  de formato lista y formato legalizacion
     public function formato_legalizacion(Request $request)
@@ -105,6 +118,8 @@ class revisionController extends AppBaseController
 
 		return redirect(route('revisions.index'));
 	}
+
+	
 
 	/**
 	 * Display the specified revision.
@@ -208,9 +223,7 @@ class revisionController extends AppBaseController
 	}
 
 
-
-
-
+	
 
 
 }

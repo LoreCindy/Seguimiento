@@ -38,8 +38,6 @@ class datosGeneralesController extends AppBaseController
         };
 
        
-
-
         return view('datosGenerales.index')
             ->with('datosGenerales', $datosGenerales)
             ->with('attributes', $attributes);

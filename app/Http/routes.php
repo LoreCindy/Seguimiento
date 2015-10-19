@@ -5,9 +5,6 @@
 | Application Routes
 |--------------------------------------------------------------------------
 |
-
-
-
 | Here is where you can register all of the routes for an application.
 | It's a breeze. Simply tell Laravel the URIs it should respond to
 | and give it the controller to call when that URI is requested.
@@ -16,12 +13,12 @@
 
 
 
-Route::get('estad/{$value}','detalleRevisionController@cambio_estado');
-//--------------------------------------
+//-------------------------------------
 
 Route::get('formato','revisionController@formato_lista');
 
 Route::get('legal','revisionController@formato_legalizacion');
+
 
 Route::get('/', 'WelcomeController@index');
 
@@ -40,9 +37,6 @@ Route::get('proyectos/{id}/delete', [
     'uses' => 'proyectoController@destroy',
 ]);
 
-Route::get('formatolista','formatolistaController@listaformatos');
-// Esta ruta es para cargar las ciudades que pertenecen al  estado que seleciono con anterioridad
-Route::get('datosGenerales','datosGeneralesController@listaDatos');
 
 Route::resource('formatolistas', 'formatolistaController');
 
@@ -101,6 +95,27 @@ Route::get('detalleRevisions/{id}/delete', [
     'as' => 'detalleRevisions.delete',
     'uses' => 'detalleRevisionController@destroy',
 ]);
+
+Route::resource('proyectoExcel','ExcelController');
+
+Route::get('formatoExcel','ExcelController@formato');
+
+Route::get('chequeosExcel','ExcelController@chequeos');
+
+Route::get('revisionExcel','ExcelController@revision');
+
+Route::get('detalleExcel','ExcelController@detalle');
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -11,7 +11,6 @@ class revision extends Model
     
 	public $timestamps = true;
 
-	
 
 	public function  detalle()
 	{
@@ -49,6 +48,9 @@ class revision extends Model
 	if(trim($name['name'])!= "" && trim($name['tipo'])!= "" && $name['tipo']!='0')
    	$query->where($name['tipo'],"LIKE",$name['name']);
     }
+
+
+
 
 	public $fillable = [
 	    "nombre_revision",

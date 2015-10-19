@@ -35,19 +35,17 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<img src="images/BANDERA.jpg">
+				<img src="{!! asset('images/BANDERA.jpg')!!}">
 			</div>
 
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
-					<li><a href="home">Contratación</a></li>
-					<li><a href="proyectos">proyecto</a></li>
-						<li><a href="formatolistas">Formato lista</a></li>
-				<li><a href="datosGenerales">datos generales</a></li>
-				<li><a href="formatoLegalizacions">Legalizacion</a></li>
-				<li><a href="chequeos">Chequeo</a></li>
-				<li><a href="revisions">Revisiones</a></li>
-				<li><a href="detalleRevisions">Detalle revision</a></li>
+					<li><a href="{!! asset('home')!!}">Contratación</a></li>
+					<li><a href="{!! asset('proyectos')!!}">proyecto</a></li>
+					<li><a href="{!! asset('formatolistas')!!}">Formato</a></li>
+					<li><a href="{!! asset('chequeos')!!}">Chequeo</a></li>
+					<li><a href="{!! asset ('revisions')!!}">Revisiones</a></li>
+					<li><a href="{!! asset('detalleRevisions')!!}">Detallelle revision</a></li>
 				</ul>
 
 				<ul class="nav navbar-nav navbar-right">

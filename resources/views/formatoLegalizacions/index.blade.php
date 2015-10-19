@@ -3,7 +3,11 @@
 @section('content')
 
     <div class="container">
-
+    <ul class="nav nav-tabs">
+          <li role="presentation"><a href="{!! asset('formatolistas')!!}">Nombre Formato</a></li>
+          <li role="presentation" ><a href="{!! asset('datosGenerales')!!}">Datos Generales</a></li>
+          <li role="presentation" class="active"><a href="{!! asset('formatoLegalizacions')!!}">Datos Legalizacion</a></li>
+        </ul>
         @include('flash::message')
 
         <div class="row">
@@ -12,12 +16,10 @@
                 <div class="form-group">
                     {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'busqueda']) !!}
                     {!! Form::select('tipo', ['0'=>'seleccione campo','documentos_legalizacion' => 'Nombre Documento'], null, ['class' => 'form-control'])!!}
+                 </div>
                 <button type="submit" class="btn search-button t5 btn-primary"><i class="glyphicon glyphicon-search"></i></button>
             {!! Form::close() !!}
-    
-    
         </div>
-
         <div class="row">
             @if($formatoLegalizacions->isEmpty())
                 <div class="well text-center">No FormatoLegalizacions found.</div>
