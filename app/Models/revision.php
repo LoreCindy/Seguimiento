@@ -29,18 +29,22 @@ class revision extends Model
 
 		public function  general()
 		{
-			return $this->belongsTo('App\Models\datosGenerales', 'datosGenerales_id');
+			return $this->hasMany('App\Models\revisionDatosGenerales', 'datosGenerales_id');
 		}
 
 		public function  legalizacion()
 		{
-			return $this->belongsTo('App\Models\formatoLegalizacion', 'formatoLegalizacion_id');
+			return $this->hasMany('App\Models\revisionFormatoLegalizacion', 'formatoLegalizacion_id');
 		}
 
 		public function  chequeo()
 		{
 			return $this->belongsTo('App\Models\chequeo', 'chequeo_id');
 		}
+
+
+		
+
 		
 	public function scopeName($query, $name)
     {
@@ -58,7 +62,6 @@ class revision extends Model
 		"formatoLista_id",
 		"observaciones",
 		"datosGenerales_id",
-		"formatoLegalizacion_id",
 		"chequeo_id"
 	];
 
@@ -68,7 +71,6 @@ class revision extends Model
 		"formatoLista_id" => "required",
 		"observaciones" => "required",
 		"datosGenerales_id" => "required",
-		"formatoLegalizacion_id" => "required",
 		"chequeo_id" => "required"
 	];
 

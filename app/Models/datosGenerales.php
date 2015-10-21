@@ -11,9 +11,9 @@ class datosGenerales extends Model
     
 	public $timestamps = true;
 
-	public function  revision()
+	public function  revisionDatos()
 	{
-		return $this->hasMany('App\Models\revision', 'datosGenerales_id');
+		return $this->hasMany('App\Models\revisionDatosGenerales', 'datosGenerales_id');
 	}
 
 	public function  lista()

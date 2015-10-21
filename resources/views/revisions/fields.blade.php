@@ -70,13 +70,19 @@
 <div class="form-group col-sm-6 col-lg-4">
     {!! Form::label('datosGenerales_id', 'Datos generales:') !!}
     
-    <table class="table" id="nombre_dato" name="datosGenerales_id">
-      <tr>
+    <table input type="checkbox"  id= "nombre_dato" name= "datosGenerales_id">
+     
+      <tr>  
+                
       <td></td>
-      </tr>  
-      
+     
+      </tr>
     </table>
     </div>
+
+
+
+   
 
 <!--- Formatolegalizacion Id Field --->
 <div class="form-group col-sm-6 col-lg-4">

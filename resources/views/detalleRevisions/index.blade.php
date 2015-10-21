@@ -5,7 +5,7 @@
 <style type="text/css">
 .recibido {  background-color: #E0ECFF; }
 .devolucion { background-color: rgb(100%, 88%, 88%); }
-.aprobado  { background-color: rgb(227, 255, 224);   }
+.aprobado  { background-color: rgb(146, 204, 243);   }
 </style>
     <div class="container">
         @include('flash::message')

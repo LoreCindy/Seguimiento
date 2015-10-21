@@ -22,10 +22,6 @@ class CreaterevisionsTable extends Migration
 			$table->integer('formatoLista_id')->unsigned();
 			$table->foreign('formatoLista_id')->references('id')->on('formatolistas')->onDelete('cascade');
 			$table->text('observaciones')->nullable();
-			$table->integer('datosGenerales_id')->unsigned();
-			$table->foreign('datosGenerales_id')->references('id')->on('datos_generales')->onDelete('cascade');
-			$table->integer('formatoLegalizacion_id')->unsigned();
-			$table->foreign('formatoLegalizacion_id')->references('id')->on('formato_legalizacions')->onDelete('cascade');
 			$table->integer('chequeo_id')->unsigned();
 			$table->foreign('chequeo_id')->references('id')->on('chequeos')->onDelete('cascade');
 			$table->timestamps();

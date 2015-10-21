@@ -17,8 +17,7 @@ class CreateFormatoLegalizacion extends Migration
 		{
 			$table->increments('id');
 			$table->String('documentos_legalizacion');
-			$table->integer('formatolista_id')->unsigned();
-			$table->foreign('formatolista_id')->references('id')->on('formatolistas')->onDelete('cascade');
+			$table->integer('formatolista_id')->unsigned()->foreign('formatolista_id')->references('id')->on('formatolistas')->onDelete('cascade');
 			$table->timestamps();
 		});
 		
