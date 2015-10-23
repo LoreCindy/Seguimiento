@@ -27,16 +27,17 @@ class revision extends Model
 			return $this->belongsTo('App\Models\formatolista', 'formatoLista_id');
 		}
 
+
 		public function  general()
 		{
-			return $this->hasMany('App\Models\revisionDatosGenerales', 'datosGenerales_id');
+			return $this->belongsToMany('App\Models\datosGenerales');
 		}
 
 		public function  legalizacion()
 		{
-			return $this->hasMany('App\Models\revisionFormatoLegalizacion', 'formatoLegalizacion_id');
+			return $this->belongsToMany('App\Models\FormatoLegalizacion');
 		}
-
+		
 		public function  chequeo()
 		{
 			return $this->belongsTo('App\Models\chequeo', 'chequeo_id');
@@ -61,7 +62,7 @@ class revision extends Model
 		"proyecto_id",
 		"formatoLista_id",
 		"observaciones",
-		"datosGenerales_id",
+		//"datosGenerales_id",
 		"chequeo_id"
 	];
 
@@ -70,7 +71,7 @@ class revision extends Model
 		"proyecto_id" => "required",
 		"formatoLista_id" => "required",
 		"observaciones" => "required",
-		"datosGenerales_id" => "required",
+		//"datosGenerales_id" => "required",
 		"chequeo_id" => "required"
 	];
 

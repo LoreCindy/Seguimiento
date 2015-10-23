@@ -5,7 +5,7 @@
 <style type="text/css">
 .recibido {  background-color: #E0ECFF; }
 .devolucion { background-color: rgb(100%, 88%, 88%); }
-.aprobado  { background-color: rgb(146, 204, 243);   }
+.aprobado  { background-color: rgb(227, 255, 224);   }
 </style>
     <div class="container">
         @include('flash::message')
@@ -34,11 +34,11 @@
                 <table class="table">
                     <thead>
                     <th>Estado</th>
-            <th>Fecha</th>
-            <th>Nombre Responsable</th>
-            <th>Dependencia Responsable</th>
-            <th>Revisión</th>
-                             <th width="50px">Opciones</th>
+			<th>Fecha</th>
+			<th>Nombre Responsable</th>
+			<th>Dependencia Responsable</th>
+			<th>Revisión</th>
+			                 <th width="50px">Opciones</th>
                     </thead>
                     <tbody>
                      
@@ -55,11 +55,11 @@
                        <td> Aprobado</td>
                     @endif
 
-                    <td>{!! $detalleRevision->fecha !!}</td>
-                    <td>{!! $detalleRevision->nombre_responsable !!}</td>
-                    <td>{!! $detalleRevision->dependencia_responsable !!}</td>
-                    <td>{!! $detalleRevision->revision->nombre_revision !!}</td>
-                    
+					<td>{!! $detalleRevision->fecha !!}</td>
+					<td>{!! $detalleRevision->nombre_responsable !!}</td>
+					<td>{!! $detalleRevision->dependencia_responsable !!}</td>
+					<td>{!! $detalleRevision->revision->nombre_revision !!}</td>
+					
                             <td>
                                 <a href="{!! route('detalleRevisions.edit', [$detalleRevision->id]) !!}"><i class="glyphicon glyphicon-edit"></i></a>
                                 <a href="{!! route('detalleRevisions.delete', [$detalleRevision->id]) !!}" onclick="return confirm('Are you sure wants to delete this detalleRevision?')"><i class="glyphicon glyphicon-remove"></i></a>

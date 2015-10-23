@@ -3,6 +3,7 @@
 use App\Http\Requests;
 use App\Http\Requests\CreaterevisionRequest;
 use App\Models\revision;
+use App\Models\revisionDatosGenerales;
 use App\Models\formatolista;
 use App\Models\FormatoLegalizacion;
 use Illuminate\Http\Request;
@@ -56,13 +57,9 @@ class revisionController extends AppBaseController
 	public function create()
 	{	
 		$datoos= ['chequeos'=>\DB::table('chequeos')->lists('nombre_supervisor', 'id')];
-		$datoo= ['legal'=>\DB::table('formato_legalizacions')->lists('documentos_legalizacion', 'id')];
-		 $dato= ['datos'=>\DB::table('datos_generales')->lists('nombre_dato', 'id')];
 		 $datas= ['formatolista' =>\DB::table('formatolistas')->lists('nombre_formato', 'id')];
 		 $data = ['proyectos' =>\DB::table('proyectos')->lists('nombre_contratatista', 'id')];
 		return view('revisions.create',$data, $datas)
-		->with($dato)
-		->with($datoo)
 		->with($datoos);
 	}
 
@@ -94,7 +91,7 @@ class revisionController extends AppBaseController
     public function formato_legalizacion(Request $request)
     {
      	$input  =  $request->get( 'option' );
-     	 $formatolista=  formatolista::find($input);
+     	$formatolista=  formatolista::find($input);
 	   //dd($formatolista);
 	   $FormatoLegalizacion =  $formatolista->legalizacion(); 
 	 
@@ -111,8 +108,26 @@ class revisionController extends AppBaseController
 	public function store(CreaterevisionRequest $request)
 	{
         $input = $request->all();
-
 		$revision = revision::create($input);
+
+	
+		$datos_generales = $request->get('datos_generales');
+
+		foreach ($datos_generales as $key => $value) {
+
+		$revision->general()->attach($value);
+
+			
+		}
+
+		$legalizacion = $request->get('legalizacion');
+		foreach ($legalizacion as $key => $value) {
+
+		$revision->legalizacion()->attach($value);
+
+			
+		}
+
 
 		Flash::message('revision saved successfully.');
 
@@ -152,8 +167,8 @@ class revisionController extends AppBaseController
 		$revision = revision::find($id);
 
 		$datoos= ['chequeos'=>\DB::table('chequeos')->lists('nombre_supervisor', 'id')];
-		$datoo= ['legal'=>\DB::table('formato_legalizacions')->lists('documentos_legalizacion', 'id')];
-		 $dato= ['datosgenerales'=>\DB::table('datos_generales')->lists('nombre_dato', 'id')];
+		//$datoo= ['legal'=>\DB::table('formato_legalizacions')->lists('documentos_legalizacion', 'id')];
+		// $dato= ['datosgenerales'=>\DB::table('datos_generales')->lists('nombre_dato', 'id')];
 		$data = ['proyectos' =>\DB::table('proyectos')->lists('nombre_contratatista', 'id')];
  		$datas= ['formatolista' =>\DB::table('formatolistas')->lists('nombre_formato', 'id')];
 		if(empty($revision))
@@ -165,8 +180,6 @@ class revisionController extends AppBaseController
 		return view('revisions.edit')->with('revision', $revision)
 		->with($data)
 		->with($datas)
-		->with($dato)
-		->with($datoo)
 		->with($datoos);
 	}
 

@@ -34,7 +34,10 @@
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
-  <script>
+
+
+
+<script>
  $(document).ready(function(){
     $('#nombre_formato').change(function(){
       $.get("{{ url('formato')}}",
@@ -42,53 +45,54 @@
       function(data) {
         $('#nombre_dato').empty();
         $.each(data, function(key, element) {
-        $('#nombre_dato').append("<tr><td>" + element.nombre_dato + "</td></tr>");
-         
+        
+         $('#nombre_dato').append("<tr><td>" + element.nombre_dato + "</td><td><input type='checkbox' name='datos_generales[]' value='"+element.id+"' id='datos_generales_"+element.id+"'></td></tr>");
+
+        });
+      });
+    });
+
+
+     $('#nombre_formato').change(function(){
+      $.get("{{ url('legal')}}",
+      { option: $(this).val() },
+      function(data) {
+        $('#legalizacion').empty();
+        $.each(data, function(key, element) {
+        
+         $('#legalizacion').append("<tr><td>" + element.documentos_legalizacion + "</td><td><input type='checkbox' name='legalizacion[]' value='"+element.id+"' id='legalizacion_"+element.id+"'></td></tr>");
+
         });
       });
     });
   });  
   
-  $(document).ready(function(){
-    $('#nombre_formato').change(function(){
-
-      $.get("{{ url('legal')}}",
-      { option: $(this).val() },
-      function(data) {
-     
-        $('#nombre_legal').empty();
-
-        $.each(data, function(key, element) {
-          $('#nombre_legal').append("<option value='" + element.id + "'>" + element.documentos_legalizacion + "</option>");
-        });
-      });
-    });
-  });   
+    
 </script>
-
+ 
 <!--- Datosgenerales Id Field --->
 <div class="form-group col-sm-6 col-lg-4">
-    {!! Form::label('datosGenerales_id', 'Datos generales:') !!}
+    {!! Form::label('nombre_dato', 'Datos generales:') !!}
     
-    <table input type="checkbox"  id= "nombre_dato" name= "datosGenerales_id">
-     
-      <tr>  
-                
+    <table class="table" id="nombre_dato">
+      <tr>
       <td></td>
-     
-      </tr>
+      </tr>  
     </table>
     </div>
 
 
-
-   
-
-<!--- Formatolegalizacion Id Field --->
+  <!--- formato legalizacion Id Field --->
 <div class="form-group col-sm-6 col-lg-4">
-    {!! Form::label('formatoLegalizacion_id', 'Formato legalizacion:') !!}
-    {!! Form::select('formatoLegalizacion_id', $legal, null, ['class' => 'form-control', 'id' => 'nombre_legal']) !!}
-</div>
+    {!! Form::label('legalizacion', 'Legalizacion:') !!}
+    
+    <table class="table" id="legalizacion">
+      <tr>
+      <td></td>
+      </tr>  
+    </table>
+    </div>
+
 
 <!--- Submit Field --->
 <div class="form-group col-sm-12">

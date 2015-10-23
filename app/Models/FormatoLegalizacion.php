@@ -11,9 +11,9 @@ class FormatoLegalizacion extends Model
     
 	public $timestamps = true;
 
-	public function  revisionDatos()
+	public function  revisiones()
 	{
-		return $this->hasMany('App\Models\revisionFormatoLegalizacion', 'formatoLegalizacion_id');
+		return $this->belongsToMany('App\Models\revision', 'id');
 	}
 
 	public function  chequeo()
