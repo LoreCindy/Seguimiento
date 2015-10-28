@@ -48,8 +48,8 @@
 					<td  class="con">{!! $revision->proyecto->nombre_contratatista !!}</td>
 					<td>{!! $revision->formato->nombre_formato !!}</td>
 					<td>{!! $revision->observaciones !!}</td>
-          <td></td>
-          <td></td>
+          <td><button id="abrecaja">Abrir </button></td>
+          <td><button id="abrecaja">Abrir </button></td>
 
 					<td>{!! $revision->chequeo->nombre_supervisor!!}</td>
 

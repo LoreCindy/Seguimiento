@@ -13,7 +13,7 @@ class chequeo extends Model
 
 	public function  revision()
 	{
-		return $this->hasMany('App\Models\revision', 'chequeo_id');
+		return $this->belongsTo('App\Models\revision', 'revision_id');
 	}
 
 	public function  legalizacion()
@@ -33,6 +33,7 @@ class chequeo extends Model
 	    "legalizacion_id",
 		"nombre_supervisor",
 		"dac",
+		"revision_id",
 		"observaciones"
 	];
 
@@ -40,6 +41,7 @@ class chequeo extends Model
 	    "legalizacion_id" => "required",
 		"nombre_supervisor" => "required",
 		"dac" => "required",
+		"revision_id"=>"required",
 		"observaciones" => "required"
 	];
 

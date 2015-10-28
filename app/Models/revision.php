@@ -40,7 +40,7 @@ class revision extends Model
 		
 		public function  chequeo()
 		{
-			return $this->belongsTo('App\Models\chequeo', 'chequeo_id');
+			return $this->hasMany('App\Models\chequeo', 'revision_id');
 		}
 
 
@@ -63,7 +63,7 @@ class revision extends Model
 		"formatoLista_id",
 		"observaciones",
 		//"datosGenerales_id",
-		"chequeo_id"
+		//"chequeo_id"
 	];
 
 	public static $rules = [
@@ -72,7 +72,7 @@ class revision extends Model
 		"formatoLista_id" => "required",
 		"observaciones" => "required",
 		//"datosGenerales_id" => "required",
-		"chequeo_id" => "required"
+		//"chequeo_id" => "required"
 	];
 
 	

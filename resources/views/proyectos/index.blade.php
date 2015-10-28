@@ -2,6 +2,81 @@
 
 @section('content')
 
+<style type="text/css">
+.btn{
+   position:relative;
+   padding:8px 16px;
+   font-family:'psychotik';
+   font-size:1.2em;
+   font-weight:normal;
+   color:#fff;
+   text-shadow:none;
+   border-radius:16px;
+   background:#00A6B6;
+   box-shadow:inset 2px 2px 1px #007f8b;
+}
+.btn:hover{
+   background:#FF9C00;
+   box-shadow:inset 2px 2px 1px #995f02;
+}
+/* Un bloque que ocupe toda la pantalla y contendrá nuestra modal... */
+#modalContent{
+   position:absolute;
+   top:50%;
+   left:50%;
+   z-index:6;
+   margin:-2% 0px 0px -150px;
+   float:left;
+   width:300px;
+   color:#fff;
+   line-height:22px;
+   padding:15px;
+   border-radius:5px;
+   background:#00A6B6;
+   border:1px solid #fff;
+   box-shadow:0px 2px 1px #999;
+}
+/* ... los estilos de la ventana central ... */
+#modal{
+   position:fixed;
+   top:0px;
+   left:0px;
+   z-index:5;
+   float:left;
+   width:100%;
+   height:100%;
+   background:rgba(0,0,0,0.2);
+   display:none;
+   opacity:0;
+}
+/* ... y un ‹a› transparente que ocupa todo el espacio para poder cerrar la modal desde cualquier punto */
+#modal > td{
+   position:fixed;
+   top:0px;
+   left:0px;
+   z-index:1;
+   float:left;
+   width:100%;
+   height:100%;
+}
+:target{
+   display:block!important;
+   opacity:1!important;
+}
+/* Un botón de cerrar para no despistar al usuario */
+#modalContent > a{
+   position:absolute;
+   top:-4px;
+   right:-4px;
+   color:#00A6B6;
+   border-radius:2px;
+   background:#fff;
+   padding:4px;
+}
+
+</style>
+
+
   <script type="text/javascript">
         $(document).ready(function(){
           alert("hola");
@@ -19,6 +94,15 @@
        }
        </style>
 
+
+
+
+<link type="text/css" rel="stylesheet" href="modal.css" />
+<script type="text/javascript" src="jquery-1.2.3.min.js"></script>
+<script type="text/javascript" src="modal.js"></script>
+
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+ <link href="bootstrap.css" rel="stylesheet">
 
          <div class="row">
          <a class="btn btn-primary pull-left" style="margin-top: 10px" href="{!! route('proyectos.create') !!}"><i class="glyphicon glyphicon-plus"></i> &nbsp; Agregar Proyecto</a>
@@ -56,7 +140,29 @@
                         <tr>
 
 
-          <td>{!! $proyecto->fecha_radicacion !!}</td>
+ <div class="modal fade bs-example-modal-lg" id="PlaceModal-{!! $proyecto->fecha_radicacion !!}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" id="ok" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+          <h4 class="modal-title" id="myModalLabel"><i class="fa fa-plus-square"></i> {!! $proyecto->fecha_radicacion !!}</h4>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
+ <a href="#PlaceModal-{{$proyecto->fecha_radicacion}}" id="{!!$proyecto->fecha_radicacion !!}" class="btn">pincha aqui</a>
+           <script type="text/javascript">
+            $(document).ready(function(){
+           $(".close").click(function(){
+           $("#ok").modal('close');
+            });
+          });
+          </script>          
+
+
+         <td>{!! $proyecto->fecha_radicacion !!}</td>
 					<td>{!! $proyecto->nombre_contratatista !!}</td>
 					<td>{!! $proyecto->nombre_modalidad !!}</td>
 					<td>{!! $proyecto->nombre_tipoContratacion !!}</td>
@@ -66,7 +172,10 @@
                             </td>
                         </tr>
 
-                    @endforeach
+
+
+                            
+         @endforeach
                     <td> 
                          {!! $proyectos->appends(Request::only(['name','tipo']))->render()!!} 
                     </tbody>

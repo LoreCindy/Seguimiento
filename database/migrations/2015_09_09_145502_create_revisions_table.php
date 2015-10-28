@@ -22,8 +22,6 @@ class CreaterevisionsTable extends Migration
 			$table->integer('formatoLista_id')->unsigned();
 			$table->foreign('formatoLista_id')->references('id')->on('formatolistas')->onDelete('cascade');
 			$table->text('observaciones')->nullable();
-			$table->integer('chequeo_id')->unsigned();
-			$table->foreign('chequeo_id')->references('id')->on('chequeos')->onDelete('cascade');
 			$table->timestamps();
 		});
 	}
