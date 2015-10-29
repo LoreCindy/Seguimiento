@@ -48,11 +48,9 @@
 					<td  class="con">{!! $revision->proyecto->nombre_contratatista !!}</td>
 					<td>{!! $revision->formato->nombre_formato !!}</td>
 					<td>{!! $revision->observaciones !!}</td>
-          <td><button id="abrecaja">Abrir </button></td>
-          <td><button id="abrecaja">Abrir </button></td>
-
-					<td>{!! $revision->chequeo->nombre_supervisor!!}</td>
-
+          <td></td>
+          <td></td>
+				
                               
                             <td>
                                 <a href="{!! route('revisions.edit', [$revision->id]) !!}"><i class="glyphicon glyphicon-edit"></i></a>

@@ -21,6 +21,11 @@ class datosGenerales extends Model
 			return $this->belongsTo('App\Models\formatolista', 'formatolista_id');
 		}
 
+	public function  chequeoDatos()
+	{
+		return $this->hasMany('App\Models\chequeoDatos', 'datos_generales_id');
+	}
+
 
 	public function scopeName($query, $name)
     {

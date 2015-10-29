@@ -18,7 +18,7 @@ class FormatoLegalizacion extends Model
 
 	public function  chequeo()
 	{
-		return $this->hasMany('App\Models\revision', 'legalizacion_id');
+		return $this->hasMany('App\Models\chequeo', 'legalizacion_id');
 	}
 
 	public function  formato()

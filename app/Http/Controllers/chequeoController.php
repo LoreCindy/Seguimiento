@@ -66,8 +66,9 @@ class chequeoController extends AppBaseController
 	{
         $input = $request->all();
 
+		//$chequeo = chequeo::create($input);
 		$chequeo = chequeo::create($input);
-
+		
 		Flash::message('chequeo saved successfully.');
 
 		return redirect(route('chequeos.index'));

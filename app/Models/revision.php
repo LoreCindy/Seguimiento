@@ -43,7 +43,12 @@ class revision extends Model
 			return $this->hasMany('App\Models\chequeo', 'revision_id');
 		}
 
+		public function  chequeoDatos()
+		{
+			return $this->hasMany('App\Models\chequeoDatos', 'revision_id');
+		}
 
+		
 		
 
 		
@@ -58,6 +63,7 @@ class revision extends Model
 
 
 	public $fillable = [
+		
 	    "nombre_revision",
 		"proyecto_id",
 		"formatoLista_id",

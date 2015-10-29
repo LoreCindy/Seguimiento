@@ -11,7 +11,15 @@ class chequeoDatos extends Model
     
 	public $timestamps = true;
 
-	
+	public function  revision()
+	{
+		return $this->belongsTo('App\Models\revision', 'revision_id');
+	}
+
+	public function  general()
+	{
+			return $this->belongsTo('App\Models\datosGenerales', 'datos_generales_id');
+	}
 
 		public function scopeName($query, $name)
     {

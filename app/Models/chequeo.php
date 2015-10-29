@@ -17,9 +17,9 @@ class chequeo extends Model
 	}
 
 	public function  legalizacion()
-		{
-			return $this->belongsTo('App\Models\formatoLegalizacion', 'legalizacion_id');
-		}
+	{
+		return $this->belongsTo('App\Models\formatoLegalizacion', 'legalizacion_id');
+	}
 
 		public function scopeName($query, $name)
     {

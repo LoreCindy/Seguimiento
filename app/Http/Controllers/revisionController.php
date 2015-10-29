@@ -3,7 +3,8 @@
 use App\Http\Requests;
 use App\Http\Requests\CreaterevisionRequest;
 use App\Models\revision;
-use App\Models\revisionDatosGenerales;
+use App\Models\chequeo;
+use App\Models\chequeoDatos;
 use App\Models\formatolista;
 use App\Models\FormatoLegalizacion;
 use Illuminate\Http\Request;
@@ -108,29 +109,32 @@ class revisionController extends AppBaseController
 	public function store(CreaterevisionRequest $request)
 	{
         $input = $request->all();
+     
 		$revision = revision::create($input);
-
-	
+		$idRevision= $revision->id;
+		
 		$datos_generales = $request->get('datos_generales');
 
+		$nombreDatos = $request->get("nombre_datosGenerales");
+		dd($nombreDatos);
+		
 		foreach ($datos_generales as $key => $value) {
-
 		$revision->general()->attach($value);
-
-			
+			$chequeodato= ["nombreChequeoDatos"=>$nombreDatos[$key],"datos_generales_id"=>$value,"revision_id"=>$idRevision];
+			$chequeodatos = chequeoDatos::create($chequeodato);
 		}
 
-		$legalizacion = $request->get('legalizacion');
+		$legalizacion = $request->get("legalizacion_id");
+		$chequeosupervisor = $request->input("nombre_supervisor");
+		$chequeoobservacion= $request->input("observacion");
+	  	$dac="false";
 		foreach ($legalizacion as $key => $value) {
-
 		$revision->legalizacion()->attach($value);
-
-			
+		$dac="true";
+	   	$chequeo= ["legalizacion_id"=>$value,"nombre_supervisor"=>$chequeosupervisor[$key],"dac"=>$dac,"revision_id"=>$idRevision,"observaciones"=>$chequeoobservacion[$key]];
+		$chequeos = chequeo::create($chequeo);
 		}
-
-
 		Flash::message('revision saved successfully.');
-
 		return redirect(route('revisions.index'));
 	}
 
