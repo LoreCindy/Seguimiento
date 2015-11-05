@@ -2,6 +2,8 @@
 
 @section('content')
 
+
+
   <script type="text/javascript">
         $(document).ready(function(){
           alert("hola");
@@ -19,6 +21,15 @@
        }
        </style>
 
+
+
+
+<link type="text/css" rel="stylesheet" href="modal.css" />
+<script type="text/javascript" src="jquery-1.2.3.min.js"></script>
+<script type="text/javascript" src="modal.js"></script>
+
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+ <link href="bootstrap.css" rel="stylesheet">
 
          <div class="row">
          <a class="btn btn-primary pull-left" style="margin-top: 10px" href="{!! route('proyectos.create') !!}"><i class="glyphicon glyphicon-plus"></i> &nbsp; Agregar Proyecto</a>
@@ -55,8 +66,8 @@
                     @foreach($proyectos as $proyecto)
                         <tr>
 
+         <td>{!! $proyecto->fecha_radicacion !!}</td>
 
-          <td>{!! $proyecto->fecha_radicacion !!}</td>
 					<td>{!! $proyecto->nombre_contratatista !!}</td>
 					<td>{!! $proyecto->nombre_modalidad !!}</td>
 					<td>{!! $proyecto->nombre_tipoContratacion !!}</td>
@@ -65,8 +76,8 @@
                                 <a href="{!! route('proyectos.delete', [$proyecto->id]) !!}" onclick="return confirm('Are you sure wants to delete this proyecto?')"><i class="glyphicon glyphicon-remove"></i></a>
                             </td>
                         </tr>
-
-                    @endforeach
+      
+         @endforeach
                     <td> 
                          {!! $proyectos->appends(Request::only(['name','tipo']))->render()!!} 
                     </tbody>

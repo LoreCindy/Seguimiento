@@ -28,11 +28,15 @@ class revisionController extends AppBaseController
 	{
 		//$revisions= \DB::table('revisions')->paginate();
 
-		$query = revision::name($request->only('name', 'tipo'));
-		$revisions = $query->paginate(5);
+		$query = revision::name($request->only('name', 'tipo'))->with('general');
+		$revisions = $query->paginate(1);
+		//dd($revisions>toArray()[2]['general']);
+
+	
 		$revisions->setPath('/contratacion/public/revisions');
         $columns = Schema::getColumnListing('$TABLE_NAME$');
         $attributes = array();
+
 
         foreach($columns as $attribute){
             if($request[$attribute] == true)
@@ -43,7 +47,7 @@ class revisionController extends AppBaseController
                 $attributes[$attribute] =  null;
             }
         };
-	
+
         return view('revisions.index')
            // ->with('revisions', $revisions)
             ->with('attributes', $attributes)
@@ -111,15 +115,18 @@ class revisionController extends AppBaseController
         $input = $request->all();
      
 		$revision = revision::create($input);
+
 		$idRevision= $revision->id;
 		
 		$datos_generales = $request->get('datos_generales');
 
 		$nombreDatos = $request->get("nombre_datosGenerales");
-		dd($nombreDatos);
+		//dd($nombreDatos);
 		
 		foreach ($datos_generales as $key => $value) {
+			
 		$revision->general()->attach($value);
+
 			$chequeodato= ["nombreChequeoDatos"=>$nombreDatos[$key],"datos_generales_id"=>$value,"revision_id"=>$idRevision];
 			$chequeodatos = chequeoDatos::create($chequeodato);
 		}

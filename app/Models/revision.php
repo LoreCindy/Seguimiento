@@ -17,36 +17,36 @@ class revision extends Model
 		return $this->hasMany('App\Models\detalleRevision', 'revision_id');
 	}
 
-		public function  proyecto()
-		{
-			return $this->belongsTo('App\Models\proyecto', 'proyecto_id');
-		}
+	public function  proyecto()
+	{
+		return $this->belongsTo('App\Models\proyecto', 'proyecto_id');
+	}
 
-		public function  formato()
-		{
-			return $this->belongsTo('App\Models\formatolista', 'formatoLista_id');
-		}
+	public function  formato()
+	{
+		return $this->belongsTo('App\Models\formatolista', 'formatoLista_id');
+	}
 
 
-		public function  general()
-		{
-			return $this->belongsToMany('App\Models\datosGenerales');
-		}
+	public function general()
+	{
+		return $this->belongsToMany('App\Models\datosGenerales');
+	}
 
-		public function  legalizacion()
-		{
-			return $this->belongsToMany('App\Models\FormatoLegalizacion');
-		}
-		
-		public function  chequeo()
-		{
-			return $this->hasMany('App\Models\chequeo', 'revision_id');
-		}
+	public function  legalizacion()
+	{
+		return $this->belongsToMany('App\Models\FormatoLegalizacion');
+	}
+	
+	public function  chequeo()
+	{
+		return $this->hasMany('App\Models\chequeo', 'revision_id');
+	}
 
-		public function  chequeoDatos()
-		{
-			return $this->hasMany('App\Models\chequeoDatos', 'revision_id');
-		}
+	public function  chequeoDatos()
+	{
+		return $this->hasMany('App\Models\chequeoDatos', 'revision_id');
+	}
 
 		
 		
