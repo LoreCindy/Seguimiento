@@ -54,39 +54,37 @@
 					<td  class="con">{!! $revision->proyecto->nombre_contratatista !!}</td>
 					<td>{!! $revision->formato->nombre_formato !!}</td>
 					<td>{!! $revision->observaciones !!}</td>
-          <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">detalles
+        <!--  boton Modal datos generales -->
+          <td><a href="#myModal{{$revision->id}}" class="btn btn-primary" data-toggle="modal" data-target="#myModal{{$revision->id}}">detalles</a></td>
 
-</button>
+        <!-- Modal datos generales -->
+          <div class="modal fade" id="myModal{{$revision->id}}"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel1">
+          <div class="modal-dialog" role="document">
+          <div class="modal-content">
+          <div class="modal-header">
+          <h4 class="modal-title" >Datos Generales</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="false">&times;</span></button>
+          </div>
+          <div class="modal-body">
+         @foreach($revision->general as $dato_general)
+            <h4 class="modal-title" id="myModalLabel1"><i class="fa fa-plus-square"></i>Nombre: {!!$dato_general->nombre_dato!!}</h4>
+         @endforeach
+          </div>
+          <div class="modal-footer">
+         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+         </div>
+         </div>
+         </div>
+          </div>  
 
-<!-- Modal -->
-<div class="modal fade" id="myModal"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title" >Datos Generales</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="false">&times;</span></button>
-      </div>
-      <div class="modal-body">
-        @foreach($revision->general as $dato_general)
-        <h4 class="modal-title" id="myModalLabel"><i class="fa fa-plus-square"></i>nombre dato general: {!! $dato_general->nombre_dato !!}</h4>
-        @endforeach
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-       
-      </div>
-    </div>
-  </div>
-</div></td>
-         
-<td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal1">detalles
-
-</button>
-
-            <!-- Modal -->
-<div class="modal fade" id="myModal1"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
+      <!-- boton Modal legalizacion  -->
+      <td><a class="btn btn-primary"  href="#PlaceModal-{{$revision->id}}" data-toggle="modal">Detalles</a></td>
+      
+     <!-- Modal legalizacion  -->
+            
+      <div class="modal fade" id="PlaceModal-{{$revision->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+      <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title" >Formato Legalización</h4>
         <button type="button"  i class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="false">&times;</span></button>
@@ -94,7 +92,7 @@
       </div>
       <div class="modal-body">
       @foreach($revision->legalizacion as $legalizacion)
-       <h4 class="modal-title" id="myModalLabel"><i class="fa fa-plus-square"></i>nombre legalizacion: {!! $legalizacion->documentos_legalizacion !!} </h4>
+       <h4 class="modal-title" id="myModalLabel"><i class="fa fa-plus-square"></i>Legalización: {!! $legalizacion->documentos_legalizacion !!} </h4>
        @endforeach
       </div>
       <div class="modal-footer">
@@ -116,31 +114,13 @@
 
                         </tr>
                     @endforeach
+
                     <td> 
                      {!! $revisions->appends(Request::only(['name','tipo']))->render()!!}
                     </tbody>
                 </table>
             @endif  
         </div>
-        <!-- Modal -->
-<div id="myModal" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Modal Header</h4>
-      </div>
-      <div class="modal-body">
-        <p>Some text in the modal.</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-
-  </div>
-</div>
+  
     </div>
 @endsection

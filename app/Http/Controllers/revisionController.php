@@ -29,7 +29,7 @@ class revisionController extends AppBaseController
 		//$revisions= \DB::table('revisions')->paginate();
 
 		$query = revision::name($request->only('name', 'tipo'))->with('general');
-		$revisions = $query->paginate(1);
+		$revisions = $query->paginate(5);
 		//dd($revisions>toArray()[2]['general']);
 
 	
