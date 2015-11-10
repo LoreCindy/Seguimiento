@@ -55,7 +55,6 @@ class proyectoController extends AppBaseController
       //  $proyectos = $query->get();
 
         return view('proyectos.index')
-            //->with('proyectos', $proyectos)
             ->with('attributes', $attributes)
             ->with('proyectos',$proyectos);
 	}

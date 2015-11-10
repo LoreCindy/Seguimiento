@@ -52,7 +52,8 @@ class chequeoController extends AppBaseController
 	public function create()
 	{
 		$data= ['legal'=>\DB::table('formato_legalizacions')->lists('documentos_legalizacion', 'id')];
-		return view('chequeos.create',  $data);
+		$datos=['revision'=>\DB::table('revisions')->lists('nombre_revision', 'id')];
+		return view('chequeos.create',  $data) ->with($datos);
 	}
 
 	/**

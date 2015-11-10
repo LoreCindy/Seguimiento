@@ -3,12 +3,15 @@
 @section('content')
 
     <div class="container">
-
+        <ul class="nav nav-tabs">
+          <li role="presentation"><a href="{!! asset('revisions')!!}">Revisiones</a></li>
+           <li role="presentation" class="active"><a href="{!! asset('chequeos')!!}">Chequeos</a></li>
+        </ul>
         @include('flash::message')
 
         <div class="row">
             <a class="btn btn-primary pull-left" style="margin-top: 10px"href="{!! route('chequeos.create') !!}"><i class="glyphicon glyphicon-plus"></i> &nbsp;Agregar Chequeo</a>
-             <a class="btn btn-default"   href="chequeosExcel" style="margin-top: 8px; margin-left:40%"data-url="">
+             <a class="btn btn-primary pull-left" href="chequeosExcel" style="margin-top: 8px; margin-left:40%"data-url="">
                <i class="glyphicon glyphicon-download-alt"></i>
                <span class="hidden-xs floatL l5">Exportar</span>
            </a>

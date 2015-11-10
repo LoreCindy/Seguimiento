@@ -33,9 +33,9 @@
 
          <div class="row">
          <a class="btn btn-primary pull-left" style="margin-top: 10px" href="{!! route('proyectos.create') !!}"><i class="glyphicon glyphicon-plus"></i> &nbsp; Agregar Proyecto</a>
-         <a class="btn btn-default"   href="proyectoExcel" style="margin-top: 8px; margin-left:40%"data-url="">
+         <a class="btn btn-primary pull-left"  href="proyectoExcel" style="margin-top: 8px; margin-left:40%"data-url="">
                <i class="glyphicon glyphicon-download-alt"></i>
-               <span class="hidden-xs floatL l5">Exportar</span>
+               <span   class="hidden-xs floatL l5">Exportar</span>
            </a>
 
            {!! Form::open(['route' => 'proyectos.index', 'method' => 'GET', 'class' => 'navbar-form navbar-right', 'role' => 'search']) !!}

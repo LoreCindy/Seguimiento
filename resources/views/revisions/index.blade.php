@@ -3,7 +3,17 @@
 @section('content')
 
     <div class="container">
-
+<ul class="nav nav-tabs">
+      <li role="presentation"class="active"><a href="{!! asset('revisions')!!}">Revisiones</a></li>
+      @if($revisions->isEmpty())
+      <li role="presentation"><a class="btn btn-primary btn-lg disabled" href="{!! asset('chequeos')!!}">Chequeos</a></li>
+     
+     @else
+     <li role="presentation"><a href="{!! asset('chequeos')!!}">Chequeos</a></li>
+     
+       @endif
+    </ul>
+    <tr>
         @include('flash::message')
        
 <link type="text/css" rel="stylesheet" href="modal.css" />
@@ -17,7 +27,7 @@
         <div class="row">
              <a class="btn btn-primary pull-left" style="margin-top: 10px" href="{!! route('revisions.create') !!}"><i class="glyphicon glyphicon-plus"></i> &nbsp;Agregar Revisión</a>
            
-            <a class="btn btn-default"   href="revisionExcel" style="margin-top: 8px; margin-left:40%"data-url="">
+            <a class="btn btn-primary pull-left" href="revisionExcel" style="margin-top: 8px; margin-left:40%"data-url="">
                <i class="glyphicon glyphicon-download-alt"></i>
                <span class="hidden-xs floatL l5">Exportar</span>
            </a>

@@ -13,7 +13,7 @@
         <div class="row">
          <a class="btn btn-primary pull-left" style="margin-top: 10px" href="{!! route('detalleRevisions.create') !!}"><i class="glyphicon glyphicon-plus"></i> &nbsp;Agregar detalles Revisión</a>
             
-        <a class="btn btn-default"   href="detalleExcel" style="margin-top: 8px; margin-left:32%"data-url="">
+        <a class="btn btn-primary pull-left"  href="detalleExcel" style="margin-top: 8px; margin-left:32%"data-url="">
                <i class="glyphicon glyphicon-download-alt"></i>
                <span class="hidden-xs floatL l5">Exportar</span>
         </a>

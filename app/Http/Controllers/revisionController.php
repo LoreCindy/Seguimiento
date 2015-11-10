@@ -31,6 +31,7 @@ class revisionController extends AppBaseController
 		$query = revision::name($request->only('name', 'tipo'))->with('general');
 		$revisions = $query->paginate(5);
 		//dd($revisions>toArray()[2]['general']);
+		
 
 	
 		$revisions->setPath('/contratacion/public/revisions');
@@ -175,11 +176,18 @@ class revisionController extends AppBaseController
 	 */
 	public function edit($id)
 	{
-		$revision = revision::find($id);
 
+
+		$revision = revision::find($id);
+		
+		$datosgenerales=$revision->general()->get();
+			
+		$legalizacion=$revision->legalizacion()->get();
+		
 		$datoos= ['chequeos'=>\DB::table('chequeos')->lists('nombre_supervisor', 'id')];
 		//$datoo= ['legal'=>\DB::table('formato_legalizacions')->lists('documentos_legalizacion', 'id')];
 		// $dato= ['datosgenerales'=>\DB::table('datos_generales')->lists('nombre_dato', 'id')];
+		
 		$data = ['proyectos' =>\DB::table('proyectos')->lists('nombre_contratatista', 'id')];
  		$datas= ['formatolista' =>\DB::table('formatolistas')->lists('nombre_formato', 'id')];
 		if(empty($revision))
@@ -190,6 +198,7 @@ class revisionController extends AppBaseController
 
 		return view('revisions.edit')->with('revision', $revision)
 		->with($data)
+
 		->with($datas)
 		->with($datoos);
 	}

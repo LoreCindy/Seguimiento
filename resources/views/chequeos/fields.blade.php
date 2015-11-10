@@ -24,8 +24,16 @@
 </div>
 
 
+<!--- Revision Id Field --->
+<div class="form-group col-sm-6 col-lg-4">
+    {!! Form::label('revision_id', 'Revision:') !!}
+    {!! Form::select('revision_id', $revision,null, ['class' => 'form-control']) !!}
+</div>
+
 <!--- Submit Field --->
 <div class="form-group col-sm-12">
     {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
        {!! link_to(URL::previous(), 'Cancelar', ['class' => 'btn btn-danger']) !!}
 </div>
+
+

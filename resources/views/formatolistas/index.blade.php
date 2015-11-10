@@ -18,7 +18,7 @@
         <div class="row">
             <a class="btn btn-primary pull-left" style="margin-top: 10px"href="{!! route('formatolistas.create') !!}"><i class="glyphicon glyphicon-plus"></i> &nbsp; Agregar Formato Lista</a>
               
-            <a class="btn btn-default"   href="formatoExcel" style="margin-top: 8px; margin-left:38%" data-url="">
+            <a class="btn btn-primary pull-left"  href="formatoExcel" style="margin-top: 8px; margin-left:38%" data-url="">
                <i class="glyphicon glyphicon-download-alt"></i>
                <span class="hidden-xs floatL l5">Exportar</span>
            </a>
