@@ -6,6 +6,8 @@
 .recibido {  background-color: #E0ECFF; }
 .devolucion { background-color: rgb(100%, 88%, 88%); }
 .aprobado  { background-color: rgb(227, 255, 224);   }
+
+
 </style>
     <div class="container">
         @include('flash::message')
@@ -63,14 +65,63 @@
                             <td>
                                 <a href="{!! route('detalleRevisions.edit', [$detalleRevision->id]) !!}"><i class="glyphicon glyphicon-edit"></i></a>
                                 <a href="{!! route('detalleRevisions.delete', [$detalleRevision->id]) !!}" onclick="return confirm('Are you sure wants to delete this detalleRevision?')"><i class="glyphicon glyphicon-remove"></i></a>
-                            </td>
-                        </tr>
+                               
+                                <a href="#myModal{{$detalleRevision->id}}" data-backdrop="false"  data-toggle="modal" data-target="#myModal{{$detalleRevision->id}}"><i class="glyphicon glyphicon-envelope"></i></a>
+                          </td>
+
+ 
+          
+              <div class="modal fade" id="myModal{{$detalleRevision->id}}" tabindex="-1" role="dialog" aria-labelledby="prueba">
+                <div class="modal-dialog" >
+                  <div class="modal-content">
+                       <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                          <h4 class="modal-title" id="exampleModalLabel">Enviar Correo</h4>
+                      </div>
+                      <div class="modal-body">
+                         {!! Form::open(['route' => 'send', 'method' => 'post']) !!} 
+                        
+                         
+                          <div class="form-group">
+                            {!! Form::label('name', 'Nombre') !!}
+                            {!!Form::input('text','name', null,array('class'=>'form-control'))!!}
+                          </div>
+                          <div class="form-group">
+                            {!! Form::label('email', 'E-Mail') !!}
+                            {!!Form::input('email','email', null,array('class'=>'form-control'))!!}
+                          </div>
+                          <div class="form-group">
+                            {!! Form::label('subject', 'Asunto') !!}
+                            {!!Form::input('text','subject', null,array('class'=>'form-control'))!!}
+                          </div>
+                          <div class="form-group">
+                          {!! Form::label('body', 'Mensaje') !!}
+                          {!! Form::textarea('body', null, ['class' => 'form-control' ]) !!}
+                          </div>
+                           <div class="form-group">
+                            <h4 class="modal-title" id="myModalLabel1"><i class="fa fa-plus-square"></i>Nombre revision: {!!$detalleRevision->revision->nombre_revision!!}</h4>
+                           </div>
+
+                     
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                        {!! Form::submit('Enviar', ['class' => 'btn btn-primary' ] ) !!}
+                          {!! Form::close() !!}
+                      </div>
+         
+                  </div>
+                </div>
+              </div>
+   
                     @endforeach
                     <td> 
                      {!! $detalleRevisions->appends(Request::only(['name','tipo']))->render()!!}
                     </tbody>
                 </table>
             @endif
+
         </div>
     </div>
 @endsection
+

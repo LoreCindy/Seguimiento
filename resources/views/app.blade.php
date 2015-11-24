@@ -9,12 +9,13 @@
 	<title>Laravel</title>
 
 
-	<link href="/css/app.css" rel="stylesheet">
+	<link href="{{asset('css/app.css')}}" rel="stylesheet">
 
 	<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	<link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="{{asset('js/bootstrap.min.js')}}"></script>
 	<!-- Fonts -->
 	<link href='//fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
 
@@ -47,6 +48,7 @@
 					<li><a href="{!! asset('formatolistas')!!}">Formato</a></li>
 					<li><a href="{!! asset ('revisions')!!}">Revisiones</a></li>
 					<li><a href="{!! asset('detalleRevisions')!!}">Detalle revisión</a></li>
+					<li><a href="{!! asset('contact')!!}">Contacto</a></li>
 				</ul>
 
 				<ul class="nav navbar-nav navbar-right">
@@ -57,7 +59,7 @@
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ Auth::user()->name }} <span class="caret"></span></a>
 							<ul class="dropdown-menu" role="menu">
-								<li><a href="auth/logout">Logout</a></li>
+								<li><a href="auth/login">Logout</a></li>
 							</ul>
 						</li>
 					@endif

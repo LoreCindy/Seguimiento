@@ -164,4 +164,36 @@ class detalleRevisionController extends AppBaseController
 
 		return redirect(route('detalleRevisions.index'));
 	}
+
+	
+	public function send(Request $request)
+   {
+       //guarda el valor de los campos enviados desde el form en un array
+       $data = $request->all();
+ 		
+       //se envia el array y la vista lo recibe en llaves individuales {{ $email }} , {{ $subject }}...
+
+
+       
+       \Mail::send('contacto.email', $data, function($message) use ($request)
+       {
+       
+
+           //remitente
+           $message->from("gerenciap2015@gmail.com");
+ 			//nombre
+          // $message->text($request->text);
+           //asunto
+           $message->subject($request->subject);
+ 
+           //receptor
+           $message->to($request->email);
+           //dd($message);
+ 
+       });
+
+       Flash::message('su correo de detalleRevision se ha enviado con exito.');
+       return redirect(route('detalleRevisions.index'));
+   }
+
 }

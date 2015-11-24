@@ -177,12 +177,20 @@ class revisionController extends AppBaseController
 	public function edit($id)
 	{
 
-
+       
 		$revision = revision::find($id);
 		
-		$datosgenerales=$revision->general()->get();
-			
-		$legalizacion=$revision->legalizacion()->get();
+		//$idRevision= $revision->id;
+
+		//$datosgenerales=$revision->general('revision_id'.'datos_generles_id')->get();
+        //dd($datosgenerales);
+
+		
+		
+		//$legalizacion=$revision->legalizacion()->get();
+		//$rev=$datosgenerales -> $legalizacion;
+
+
 		
 		$datoos= ['chequeos'=>\DB::table('chequeos')->lists('nombre_supervisor', 'id')];
 		//$datoo= ['legal'=>\DB::table('formato_legalizacions')->lists('documentos_legalizacion', 'id')];
@@ -198,7 +206,6 @@ class revisionController extends AppBaseController
 
 		return view('revisions.edit')->with('revision', $revision)
 		->with($data)
-
 		->with($datas)
 		->with($datoos);
 	}

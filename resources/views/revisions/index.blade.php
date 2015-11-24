@@ -65,7 +65,7 @@
 					<td>{!! $revision->formato->nombre_formato !!}</td>
 					<td>{!! $revision->observaciones !!}</td>
         <!--  boton Modal datos generales -->
-          <td><a href="#myModal{{$revision->id}}" class="btn btn-primary" data-toggle="modal" data-target="#myModal{{$revision->id}}">detalles</a></td>
+          <td><a href="#myModal{{$revision->id}}" class="btn btn-primary" data-backdrop="false"data-toggle="modal" data-target="#myModal{{$revision->id}}">detalles</a></td>
 
         <!-- Modal datos generales -->
           <div class="modal fade" id="myModal{{$revision->id}}"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel1">
@@ -88,7 +88,7 @@
           </div>  
 
       <!-- boton Modal legalizacion  -->
-      <td><a class="btn btn-primary"  href="#PlaceModal-{{$revision->id}}" data-toggle="modal">Detalles</a></td>
+      <td><a class="btn btn-primary" data-backdrop="false" href="#PlaceModal-{{$revision->id}}" data-toggle="modal">Detalles</a></td>
       
      <!-- Modal legalizacion  -->
             
