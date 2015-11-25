@@ -2,11 +2,11 @@
 <head></head>
 <body>
 
-<p>enviado por: {{$name}}</p>
-
-
+<p>Nombre Responsable: {{$name}}</p>
+<p>Dependencia Responsable:{{$dep}}</p>
+<p>Revision:{{$rev}}</p>
 {{$body}}
-<p>{{}}</p>
+
 
 </body>
 </html>

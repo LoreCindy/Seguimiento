@@ -71,7 +71,7 @@
 
  
           
-              <div class="modal fade" id="myModal{{$detalleRevision->id}}" tabindex="-1" role="dialog" aria-labelledby="prueba">
+                <div class="modal fade" id="myModal{{$detalleRevision->id}}" tabindex="-1" role="dialog" aria-labelledby="prueba">
                 <div class="modal-dialog" >
                   <div class="modal-content">
                        <div class="modal-header">
@@ -82,10 +82,7 @@
                          {!! Form::open(['route' => 'send', 'method' => 'post']) !!} 
                         
                          
-                          <div class="form-group">
-                            {!! Form::label('name', 'Nombre') !!}
-                            {!!Form::input('text','name', null,array('class'=>'form-control'))!!}
-                          </div>
+
                           <div class="form-group">
                             {!! Form::label('email', 'E-Mail') !!}
                             {!!Form::input('email','email', null,array('class'=>'form-control'))!!}
@@ -94,15 +91,25 @@
                             {!! Form::label('subject', 'Asunto') !!}
                             {!!Form::input('text','subject', null,array('class'=>'form-control'))!!}
                           </div>
+                           
                           <div class="form-group">
-                          {!! Form::label('body', 'Mensaje') !!}
-                          {!! Form::textarea('body', null, ['class' => 'form-control' ]) !!}
+                            {!! Form::label('body', 'Mensaje') !!}
+                            {!! Form::textarea('body',null, ['class' => 'form-control' ]) !!}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
                           </div>
-                           <div class="form-group">
-                            <h4 class="modal-title" id="myModalLabel1"><i class="fa fa-plus-square"></i>Nombre revision: {!!$detalleRevision->revision->nombre_revision!!}</h4>
-                           </div>
-
-                     
+                          <div class="form-group">
+                            {!! Form::label('name', 'Nombre Responsable') !!}
+                            {!!Form::input('text','name',$detalleRevision->nombre_responsable, null,array('class'=>'form-control'))!!}
+                          </div>
+                          <div class="form-group">
+                            {!! Form::label('dep', 'Dependecia Responsable') !!}
+                            {!!Form::input('text','dep',$detalleRevision->dependencia_responsable , null,array('class'=>'form-control'))!!}
+                          </div>
+                          <div class="form-group">
+                            {!! Form::label('rev', 'Nombre Revision') !!}
+                            {!!Form::input('text','rev',$detalleRevision->revision->nombre_revision , null,array('class'=>'form-control'))!!}
+                          </div>
+                        
+                         
                       </div>
                       <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
@@ -113,7 +120,6 @@
                   </div>
                 </div>
               </div>
-   
                     @endforeach
                     <td> 
                      {!! $detalleRevisions->appends(Request::only(['name','tipo']))->render()!!}
