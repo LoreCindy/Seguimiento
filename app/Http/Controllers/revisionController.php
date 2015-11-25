@@ -16,6 +16,15 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class revisionController extends AppBaseController
 {
+	/**
+	 * Create a new controller instance.
+	 *
+	 * @return void
+	 */
+	public function __construct()
+	{
+		$this->middleware('auth');
+	}
 
 	/**
 	 * Display a listing of the Post.
@@ -113,37 +122,38 @@ class revisionController extends AppBaseController
 	 */
 	public function store(CreaterevisionRequest $request)
 	{
-        $input = $request->all();
-     
+        try {
+		$input = $request->all();
 		$revision = revision::create($input);
-
 		$idRevision= $revision->id;
-		
-		$datos_generales = $request->get('datos_generales');
-
+		$datosGenerales = $request->get("datosGenerales");
+		$legalizacion = $request->get("legalizacion_id");
 		$nombreDatos = $request->get("nombre_datosGenerales");
-		//dd($nombreDatos);
-		
-		foreach ($datos_generales as $key => $value) {
-			
-		$revision->general()->attach($value);
+		$dacCheck= $request->get('dac');
 
-			$chequeodato= ["nombreChequeoDatos"=>$nombreDatos[$key],"datos_generales_id"=>$value,"revision_id"=>$idRevision];
+		foreach ($datosGenerales as $key => $dato) {
+			$revision->general()->attach($dato);
+			$chequeodato= ["nombreChequeoDatos"=>$nombreDatos[$key],"datos_generales_id"=>$dato,"revision_id"=>$idRevision];
 			$chequeodatos = chequeoDatos::create($chequeodato);
 		}
 
-		$legalizacion = $request->get("legalizacion_id");
-		$chequeosupervisor = $request->input("nombre_supervisor");
-		$chequeoobservacion= $request->input("observacion");
-	  	$dac="false";
+	  	$chequeosupervisor=$request->get("nombre_supervisor");
+		$chequeoobservacion= $request->get("observacion");
+
 		foreach ($legalizacion as $key => $value) {
 		$revision->legalizacion()->attach($value);
-		$dac="true";
-	   	$chequeo= ["legalizacion_id"=>$value,"nombre_supervisor"=>$chequeosupervisor[$key],"dac"=>$dac,"revision_id"=>$idRevision,"observaciones"=>$chequeoobservacion[$key]];
+	   	$chequeo= ["legalizacion_id"=>$value,"nombre_supervisor"=>$chequeosupervisor[$key],"dac"=>$dacCheck[$key],"revision_id"=>$idRevision,"observaciones"=>$chequeoobservacion[$key]];
 		$chequeos = chequeo::create($chequeo);
 		}
+
 		Flash::message('revision saved successfully.');
 		return redirect(route('revisions.index'));
+			
+		} catch (Exception $e) {
+			Flash::message('no se ha podido guardar la revision');
+			
+		}
+
 	}
 
 	
@@ -176,28 +186,18 @@ class revisionController extends AppBaseController
 	 */
 	public function edit($id)
 	{
-
-       
+		//$query = revision->consulta($id);
 		$revision = revision::find($id);
-		
-		//$idRevision= $revision->id;
 
-		//$datosgenerales=$revision->general('revision_id'.'datos_generles_id')->get();
-        //dd($datosgenerales);
+		$legalizaciones =$revision->chequeo;
+		$legalizacionFormato=$revision->legalizacion;
+		$ejemplo=$revision->formato->legalizacion;
+		//dd($ejemplo);
+		$datosGenerales=$revision->chequeoDatos;
+		$datosGeneralesformato=$revision->general;
 
-		
-		
-		//$legalizacion=$revision->legalizacion()->get();
-		//$rev=$datosgenerales -> $legalizacion;
-
-
-		
-		$datoos= ['chequeos'=>\DB::table('chequeos')->lists('nombre_supervisor', 'id')];
-		//$datoo= ['legal'=>\DB::table('formato_legalizacions')->lists('documentos_legalizacion', 'id')];
-		// $dato= ['datosgenerales'=>\DB::table('datos_generales')->lists('nombre_dato', 'id')];
-		
-		$data = ['proyectos' =>\DB::table('proyectos')->lists('nombre_contratatista', 'id')];
- 		$datas= ['formatolista' =>\DB::table('formatolistas')->lists('nombre_formato', 'id')];
+		$proyectos = ['proyectos' =>\DB::table('proyectos')->lists('nombre_contratatista', 'id')];
+ 		$formatolista= ['formatolista' =>\DB::table('formatolistas')->lists('nombre_formato', 'id')];
 		if(empty($revision))
 		{
 			Flash::error('revision not found');
@@ -205,9 +205,14 @@ class revisionController extends AppBaseController
 		}
 
 		return view('revisions.edit')->with('revision', $revision)
-		->with($data)
-		->with($datas)
-		->with($datoos);
+		->with($proyectos)
+		->with($formatolista)
+		->with('datosGeneralesFormato',$datosGeneralesformato)
+		->with('datosGenerales',$datosGenerales)
+		->with('legalizaciones',$legalizaciones)
+		->with('legalizacionesFormato',$legalizacionFormato);
+       
+		
 	}
 
 	/**
@@ -222,7 +227,14 @@ class revisionController extends AppBaseController
 	{
 		/** @var revision $revision */
 		$revision = revision::find($id);
-
+		$idChequeo= $request->get('id');
+		$buscarChequeo= chequeo::find($idChequeo);
+		$chequeos = $request->only('nombre_supervisor','observacion','dac');
+		
+		$idDatos= $request->get('id_datos');
+		$buscarDatos= chequeoDatos::find($idDatos);
+		$datos = $request->only('nombreChequeoDatos');
+		
 		if(empty($revision))
 		{
 			Flash::error('revision not found');
@@ -231,9 +243,30 @@ class revisionController extends AppBaseController
 
 		$revision->fill($request->all());
 		$revision->save();
+		foreach ($buscarChequeo as $key => $chequeo) {
+
+			$observacion=$chequeos['observacion'][$key];
+			$nombre=$chequeos['nombre_supervisor'][$key];
+			$dac=$chequeos['dac'][$key];
+			$nombre_supervisor=['nombre_supervisor'=>$nombre,'observaciones'=>$observacion ,'dac'=>$dac];
+			
+			$chequeo->fill($nombre_supervisor);
+			$chequeo->save();
+	
+		}
+
+		foreach ($buscarDatos as $key => $dato) {
+
+			$nombreChequeo=$datos['nombreChequeoDatos'][$key];
+		
+			$nombreChequeoDatos=['nombreChequeoDatos'=>$nombreChequeo];
+		
+			$dato->fill($nombreChequeoDatos);
+			$dato->save();
+	
+		}
 
 		Flash::message('revision updated successfully.');
-
 		return redirect(route('revisions.index'));
 	}
 
@@ -248,13 +281,15 @@ class revisionController extends AppBaseController
 	{
 		/** @var revision $revision */
 		$revision = revision::find($id);
-
+		$datos=$revision->general()->lists('id');
+		
 		if(empty($revision))
 		{
 			Flash::error('revision not found');
 			return redirect(route('revisions.index'));
 		}
 
+		$revision->general()->detach($datos);
 		$revision->delete();
 
 		Flash::message('revision deleted successfully.');

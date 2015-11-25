@@ -3,27 +3,11 @@
 @section('content')
 
 
-
-  <script type="text/javascript">
-        $(document).ready(function(){
-          alert("hola");
-          $(".con").parentNode.css("background-color:yellow;");
-        });
-        
-       </script>
     <div class="container">
 
         @include('flash::message')
 
-   <style>
-       {
-        background-color: yellow;
-       }
-       </style>
-
-
-
-
+   
 <link type="text/css" rel="stylesheet" href="modal.css" />
 <script type="text/javascript" src="jquery-1.2.3.min.js"></script>
 <script type="text/javascript" src="modal.js"></script>

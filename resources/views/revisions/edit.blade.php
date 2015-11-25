@@ -7,7 +7,7 @@
 
     {!! Form::model($revision, ['route' => ['revisions.update', $revision->id], 'method' => 'patch']) !!}
 
-        @include('revisions.fields')
+        @include('revisions.editarField')
 
     {!! Form::close() !!}
 </div>

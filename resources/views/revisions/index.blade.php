@@ -3,17 +3,7 @@
 @section('content')
 
     <div class="container">
-<ul class="nav nav-tabs">
-      <li role="presentation"class="active"><a href="{!! asset('revisions')!!}">Revisiones</a></li>
-      @if($revisions->isEmpty())
-      <li role="presentation"><a class="btn btn-primary btn-lg disabled" href="{!! asset('chequeos')!!}">Chequeos</a></li>
-     
-     @else
-     <li role="presentation"><a href="{!! asset('chequeos')!!}">Chequeos</a></li>
-     
-       @endif
-    </ul>
-    <tr>
+
         @include('flash::message')
        
 <link type="text/css" rel="stylesheet" href="modal.css" />
@@ -38,6 +28,7 @@
                     {!! Form::select('tipo', ['0'=>'seleccione campo','nombre_revision' => 'Nombre Revision'], null, ['class' => 'form-control'])!!}
                 <button type="submit" class="btn search-button t5 btn-primary"><i class="glyphicon glyphicon-search"></i></button>
             {!! Form::close() !!}
+        </div>
         </div>
         <div class="row">
             @if($revisions->isEmpty())

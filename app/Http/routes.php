@@ -29,9 +29,9 @@ Route::get('formato','revisionController@formato_lista');
 Route::get('legal','revisionController@formato_legalizacion');
 
 
-Route::get('/', 'WelcomeController@index');
+Route::get('/', 'HomeController@index');
 
-Route::get('home', 'HomeController@index');
+Route::get('app', 'HomeController@index');
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',
