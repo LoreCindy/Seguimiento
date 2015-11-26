@@ -81,8 +81,6 @@
                       <div class="modal-body">
                          {!! Form::open(['route' => 'send', 'method' => 'post']) !!} 
                         
-                         
-
                           <div class="form-group">
                             {!! Form::label('email', 'E-Mail') !!}
                             {!!Form::input('email','email', null,array('class'=>'form-control'))!!}
@@ -91,7 +89,7 @@
                             {!! Form::label('subject', 'Asunto') !!}
                             {!!Form::input('text','subject', null,array('class'=>'form-control'))!!}
                           </div>
-                           
+                                                   
                           <div class="form-group">
                             {!! Form::label('body', 'Mensaje') !!}
                             {!! Form::textarea('body',null, ['class' => 'form-control' ]) !!}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
@@ -108,7 +106,11 @@
                             {!! Form::label('rev', 'Nombre Revision') !!}
                             {!!Form::input('text','rev',$detalleRevision->revision->nombre_revision , null,array('class'=>'form-control'))!!}
                           </div>
+                          <div class="form-group">
+                            {!! Form::label('a', 'Observaciones') !!}
+                            {!!Form::textarea('a',$detalleRevision->revision->observaciones,array('class'=>'form-control'))!!}
                         
+                          </div>
                          
                       </div>
                       <div class="modal-footer">

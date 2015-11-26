@@ -113,6 +113,12 @@ class revisionController extends AppBaseController
 	   return  Response::make(  $FormatoLegalizacion->get([ 'id' , 'documentos_legalizacion' ])); 
     }
 
+
+    public function darObservacion(Request $request)
+    {
+
+    }
+
 	/**
 	 * Store a newly created revision in storage.
 	 *
