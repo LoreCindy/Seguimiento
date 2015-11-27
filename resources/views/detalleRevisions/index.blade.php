@@ -6,8 +6,27 @@
 .recibido {  background-color: #E0ECFF; }
 .devolucion { background-color: rgb(100%, 88%, 88%); }
 .aprobado  { background-color: rgb(227, 255, 224);   }
+.modal-body
+{
+    background-color: #DAFDFD;
+}
+.modal-header
+{
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+     background-color: #263963
 
-
+}
+.modal-footer
+{
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+     background-color: #263963
+   
+}
+.h4{
+   background-color: #E4E9F5 ;
+}
 </style>
     <div class="container">
         @include('flash::message')
@@ -74,9 +93,9 @@
                 <div class="modal fade" id="myModal{{$detalleRevision->id}}" tabindex="-1" role="dialog" aria-labelledby="prueba">
                 <div class="modal-dialog" >
                   <div class="modal-content">
-                       <div class="modal-header">
+                       <div class="modal-header" >
                           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                          <h4 class="modal-title" id="exampleModalLabel">Enviar Correo</h4>
+                          <h4 class="modal-title" style="color:#E4E9F5;"id="exampleModalLabel">Enviar Correo</h4>
                       </div>
                       <div class="modal-body">
                          {!! Form::open(['route' => 'send', 'method' => 'post']) !!} 
@@ -107,15 +126,15 @@
                             {!!Form::input('text','rev',$detalleRevision->revision->nombre_revision , null,array('class'=>'form-control'))!!}
                           </div>
                           <div class="form-group">
-                            {!! Form::label('a', 'Observaciones') !!}
-                            {!!Form::textarea('a',$detalleRevision->revision->observaciones,array('class'=>'form-control'))!!}
-                        
+                           {!! Form::label('a', 'Observaciones') !!}
+                           {!!Form::textarea('a',$detalleRevision->revision->observaciones,array('class'=>'form-control'))!!}
+
                           </div>
                          
-                      </div>
+                      </div>  
                       <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                        {!! Form::submit('Enviar', ['class' => 'btn btn-primary' ] ) !!}
+                        {!! Form::submit('Enviar', ['class' => 'btn btn-default' ] ) !!}
                           {!! Form::close() !!}
                       </div>
          
