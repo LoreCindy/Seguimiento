@@ -13,7 +13,7 @@
 <!--- Observaciones Field --->
 <div class="form-group col-sm-6 col-lg-6">
     {!! Form::label('observaciones', 'Observaciones:') !!}
-    {!! Form::textarea('observaciones', null, ['class' => 'form-control','rows'=>'8']) !!}
+    {!! Form::textarea('observaciones', null, ['class' => 'ckeditor','rows'=>'8']) !!}
 </div>
 
 <!--- Formatolista Id Field --->
