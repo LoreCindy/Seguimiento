@@ -35,7 +35,7 @@
     
 
         <div class="row">
-             <a class="btn btn-primary pull-left" style="margin-top: 10px" href="{!! route('revisions.create') !!}"><i class="glyphicon glyphicon-plus"></i> &nbsp;Agregar RevisiÃ³n</a>
+             <a class="btn btn-primary pull-left" style="margin-top: 10px" href="{!! route('revisions.create') !!}"><i class="glyphicon glyphicon-plus"></i> &nbsp;Agregar Revision</a>
            
             <a class="btn btn-primary pull-left" href="revisionExcel" style="margin-top: 8px; margin-left:40%"data-url="">
                <i class="glyphicon glyphicon-download-alt"></i>

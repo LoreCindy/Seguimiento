@@ -8,6 +8,8 @@ use Mitul\Controller\AppBaseController;
 use Response;
 use Flash;
 use Schema;
+use Validator, Input, Redirect; 
+
 
 class detalleRevisionController extends AppBaseController
 {
@@ -176,16 +178,22 @@ class detalleRevisionController extends AppBaseController
 	
 	public function send(Request $request)
    {
-       //guarda el valor de los campos enviados desde el form en un array
-       $data = $request->all();
- 		
-       //se envia el array y la vista lo recibe en llaves individuales {{ $email }} , {{ $subject }}...
 
-
-       
-       \Mail::send('contacto.email', $data, function($message) use ($request)
+   	$data = $request->all();
+   	$rules=['email'=>'required|email'];
+    $validator=Validator::make($data, $rules);
+      
+			
+	if ($validator->fails())
+   	{	Flash::error('Ingrese una dirección de correo coorecta');
+    	 return redirect(route('detalleRevisions.index'));
+   	}
+   	else
+   	{
+	
+    \Mail::send('contacto.email', $data, function($message) use ($request)
        {
-       
+       	
 
            //remitente
            $message->from("gerenciap2015@gmail.com");
@@ -200,8 +208,11 @@ class detalleRevisionController extends AppBaseController
  
        });
 
-       Flash::message('su correo de detalleRevision se ha enviado con exito.');
+       Flash::message('Su correo de detalleRevision se ha enviado con exito.');
        return redirect(route('detalleRevisions.index'));
-   }
+   
+}
+
+}
 
 }

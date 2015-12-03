@@ -24,9 +24,7 @@
      background-color: #263963
    
 }
-.h4{
-   background-color: #E4E9F5 ;
-}
+
 </style>
     <div class="container">
         @include('flash::message')
@@ -115,7 +113,7 @@
                           </div>
                           <div class="form-group">
                             {!! Form::label('name', 'Nombre Responsable') !!}
-                            {!!Form::input('text','name',$detalleRevision->nombre_responsable, null,array('class'=>'form-control'))!!}
+                            {!!Form::input('text','name',$detalleRevision->nombre_responsable,   null,array('class'=>'form-control'))!!}
                           </div>
                           <div class="form-group">
                             {!! Form::label('dep', 'Dependecia Responsable') !!}

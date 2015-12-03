@@ -48,7 +48,7 @@
 					<li><a href="{!! asset('formatolistas')!!}">Formato</a></li>
 					<li><a href="{!! asset ('revisions')!!}">Revisiones</a></li>
 					<li><a href="{!! asset('detalleRevisions')!!}">Detalle revisión</a></li>
-					<li><a href="{!! asset('contact')!!}">Contacto</a></li>
+					
 				</ul>
 
 				<ul class="nav navbar-nav navbar-right">

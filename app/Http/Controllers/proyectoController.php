@@ -10,6 +10,7 @@ use Flash;
 use Schema;
 use Illuminate\Support\Facade\Session;
 use Illuminate\Pagination\Paginator;
+use Validator, Input, Redirect; 
 
 
 class proyectoController extends AppBaseController
