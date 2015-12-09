@@ -2,24 +2,20 @@
 
 @section('content')
 
-
-    <div class="container">
-
         @include('flash::message')
 
-   
 <link type="text/css" rel="stylesheet" href="modal.css" />
 <script type="text/javascript" src="jquery-1.2.3.min.js"></script>
 <script type="text/javascript" src="modal.js"></script>
-
+<script src="{{asset('js/seleccionarVariosDelete.js')}}"></script>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
- <link href="bootstrap.css" rel="stylesheet">
+<link href="bootstrap.css" rel="stylesheet">
 
          <div class="row">
          <a class="btn btn-primary pull-left" style="margin-top: 10px" href="{!! route('proyectos.create') !!}"><i class="glyphicon glyphicon-plus"></i> &nbsp; Agregar Proyecto</a>
-         <a class="btn btn-primary pull-left"  href="proyectoExcel" style="margin-top: 8px; margin-left:40%"data-url="">
-               <i class="glyphicon glyphicon-download-alt"></i>
-               <span   class="hidden-xs floatL l5">Exportar</span>
+         <a class="btn btn-primary pull-left"  href="proyectoExcel" style="margin-top:10px; margin-left:5px"data-url="">
+        <i class="glyphicon glyphicon-download-alt"></i>
+               <span class="hidden-xs floatL l5">Exportar</span>
            </a>
 
            {!! Form::open(['route' => 'proyectos.index', 'method' => 'GET', 'class' => 'navbar-form navbar-right', 'role' => 'search']) !!}
@@ -34,24 +30,27 @@
            -->
         </div>
         <div class="row">
+
             @if($proyectos->isEmpty())
                 <div class="well text-center">No hay proyectos.</div>
             @else
+             {!! Form::open(['route' => 'deleteProyectos', 'method' => 'get']) !!}
                 <table class="table">
                     <thead>
-                    <th class="con">Fecha Radicacion</th>
+            <th><input type="checkbox" id="checkTodos"/><button  id="btn" class="btn btn-link" type="submit" onclick="return confirm('esta usted seguro que desea eliminar?')"><i class="glyphicon glyphicon-trash"></i> <span class="hidden-xs floatL l5">Eliminar</span></button> </th>
+            <th class="con">Fecha Radicacion</th>
 			<th>Nombre Contratatista</th>
 			<th>Nombre Modalidad</th>
 			<th>Tipo Contratacion</th>
-                    <th width="50px">Opciones</th>
+            <th width="50px">Opciones</th>
                     </thead>
                     <tbody>
-                     
-                    @foreach($proyectos as $proyecto)
+                    @foreach($proyectos as $key => $proyecto)
                         <tr>
-
-         <td>{!! $proyecto->fecha_radicacion !!}</td>
-
+                    <td>
+                    <input type="checkbox" class="proyectoEliminar" id="proyectoEliminar_{!! $key !!}" name="proyectoEliminar[]" value="{!! $proyecto->id !!}">
+                    </td>
+                    <td>{!! $proyecto->fecha_radicacion !!}</td>
 					<td>{!! $proyecto->nombre_contratatista !!}</td>
 					<td>{!! $proyecto->nombre_modalidad !!}</td>
 					<td>{!! $proyecto->nombre_tipoContratacion !!}</td>
@@ -60,15 +59,13 @@
                                 <a href="{!! route('proyectos.delete', [$proyecto->id]) !!}" onclick="return confirm('Are you sure wants to delete this proyecto?')"><i class="glyphicon glyphicon-remove"></i></a>
                             </td>
                         </tr>
-      
-         @endforeach
+                 @endforeach
                     <td> 
                          {!! $proyectos->appends(Request::only(['name','tipo']))->render()!!} 
                     </tbody>
                 </table>
+                {!! Form::close() !!}
             @endif
         </div>
-    </div>
 
-   
 @endsection

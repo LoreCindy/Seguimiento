@@ -4,12 +4,11 @@ use App\Http\Requests;
 use App\Http\Requests\CreatedetalleRevisionRequest;
 use App\Models\detalleRevision;
 use Illuminate\Http\Request;
+use Validator,Input,redirect;
 use Mitul\Controller\AppBaseController;
 use Response;
 use Flash;
 use Schema;
-use Validator, Input, Redirect; 
-
 
 class detalleRevisionController extends AppBaseController
 {
@@ -178,8 +177,7 @@ class detalleRevisionController extends AppBaseController
 	
 	public function send(Request $request)
    {
-
-   	$data = $request->all();
+      	$data = $request->all();
    	$rules=['email'=>'required|email'];
     $validator=Validator::make($data, $rules);
       
@@ -210,9 +208,27 @@ class detalleRevisionController extends AppBaseController
 
        Flash::message('Su correo de detalleRevision se ha enviado con exito.');
        return redirect(route('detalleRevisions.index'));
-   
+   }
 }
 
-}
+
+   	public function delete (Request $request)
+	{
+		$id_detalles =$request->get('eliminar');
+	
+		foreach ($id_detalles as $key => $id_detalle) {
+			$detalle = detalleRevision::find($id_detalle);
+
+		if(empty($detalle))
+		{
+			Flash::error('detalle revision no encontrado');
+			return redirect(route('detalleRevisions.index'));
+		}
+
+		$detalle->delete();
+	}
+		Flash::message('detalle revision eliminado exitosamente');
+		return redirect(route('detalleRevisions.index'));	
+	}
 
 }

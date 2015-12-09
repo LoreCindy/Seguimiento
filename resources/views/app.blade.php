@@ -10,12 +10,16 @@
 
 
 	<link href="{{asset('css/app.css')}}" rel="stylesheet">
-    <script src="{{ asset('/vendors/ckeditor/ckeditor.js') }}"></script>
+	<script src="{{ asset('/vendors/ckeditor/ckeditor.js') }}"></script>
+
 	<!-- Latest compiled and minified CSS -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 	<link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
+	<link rel="stylesheet" href="{{asset('css/bootstrap-select.min.css')}}">
+	<link rel="stylesheet" href="{{asset('css/bootstrap-select.css')}}">
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="{{asset('js/bootstrap.min.js')}}"></script>
+	<script src="{{asset('js/bootstrap-select.min.js')}}"></script>
 	<!-- Fonts -->
 	<link href='//fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
 
@@ -29,26 +33,26 @@
 
 </head>
 <body>
-	<nav class="navbar navbar-default" role="navigation" >
-		<div class="container-fluid">
+	<nav class="navbar navbar-default navbar-fixed-top" role="navigation" >
+		<div class="container">
 			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-					<span class="sr-only">Toggle Navigation</span>
+			<img style="padding-top:5px; margin-left:5px;width:128px;height:40" src="{!! asset('images/logo.png')!!}">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+					<span class="sr-only"></span>
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<img src="{!! asset('images/logo.jpeg')!!}">
+				
 			</div>
 
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
-					<li><a href="{!! asset('app')!!}">Contratación</a></li>
+					<li><a href="{!! asset('home')!!}"><i class="glyphicon glyphicon-home"></i></a></li>
 					<li><a href="{!! asset('proyectos')!!}">proyecto</a></li>
 					<li><a href="{!! asset('formatolistas')!!}">Formato</a></li>
 					<li><a href="{!! asset ('revisions')!!}">Revisiones</a></li>
 					<li><a href="{!! asset('detalleRevisions')!!}">Detalle revisión</a></li>
-					
 				</ul>
 
 				<ul class="nav navbar-nav navbar-right">
@@ -68,8 +72,11 @@
 		</div>
 	</nav>
 
+ <div class="container">
+    <div class="jumbotron" style="margin-top: 70px;">
 	@yield('content')
-
+	</div>
+ </div>
 	<!-- Scripts -->
 	
 </body>

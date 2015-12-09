@@ -26,7 +26,7 @@
 <!--- Revision Id Field --->
 <div class="form-group col-sm-6 col-lg-4">
     {!! Form::label('revision_id', 'Revision:') !!}
-    {!! Form::select('revision_id', $revision,null, ['class' => 'form-control']) !!}
+    {!! Form::select('revision_id', $revision,null, ['class' => 'selectpicker show-tick','data-live-search'=>'true', 'data-size'=>'10', 'data-header'=>'Select a condiment']) !!}
 </div>
 
 

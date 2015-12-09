@@ -8,10 +8,9 @@
       margin: auto;
   }
     </style>
-<body>
 
-  <div class="container">
-    <br>
+
+    
     <div id="myCarousel" class="carousel slide" data-ride="carousel">
       <!-- Indicators -->
      
@@ -45,7 +44,5 @@
         <span class="sr-only"></span>
       </a>
     </div>
-  </div>
-
-</body>
+  
 @endsection

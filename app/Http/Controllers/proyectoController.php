@@ -10,7 +10,6 @@ use Flash;
 use Schema;
 use Illuminate\Support\Facade\Session;
 use Illuminate\Pagination\Paginator;
-use Validator, Input, Redirect; 
 
 
 class proyectoController extends AppBaseController
@@ -35,11 +34,11 @@ class proyectoController extends AppBaseController
 	 */
 	public function index(Request $request)
 	{
-		//$proyectos = \DB::table('proyectos')->paginate(5);
+
 		$query = proyecto::name($request->only('name', 'tipo'));
 		$proyectos = $query->paginate(5);
 		$proyectos->setPath('/contratacion/public/proyectos');
-		//$query = proyecto::query();
+		
         $columns = Schema::getColumnListing('$TABLE_NAME$');
         $attributes = array();
 
@@ -53,8 +52,7 @@ class proyectoController extends AppBaseController
             }
         };
 
-      //  $proyectos = $query->get();
-
+     
         return view('proyectos.index')
             ->with('attributes', $attributes)
             ->with('proyectos',$proyectos);
@@ -161,9 +159,32 @@ class proyectoController extends AppBaseController
 	 *
 	 * @return Response
 	 */
+
+	public function delete (Request $request)
+	{
+		$id_proyectos =$request->get('proyectoEliminar');
+	
+		foreach ($id_proyectos as $key => $id_proyecto) {
+			$proyecto = proyecto::find($id_proyecto);
+
+		if(empty($proyecto))
+		{
+			Flash::error('proyecto no encontrado');
+			return redirect(route('proyectos.index'));
+		}
+
+		$proyecto->delete();
+	}
+		Flash::message('proyecto deleted successfully.');
+		return redirect(route('proyectos.index'));	
+	}
+	
+	
 	public function destroy($id)
 	{
 		/** @var proyecto $proyecto */
+
+
 		$proyecto = proyecto::find($id);
 
 		if(empty($proyecto))

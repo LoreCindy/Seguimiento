@@ -2,7 +2,6 @@
 
 @section('content')
 
-    <div class="container">
     <ul class="nav nav-tabs">
           <li role="presentation"><a href="{!! asset('formatolistas')!!}">Nombre Formato</a></li>
           <li role="presentation" ><a href="{!! asset('datosGenerales')!!}">Datos Generales</a></li>
@@ -24,16 +23,21 @@
             @if($formatoLegalizacions->isEmpty())
                 <div class="well text-center">No FormatoLegalizacions found.</div>
             @else
+            {!! Form::open(['route' => 'deleteFormatoLegalizacion', 'method' => 'get']) !!}
                 <table class="table">
                     <thead>
+                     <th><input type="checkbox" id="checkTodos"/><button  id="btn" class="btn btn-link" type="submit" onclick="return confirm('esta usted seguro que desea eliminar?')"><i class="glyphicon glyphicon-trash"></i> <span class="hidden-xs floatL l5">Eliminar</span></button> </th>
                     <th>Documentos Legalización</th>
-			<th>Formato Lista </th>
+			        <th>Formato Lista </th>
                     <th width="50px">Opciones</th>
                     </thead>
                     <tbody>
                      
-                    @foreach($formatoLegalizacions as $formatoLegalizacion)
+                    @foreach($formatoLegalizacions as $key => $formatoLegalizacion)
                         <tr>
+                         <td>
+                    <input type="checkbox" class="proyectoEliminar" id="proyectoEliminar_{!! $key !!}" name="eliminar[]" value="{!! $formatoLegalizacion->id !!}">
+                    </td>
                             <td>{!! $formatoLegalizacion->documentos_legalizacion !!}</td>
 					       <td>{!! $formatoLegalizacion-> formato->nombre_formato !!}</td>
                             <td>
@@ -48,5 +52,7 @@
                 </table>
             @endif
         </div>
-    </div>
+
+           <script src="{{asset('js/seleccionarVariosDelete.js')}}"></script>
+
 @endsection

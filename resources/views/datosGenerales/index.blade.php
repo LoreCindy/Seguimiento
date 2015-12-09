@@ -2,7 +2,6 @@
 
 @section('content')
 
-    <div class="container">
          <ul class="nav nav-tabs">
           <li role="presentation"><a href="{!! asset('formatolistas')!!}">Nombre Formato</a></li>
           <li role="presentation" class="active"><a href="{!! asset('datosGenerales')!!}">Datos Generales</a></li>
@@ -24,17 +23,21 @@
             @if($datosGenerales->isEmpty())
                 <div class="well text-center">No datosGenerales found.</div>
             @else
+             {!! Form::open(['route' => 'deleteDatosGenerales', 'method' => 'get']) !!}
                 <table class="table">
                     <thead>
+                    <th><input type="checkbox" id="checkTodos"/><button  id="btn" class="btn btn-link" type="submit" onclick="return confirm('esta usted seguro que desea eliminar?')"><i class="glyphicon glyphicon-trash"></i> <span class="hidden-xs floatL l5">Eliminar</span></button> </th>
                     <th>Nombre Dato</th>
-			<th>Formato Lista </th>
-			
+			        <th>Formato Lista </th>
                     <th width="50px">Opciones</th>
                     </thead>
                     <tbody>
                      
-                    @foreach($datosGenerales as $datoGeneral)
+                    @foreach($datosGenerales as $key => $datoGeneral)
                         <tr>
+                    <td>
+                    <input type="checkbox" class="proyectoEliminar" id="proyectoEliminar_{!! $key !!}" name="eliminar[]" value="{!! $datoGeneral->id !!}">
+                    </td>
                             <td>{!! $datoGeneral->nombre_dato !!}</td>
 					<td>{!! $datoGeneral->lista->nombre_formato !!}</td>
                             <td>
@@ -48,7 +51,9 @@
                       {!! $datosGenerales->appends(Request::only(['name','tipo']))->render()!!}
                     </tbody>
                 </table>
+                {!! Form::close() !!}
             @endif
         </div>
-    </div>
+         <script src="{{asset('js/seleccionarVariosDelete.js')}}"></script>
+    
 @endsection

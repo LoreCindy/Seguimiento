@@ -2,7 +2,6 @@
 
 @section('content')
 
-    <div class="container">
      <ul class="nav nav-tabs">
       <li role="presentation"class="active"><a href="{!! asset('formatolistas')!!}">Nombre Formato</a></li>
       @if($formatolistas->isEmpty())
@@ -18,7 +17,7 @@
         <div class="row">
             <a class="btn btn-primary pull-left" style="margin-top: 10px"href="{!! route('formatolistas.create') !!}"><i class="glyphicon glyphicon-plus"></i> &nbsp; Agregar Formato Lista</a>
               
-            <a class="btn btn-primary pull-left"  href="formatoExcel" style="margin-top: 8px; margin-left:38%" data-url="">
+            <a class="btn btn-primary pull-left"  href="formatoExcel" style="margin-top:10px; margin-left:5px" data-url="">
                <i class="glyphicon glyphicon-download-alt"></i>
                <span class="hidden-xs floatL l5">Exportar</span>
            </a>
@@ -35,18 +34,24 @@
             @if($formatolistas->isEmpty())
                 <div class="well text-center">No formatolistas found.</div>
             @else
+
+             {!! Form::open(['route' => 'deleteFormatoLista', 'method' => 'get']) !!}
                 <table class="table">
                     <thead>
+                     <th><input type="checkbox" id="checkTodos"/><button  id="btn" class="btn btn-link" type="submit" onclick="return confirm('esta usted seguro que desea eliminar?')"><i class="glyphicon glyphicon-trash"></i> <span class="hidden-xs floatL l5">Eliminar</span></button> </th>
                     <th>Nombre Formato</th>
-			<th>Fecha Formato</th>
+			               <th>Fecha Formato</th>
                     <th width="50px">Opciones</th>
                     </thead>
                     <tbody>
                      
-                    @foreach($formatolistas as $formatolista)
+                    @foreach($formatolistas as $key => $formatolista)
                         <tr>
+                    <td>
+                    <input type="checkbox" class="proyectoEliminar" id="proyectoEliminar_{!! $key !!}" name="eliminar[]" value="{!! $formatolista->id !!}">
+                    </td>
                             <td>{!! $formatolista->nombre_formato !!}</td>
-					<td>{!! $formatolista->fecha_formato !!}</td>
+					                   <td>{!! $formatolista->fecha_formato !!}</td>
                             <td>
                                 <a href="{!! route('formatolistas.edit', [$formatolista->id]) !!}"><i class="glyphicon glyphicon-edit"></i></a>
                                 <a href="{!! route('formatolistas.delete', [$formatolista->id]) !!}" onclick="return confirm('Are you sure wants to delete this formatolista?')"><i class="glyphicon glyphicon-remove"></i></a>
@@ -57,7 +62,10 @@
                       {!! $formatolistas->appends(Request::only(['name','tipo']))->render()!!}
                     </tbody>
                 </table>
+                {!! Form::close() !!}
             @endif
         </div>
-    </div>
+
+        <script src="{{asset('js/seleccionarVariosDelete.js')}}"></script>
+  
 @endsection

@@ -173,4 +173,24 @@ class FormatoLegalizacionController extends AppBaseController
 
 		return redirect(route('formatoLegalizacions.index'));
 	}
+
+
+	public function delete (Request $request)
+	{
+		$id_formatos =$request->get('eliminar');
+	
+		foreach ($id_formatos as $key => $id_foramto) {
+			$formato= formatoLegalizacion::find($id_formato);
+
+		if(empty($formato))
+		{
+			Flash::error('formato legalizacion no encontrado');
+			return redirect(route('formatoLegalizacions.index'));
+		}
+
+		$formato->delete();
+	}
+		Flash::message('formato legalizacion eliminado exitosamente');
+		return redirect(route('formatoLegalizacions.index'));	
+	}
 }

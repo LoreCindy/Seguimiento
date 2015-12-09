@@ -4,6 +4,7 @@ use App\Http\Requests;
 use App\Http\Requests\CreaterevisionRequest;
 use App\Models\revision;
 use App\Models\chequeo;
+use App\Models\proyecto;
 use App\Models\chequeoDatos;
 use App\Models\formatolista;
 use App\Models\FormatoLegalizacion;
@@ -71,11 +72,15 @@ class revisionController extends AppBaseController
 	 */
 	public function create()
 	{	
-		$datoos= ['chequeos'=>\DB::table('chequeos')->lists('nombre_supervisor', 'id')];
-		 $datas= ['formatolista' =>\DB::table('formatolistas')->lists('nombre_formato', 'id')];
-		 $data = ['proyectos' =>\DB::table('proyectos')->lists('nombre_contratatista', 'id')];
-		return view('revisions.create',$data, $datas)
-		->with($datoos);
+
+		//$= ['chequeos'=>\DB::table('chequeos')->lists('nombre_supervisor', 'id')];
+		 $formatos= ['formatolista' =>\DB::table('formatolistas')->lists('nombre_formato', 'id')];
+		
+		$proyectos= proyecto::all();
+		//$proyectos = ['proyectos' =>\DB::table('proyectos')->lists('nombre_contratatista', 'id')];
+		return view('revisions.create')
+		->with('proyectos',$proyectos)
+		->with($formatos);
 	}
 
 	// funcion para regresar la información de las ciudades que pertenecen al estado selecionado
@@ -113,12 +118,6 @@ class revisionController extends AppBaseController
 	   return  Response::make(  $FormatoLegalizacion->get([ 'id' , 'documentos_legalizacion' ])); 
     }
 
-
-    public function darObservacion(Request $request)
-    {
-
-    }
-
 	/**
 	 * Store a newly created revision in storage.
 	 *
@@ -129,6 +128,8 @@ class revisionController extends AppBaseController
 	public function store(CreaterevisionRequest $request)
 	{
         try {
+       
+       
 		$input = $request->all();
 		$revision = revision::create($input);
 		$idRevision= $revision->id;
@@ -303,7 +304,26 @@ class revisionController extends AppBaseController
 		return redirect(route('revisions.index'));
 	}
 
+	public function delete (Request $request)
+	{
+		$id_revisions =$request->get('eliminar');
+	
+		foreach ($id_revisions as $key => $id_revision) {
+			$revision = revision::find($id_revision);
+			$datos=$revision->general()->lists('id');
 
+		if(empty($revision))
+		{
+			Flash::error('revision no encontrada');
+			return redirect(route('revisions.index'));
+		}
+
+		$revision->general()->detach($datos);
+		$revision->delete();
+	}
+		Flash::message('proyecto deleted successfully.');
+		return redirect(route('revisions.index'));	
+	}
 	
 
 

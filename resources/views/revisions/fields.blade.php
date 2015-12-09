@@ -9,8 +9,14 @@
 <!--- Proyecto Id Field --->
 <div class="form-group col-sm-6 col-lg-6">
     {!! Form::label('proyecto_id', 'Proyecto:') !!}
-    {!! Form::select('proyecto_id', $proyectos,null, ['class' => 'form-control']) !!}
+<select class="selectpicker" name='proyecto_id' data-live-search="true" data-size="10"  data-header="Select a condiment">
+       @foreach($proyectos as $key => $proyecto)
+        <option value='{!! $proyecto->nombre_contratatista !!}' >{!! $proyecto->nombre_contratatista !!}</option>
+    @endforeach
+      </select>
+    
 </div>
+
 
   <!--- Observaciones Field --->
 <div class="form-group col-sm-6 col-lg-6">
@@ -21,7 +27,7 @@
 <!--- Formatolista Id Field --->
 <div class="form-group col-sm-6 col-lg-6">
     {!! Form::label('formatoLista_id', 'Formato lista:') !!}          
-    {!!  Form::select('formatoLista_id',['seleccione un formato',''=>$formatolista],null, ['class' => 'form-control', 'id' => 'nombre_formato'])  !!}
+    {!!  Form::select('formatoLista_id',['seleccione un formato',''=>$formatolista],null, ['class' => 'selectpicker show-tick','data-live-search'=>'true', 'data-size'=>'10', 'data-header'=>'Select a condiment', 'id' => 'nombre_formato'])  !!}
 </div>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 

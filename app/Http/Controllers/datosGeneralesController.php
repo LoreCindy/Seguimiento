@@ -173,4 +173,24 @@ class datosGeneralesController extends AppBaseController
 
 		return redirect(route('datosGenerales.index'));
 	}
+
+	
+	public function delete (Request $request)
+	{
+		$id_datos =$request->get('eliminar');
+	
+		foreach ($id_datos as $key => $id_dato) {
+			$dato = datosGenerales::find($id_dato);
+
+		if(empty($dato))
+		{
+			Flash::error('datos generales no encontrado.');
+			return redirect(route('datosGenerales.index'));
+		}
+
+		$dato->delete();
+	}
+		Flash::message('datos generales eliminados exitosamente.');
+		return redirect(route('datosGenerales.index'));	
+	}
 }

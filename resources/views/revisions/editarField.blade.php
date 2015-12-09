@@ -7,19 +7,19 @@
 <!--- Proyecto Id Field --->
 <div class="form-group col-sm-6 col-lg-6">
     {!! Form::label('proyecto_id', 'Proyecto:') !!}
-    {!! Form::select('proyecto_id', $proyectos,null, ['class' => 'form-control']) !!}
+    {!! Form::select('proyecto_id', $proyectos,null, ['class' => 'selectpicker show-tick','data-live-search'=>'true', 'data-size'=>'10', 'data-header'=>'Select a condiment']) !!}
 </div>
 
 <!--- Observaciones Field --->
 <div class="form-group col-sm-6 col-lg-6">
     {!! Form::label('observaciones', 'Observaciones:') !!}
-    {!! Form::textarea('observaciones', null, ['class' => 'ckeditor','rows'=>'8']) !!}
+    {!! Form::textarea('observaciones', null, ['class' => 'form-control','rows'=>'8']) !!}
 </div>
 
 <!--- Formatolista Id Field --->
 <div class="form-group col-sm-6 col-lg-6">
     {!! Form::label('formatoLista_id', 'Formato lista:') !!}          
-    {!! Form::select('formatoLista_id',['seleccione un formato',''=>$formatolista],null, ['class' => 'form-control', 'id' => 'nombre_formato'])  !!}
+    {!! Form::select('formatoLista_id',['seleccione un formato',''=>$formatolista],null, ['class' => 'selectpicker show-tick','data-live-search'=>'true', 'data-size'=>'10', 'data-header'=>'Select a condiment', 'id' => 'nombre_formato'])  !!}
 </div>
 
 <!--- Datosgenerales Id Field --->

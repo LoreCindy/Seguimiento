@@ -175,4 +175,24 @@ class formatolistaController extends AppBaseController
 
 		return redirect(route('formatolistas.index'));
 	}
+
+
+		public function delete (Request $request)
+	{
+		$id_formatos =$request->get('eliminar');
+	
+		foreach ($id_formatos as $key => $id_formato) {
+			$formato = formatolista::find($id_formato);
+
+		if(empty($formato))
+		{
+			Flash::error('formato no encontrado');
+			return redirect(route('formatolistas.index'));
+		}
+
+		$formato->delete();
+	}
+		Flash::message('formato eliminado exitosamente');
+		return redirect(route('formatolistas.index'));	
+	}
 }

@@ -19,8 +19,20 @@
 //-----------------------------------
 
 //Route::post('send', ['as' => 'send', 'uses' => 'detalleRevisionController@send'] );
+
 Route::post('send', ['as' => 'send', 'uses' => 'detalleRevisionController@send'] );
 Route::get('index', ['as' => 'index', 'uses' => 'detalleRevisionController@index'] );
+
+
+
+Route::get('deleteProyectos', ['as' => 'deleteProyectos', 'uses' => 'proyectoController@delete'] );
+Route::get('deleteFormatoLista', ['as' => 'deleteFormatoLista', 'uses' => 'formatolistaController@delete'] );
+Route::get('deleteFormatoLegalizacion', ['as' => 'deleteFormatoLegalizacion', 'uses' => 'FormatoLegalizacionController@delete'] );
+Route::get('deleteDatosGenerales', ['as' => 'deleteDatosGenerales', 'uses' => 'datosGeneralesController@delete'] );
+Route::get('deleteRevison', ['as' => 'deleteRevison', 'uses' => 'revisionController@delete'] );
+Route::get('deleteRevisonDetalle', ['as' => 'deleteRevisonDetalle', 'uses' => 'detalleRevisionController@delete'] );
+
+
 
 //-------------------------------------
 Route::get('/', 'detalleRevisionController@correo');
@@ -32,6 +44,8 @@ Route::get('legal','revisionController@formato_legalizacion');
 Route::get('/', 'HomeController@index');
 
 Route::get('app', 'HomeController@index');
+
+Route::get('home', 'HomeController@index');
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',
