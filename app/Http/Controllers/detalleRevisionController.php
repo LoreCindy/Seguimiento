@@ -183,7 +183,7 @@ class detalleRevisionController extends AppBaseController
       
 			
 	if ($validator->fails())
-   	{	Flash::error('Ingrese una dirección de correo coorecta');
+   	{	Flash::error('Ingrese una dirección de correo correcta');
     	 return redirect(route('detalleRevisions.index'));
    	}
    	else
@@ -194,7 +194,7 @@ class detalleRevisionController extends AppBaseController
        	
 
            //remitente
-           $message->from("gerenciap2015@gmail.com");
+           $message->from("legalizacion0@gmail.com");
  			//nombre
           // $message->text($request->text);
            //asunto
@@ -206,7 +206,7 @@ class detalleRevisionController extends AppBaseController
  
        });
 
-       Flash::message('Su correo de detalleRevision se ha enviado con exito.');
+       Flash::message('Su correo se ha enviado con exito.');
        return redirect(route('detalleRevisions.index'));
    }
 }

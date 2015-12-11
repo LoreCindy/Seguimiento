@@ -1,7 +1,27 @@
 @extends('app')
 
 @section('content')
+<style type="text/css">
+ .justifyText{text-align:justify;}
+.modal-body
+{
+    background-color: #DAFDFD;
+}
+.modal-header
+{
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+     background-color: #263963
 
+}
+.modal-footer
+{
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+     background-color: #263963
+   
+}
+</style>
         @include('flash::message')
        
 <link type="text/css" rel="stylesheet" href="modal.css" />
@@ -53,8 +73,8 @@
                     </td>
           <td>{!! $revision->nombre_revision !!}</td>
 					<td  class="con">{!! $revision->proyecto->nombre_contratatista !!}</td>
-					<td>{!! $revision->formato->nombre_formato !!}</td>
-					<td>{!! $revision->observaciones !!}</td>
+					<td class ="justifyText">{!! $revision->formato->nombre_formato !!}</td>
+					<td class ="justifyText">{!! $revision->observaciones !!}</td>
         <!--  boton Modal datos generales -->
           <td><a href="#myModal{{$revision->id}}" class="btn btn-primary" data-backdrop="false"data-toggle="modal" data-target="#myModal{{$revision->id}}">detalles</a></td>
 
@@ -63,7 +83,7 @@
           <div class="modal-dialog" role="document">
           <div class="modal-content">
           <div class="modal-header">
-          <h4 class="modal-title" >Datos Generales</h4>
+          <h4 class="modal-title" style="color:#E4E9F5" >Datos Generales</h4>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="false">&times;</span></button>
           </div>
           <div class="modal-body">
@@ -87,7 +107,7 @@
       <div class="modal-dialog" role="document">
       <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title" >Formato Legalización</h4>
+        <h4 class="modal-title" style="color:#E4E9F5">Formato Legalización</h4>
         <button type="button"  i class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="false">&times;</span></button>
 
       </div>

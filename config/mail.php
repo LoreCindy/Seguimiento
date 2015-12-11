@@ -54,7 +54,7 @@ return [
 	|
 	*/
 
-	'from' => ['address' =>'gerenciap2015@gmail.com', 'name' => 'cindy'],
+	'from' => ['address' =>'legalizacion0@gmail.com', 'name' => 'cindy'],
 
 	/*
 	|--------------------------------------------------------------------------
@@ -80,7 +80,7 @@ return [
 	|
 	*/
 
-	'username' => 'gerenciap2015@gmail.com',
+	'username' => 'legalizacion0@gmail.com',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -93,7 +93,7 @@ return [
 	|
 	*/
 
-	'password' => '2015gerenciap',
+	'password' => '123456dac',
 
 	/*
 	|--------------------------------------------------------------------------

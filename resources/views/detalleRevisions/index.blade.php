@@ -55,7 +55,7 @@
                 <table class="table">
                     <thead>
       <th><input type="checkbox" id="checkTodos" name='eliminar[]'/>
-          <button type='submit' id="botonDelete">eliminar</button> 
+          <button type='submit'class="btn search-button t5 btn-primary" id="botonDelete">eliminar</button> 
       </th>
       <th>Estado</th>
 			<th>Fecha</th>
@@ -113,32 +113,38 @@
                         
                           <div class="form-group">
                             {!! Form::label('email', 'E-Mail') !!}
-                            {!!Form::input('email','email', null,array('class'=>'form-control'))!!}
+                            {!!Form::input('email','email', null,array('class'=>'form-control', 'placeholder' => 'Correo electrónico  ' ))!!}
+                             {{ $errors->first('email', '<span class="error-message">:message</span>') }}
                           </div>
                           <div class="form-group">
                             {!! Form::label('subject', 'Asunto') !!}
-                            {!!Form::input('text','subject', null,array('class'=>'form-control'))!!}
+                            {!!Form::input('text','subject', null,array('class'=>'form-control' , 'placeholder' => 'Asunto'))!!}
                           </div>
                                                    
                           <div class="form-group">
                             {!! Form::label('body', 'Mensaje') !!}
                             {!! Form::textarea('body',null, ['class' => 'ckeditor' ]) !!}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
                           </div>
+                         
                           <div class="form-group">
                             {!! Form::label('name', 'Nombre Responsable') !!}
-                            {!!Form::input('text','name',$detalleRevision->nombre_responsable,   null,array('class'=>'form-control'))!!}
+                             <input name="name" type="text" value="{{$detalleRevision->nombre_responsable}}" id="name" class = 'form-control' disabled>
+                            {!!Form::hidden('name',$detalleRevision->nombre_responsable)!!}
                           </div>
                           <div class="form-group">
                             {!! Form::label('dep', 'Dependecia Responsable') !!}
-                            {!!Form::input('text','dep',$detalleRevision->dependencia_responsable , null,array('class'=>'form-control'))!!}
+                            <input name="dep" type="text" value="{{$detalleRevision->dependencia_responsable}}" id="dep" class = 'form-control' disabled>
+                            {!!Form::hidden('dep',$detalleRevision->dependencia_responsable)!!}
                           </div>
                           <div class="form-group">
                             {!! Form::label('rev', 'Nombre Revision') !!}
-                            {!!Form::input('text','rev',$detalleRevision->revision->nombre_revision , null,array('class'=>'form-control'))!!}
+                            <input name="rev" type="text" value="{{$detalleRevision->revision->nombre_revision}}" id="dev" class = 'form-control' disabled>
+                            {!!Form::hidden('rev',$detalleRevision->revision->nombre_revision )!!}
                           </div>
                           <div class="form-group">
                            {!! Form::label('a', 'Observaciones') !!}
-                           {!!Form::textarea('a',$detalleRevision->revision->observaciones,array('class'=>'ckeditor'))!!}
+                            {!!Form::textarea('a',$detalleRevision->revision->observaciones,array('class'=>'form-control', 'disabled'))!!}
+                           {!!Form::hidden('a' ,$detalleRevision->revision->observaciones)!!}
 
                           </div>
                          
