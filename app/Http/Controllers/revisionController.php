@@ -111,6 +111,7 @@ class revisionController extends AppBaseController
     public function formato_legalizacion(Request $request)
     {
      	$input  =  $request->get( 'option' );
+
      	$formatolista=  formatolista::find($input);
 	   //dd($formatolista);
 	   $FormatoLegalizacion =  $formatolista->legalizacion(); 

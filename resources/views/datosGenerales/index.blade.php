@@ -24,7 +24,7 @@
                 <div class="well text-center">No datosGenerales found.</div>
             @else
              {!! Form::open(['route' => 'deleteDatosGenerales', 'method' => 'get']) !!}
-                <table class="table">
+                <table class="table table-bordered table-hover">
                     <thead>
                     <th><input type="checkbox" id="checkTodos"/><button  id="btn" class="btn btn-link" type="submit" onclick="return confirm('esta usted seguro que desea eliminar?')"><i class="glyphicon glyphicon-trash"></i> <span class="hidden-xs floatL l5">Eliminar</span></button> </th>
                     <th>Nombre Dato</th>

@@ -183,8 +183,6 @@ class proyectoController extends AppBaseController
 	public function destroy($id)
 	{
 		/** @var proyecto $proyecto */
-
-
 		$proyecto = proyecto::find($id);
 
 		if(empty($proyecto))

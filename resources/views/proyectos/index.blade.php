@@ -3,14 +3,9 @@
 @section('content')
 
         @include('flash::message')
-
-<link type="text/css" rel="stylesheet" href="modal.css" />
-<script type="text/javascript" src="jquery-1.2.3.min.js"></script>
-<script type="text/javascript" src="modal.js"></script>
+<script src="{{asset('js/confirm-bootstrap.js')}}"></script>
 <script src="{{asset('js/seleccionarVariosDelete.js')}}"></script>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
-<link href="bootstrap.css" rel="stylesheet">
-
          <div class="row">
          <a class="btn btn-primary pull-left" style="margin-top: 10px" href="{!! route('proyectos.create') !!}"><i class="glyphicon glyphicon-plus"></i> &nbsp; Agregar Proyecto</a>
          <a class="btn btn-primary pull-left"  href="proyectoExcel" style="margin-top:10px; margin-left:5px"data-url="">
@@ -30,12 +25,11 @@
            -->
         </div>
         <div class="row">
-
             @if($proyectos->isEmpty())
                 <div class="well text-center">No hay proyectos.</div>
             @else
              {!! Form::open(['route' => 'deleteProyectos', 'method' => 'get']) !!}
-                <table class="table">
+                <table class="table table-bordered table-hover">
                     <thead>
             <th><input type="checkbox" id="checkTodos"/><button  id="btn" class="btn btn-link" type="submit" onclick="return confirm('esta usted seguro que desea eliminar?')"><i class="glyphicon glyphicon-trash"></i> <span class="hidden-xs floatL l5">Eliminar</span></button> </th>
             <th class="con">Fecha Radicacion</th>
@@ -56,7 +50,7 @@
 					<td>{!! $proyecto->nombre_tipoContratacion !!}</td>
                             <td>
                                 <a href="{!! route('proyectos.edit', [$proyecto->id]) !!}"><i class="glyphicon glyphicon-edit"></i></a>
-                                <a href="{!! route('proyectos.delete', [$proyecto->id]) !!}" onclick="return confirm('Are you sure wants to delete this proyecto?')"><i class="glyphicon glyphicon-remove"></i></a>
+                                <a href"{!! route('proyectos.delete', [$proyecto->id]) !!}" id="confirm" onclick="return confirm('Are you sure wants to delete this FormatoLegalizacion?')"><i class="glyphicon glyphicon-remove"></i></a>
                             </td>
                         </tr>
                  @endforeach
@@ -67,5 +61,14 @@
                 {!! Form::close() !!}
             @endif
         </div>
+
+
+<script type="text/javascript">
+  $(document).ready(function(){
+     $('#confirm').confirmModal();
+  });
+ 
+
+</script>
 
 @endsection

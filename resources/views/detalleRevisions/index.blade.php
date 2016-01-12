@@ -29,6 +29,9 @@
     
         @include('flash::message')
 
+        <div id="resultado"></div>
+
+
         <div class="row">
          <a class="btn btn-primary pull-left" style="margin-top: 10px" href="{!! route('detalleRevisions.create') !!}"><i class="glyphicon glyphicon-plus"></i> &nbsp;Agregar detalles Revisión</a>
             
@@ -52,10 +55,10 @@
             @else
 
           
-                <table class="table">
+                <table class="table table-bordered table-hover">
                     <thead>
       <th><input type="checkbox" id="checkTodos" name='eliminar[]'/>
-          <button type='submit'class="btn search-button t5 btn-primary" id="botonDelete">eliminar</button> 
+      <button  id="btn" class="btn btn-link" type="submit" onclick="return confirm('esta usted seguro que desea eliminar?')"><i class="glyphicon glyphicon-trash"></i> <span class="hidden-xs floatL l5">Eliminar</span></button> 
       </th>
       <th>Estado</th>
 			<th>Fecha</th>
@@ -113,8 +116,8 @@
                         
                           <div class="form-group">
                             {!! Form::label('email', 'E-Mail') !!}
-                            {!!Form::input('email','email', null,array('class'=>'form-control', 'placeholder' => 'Correo electrónico  ' ))!!}
-                             {{ $errors->first('email', '<span class="error-message">:message</span>') }}
+                           {!!Form::input('email','email', null,array('class'=>'form-control', 'placeholder' => 'Correo electrónico  ' ))!!}
+                           {{ $errors->first('email', '<span class="error-message">:message</span>') }}
                           </div>
                           <div class="form-group">
                             {!! Form::label('subject', 'Asunto') !!}
@@ -125,10 +128,9 @@
                             {!! Form::label('body', 'Mensaje') !!}
                             {!! Form::textarea('body',null, ['class' => 'ckeditor' ]) !!}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
                           </div>
-                         
                           <div class="form-group">
                             {!! Form::label('name', 'Nombre Responsable') !!}
-                             <input name="name" type="text" value="{{$detalleRevision->nombre_responsable}}" id="name" class = 'form-control' disabled>
+                           <input name="name" type="text" value="{{$detalleRevision->nombre_responsable}}" id="name" class = 'form-control' disabled>
                             {!!Form::hidden('name',$detalleRevision->nombre_responsable)!!}
                           </div>
                           <div class="form-group">
@@ -138,12 +140,12 @@
                           </div>
                           <div class="form-group">
                             {!! Form::label('rev', 'Nombre Revision') !!}
-                            <input name="rev" type="text" value="{{$detalleRevision->revision->nombre_revision}}" id="dev" class = 'form-control' disabled>
+                           <input name="rev" type="text" value="{{$detalleRevision->revision->nombre_revision}}" id="dev" class = 'form-control' disabled>
                             {!!Form::hidden('rev',$detalleRevision->revision->nombre_revision )!!}
                           </div>
                           <div class="form-group">
                            {!! Form::label('a', 'Observaciones') !!}
-                            {!!Form::textarea('a',$detalleRevision->revision->observaciones,array('class'=>'form-control', 'disabled'))!!}
+                          {!!Form::textarea('a',$detalleRevision->revision->observaciones,array('class'=>'form-control', 'disabled'))!!}
                            {!!Form::hidden('a' ,$detalleRevision->revision->observaciones)!!}
 
                           </div>
@@ -168,7 +170,27 @@
             @endif
 
         </div>
-          <script src="{{asset('js/seleccionarVariosDelete.js')}}"></script>
-
+        
+        <script src="{{asset('js/seleccionarVariosDelete.js')}}"></script>
+        <script type="text/javascript">
+          $(document).ready(function(){
+            var array = new Array();
+            $('#btn').on( 'click', function() {
+              $(".proyectoEliminar:checked").each(function() {
+                array.push($(this).val());
+               });
+                 $.ajax({
+                  method: "GET",
+                  url: "eliminarVarios",
+                  data:{data:array},
+                  success: function() {
+                  location.reload();
+                    //$("#resultado").html(response);
+                  }
+                });
+              });
+            });
+        </script>
+      
 @endsection
 

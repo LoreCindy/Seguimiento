@@ -19,7 +19,7 @@
 //-----------------------------------
 
 //Route::post('send', ['as' => 'send', 'uses' => 'detalleRevisionController@send'] );
-
+Route::get('eliminarVarios','detalleRevisionController@delete');
 Route::post('send', ['as' => 'send', 'uses' => 'detalleRevisionController@send'] );
 Route::get('index', ['as' => 'index', 'uses' => 'detalleRevisionController@index'] );
 
@@ -39,6 +39,8 @@ Route::get('/', 'detalleRevisionController@correo');
 Route::get('formato','revisionController@formato_lista');
 
 Route::get('legal','revisionController@formato_legalizacion');
+
+
 
 
 Route::get('/', 'HomeController@index');

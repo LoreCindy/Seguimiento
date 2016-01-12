@@ -24,7 +24,7 @@
                 <div class="well text-center">No FormatoLegalizacions found.</div>
             @else
             {!! Form::open(['route' => 'deleteFormatoLegalizacion', 'method' => 'get']) !!}
-                <table class="table">
+                <table class="table table-bordered table-hover">
                     <thead>
                      <th><input type="checkbox" id="checkTodos"/><button  id="btn" class="btn btn-link" type="submit" onclick="return confirm('esta usted seguro que desea eliminar?')"><i class="glyphicon glyphicon-trash"></i> <span class="hidden-xs floatL l5">Eliminar</span></button> </th>
                     <th>Documentos Legalización</th>
@@ -39,7 +39,7 @@
                     <input type="checkbox" class="proyectoEliminar" id="proyectoEliminar_{!! $key !!}" name="eliminar[]" value="{!! $formatoLegalizacion->id !!}">
                     </td>
                             <td>{!! $formatoLegalizacion->documentos_legalizacion !!}</td>
-					       <td>{!! $formatoLegalizacion-> formato->nombre_formato !!}</td>
+					       <td>{!! $formatoLegalizacion->formato->nombre_formato !!}</td>
                             <td>
                                 <a href="{!! route('formatoLegalizacions.edit', [$formatoLegalizacion->id]) !!}"><i class="glyphicon glyphicon-edit"></i></a>
                                 <a href="{!! route('formatoLegalizacions.delete', [$formatoLegalizacion->id]) !!}" onclick="return confirm('Are you sure wants to delete this FormatoLegalizacion?')"><i class="glyphicon glyphicon-remove"></i></a>

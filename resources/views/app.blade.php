@@ -34,7 +34,7 @@
 </head>
 <body>
 	<nav class="navbar navbar-default navbar-fixed-top" role="navigation" >
-		<div class="container">
+		<div class="container-fluid">
 			<div class="navbar-header">
 			<img style="padding-top:5px; margin-left:5px;width:128px;height:40" src="{!! asset('images/logo.png')!!}">
 			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -50,9 +50,9 @@
 				<ul class="nav navbar-nav">
 					<li><a href="{!! asset('home')!!}"><i class="glyphicon glyphicon-home"></i></a></li>
 					<li><a href="{!! asset('proyectos')!!}">proyecto</a></li>
-					<li><a href="{!! asset('formatolistas')!!}">Formato</a></li>
-					<li><a href="{!! asset ('revisions')!!}">Revisiones</a></li>
-					<li><a href="{!! asset('detalleRevisions')!!}">Detalle revisión</a></li>
+					<li><a  href="{!! asset('formatolistas')!!}">Formato</a></li>
+					<li><a  href="{!! asset ('revisions')!!}">Revisiones</a></li>
+					<li><a  href="{!! asset('detalleRevisions')!!}">Detalle revisión</a></li>
 				</ul>
 
 				<ul class="nav navbar-nav navbar-right">
@@ -61,7 +61,7 @@
 						<li><a href="/auth/register">Register</a></li>
 					@else
 						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ Auth::user()->name }} <span class="caret"></span></a>
+							<a  href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ Auth::user()->name }} <span class="caret"></span></a>
 							<ul class="dropdown-menu" role="menu">
 								<li><a href="{!! asset('auth/logout')!!}">Logout</a></li>
 							</ul>
@@ -78,6 +78,17 @@
 	</div>
  </div>
 	<!-- Scripts -->
+
+	<script type="text/javascript">
+		var url = window.location;
+// Will only work if string in href matches with location
+$('ul.nav a[href="'+ url +'"]').parent().addClass('active');
+
+// Will also work for relative and absolute hrefs
+$('ul.nav a').filter(function() {
+    return this.href == url;
+}).parent().addClass('active');
+	</script>
 	
 </body>
 </html>

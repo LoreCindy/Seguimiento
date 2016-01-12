@@ -1,6 +1,7 @@
 @extends('app')
 
 @section('content')
+
 <style type="text/css">
  .justifyText{text-align:justify;}
 .modal-body
@@ -22,7 +23,8 @@
    
 }
 </style>
-        @include('flash::message')
+
+@include('flash::message')
        
 <link type="text/css" rel="stylesheet" href="modal.css" />
 <script type="text/javascript" src="jquery-1.2.3.min.js"></script>
@@ -52,7 +54,7 @@
                 <div class="well text-center">No revisions found.</div>
             @else
              {!! Form::open(['route' => 'deleteRevison', 'method' => 'get']) !!}
-                <table class="table">
+                <table class="table table-bordered table-hover">
                     <thead>
       <th><input type="checkbox" id="checkTodos"/><button  id="btn" class="btn btn-link" type="submit" onclick="return confirm('esta usted seguro que desea eliminar?')"><i class="glyphicon glyphicon-trash"></i> <span class="hidden-xs floatL l5">Eliminar</span></button> </th>
       <th>Nombre Revision</th>
@@ -74,7 +76,7 @@
           <td>{!! $revision->nombre_revision !!}</td>
 					<td  class="con">{!! $revision->proyecto->nombre_contratatista !!}</td>
 					<td class ="justifyText">{!! $revision->formato->nombre_formato !!}</td>
-					<td class ="justifyText">{!! $revision->observaciones !!}</td>
+          <td class ="justifyText">{!! $revision->observaciones !!}</td>
         <!--  boton Modal datos generales -->
           <td><a href="#myModal{{$revision->id}}" class="btn btn-primary" data-backdrop="false"data-toggle="modal" data-target="#myModal{{$revision->id}}">detalles</a></td>
 
@@ -83,7 +85,7 @@
           <div class="modal-dialog" role="document">
           <div class="modal-content">
           <div class="modal-header">
-          <h4 class="modal-title" style="color:#E4E9F5" >Datos Generales</h4>
+           <h4 class="modal-title" style="color:#E4E9F5" >Datos Generales</h4>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="false">&times;</span></button>
           </div>
           <div class="modal-body">
@@ -107,7 +109,7 @@
       <div class="modal-dialog" role="document">
       <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title" style="color:#E4E9F5">Formato Legalización</h4>
+          <h4 class="modal-title" style="color:#E4E9F5">Formato Legalización</h4>
         <button type="button"  i class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="false">&times;</span></button>
 
       </div>
@@ -125,17 +127,12 @@
 </div>
 
 </td>
-
-				
-                              
-                            <td>
-                                <a href="{!! route('revisions.edit', [$revision->id]) !!}"><i class="glyphicon glyphicon-edit"></i></a>
-                                <a href="{!! route('revisions.delete', [$revision->id]) !!}" onclick="return confirm('Are you sure wants to delete this revision?')"><i class="glyphicon glyphicon-remove"></i></a>
-                            </td>
-
-                        </tr>
+    <td>
+        <a href="{!! route('revisions.edit', [$revision->id]) !!}"><i class="glyphicon glyphicon-edit"></i></a>
+        <a href="{!! route('revisions.delete', [$revision->id]) !!}" onclick="return confirm('Are you sure wants to delete this revision?')"><i class="glyphicon glyphicon-remove"></i></a>
+    </td>
+</tr>
                     @endforeach
-
                     <td> 
                      {!! $revisions->appends(Request::only(['name','tipo']))->render()!!}
                    </td>
@@ -145,7 +142,5 @@
                 {!! Form::close() !!}
             @endif  
         </div>
-
           <script src="{{asset('js/seleccionarVariosDelete.js')}}"></script>
-  
 @endsection

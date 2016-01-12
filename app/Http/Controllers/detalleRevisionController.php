@@ -214,21 +214,22 @@ class detalleRevisionController extends AppBaseController
 
    	public function delete (Request $request)
 	{
-		$id_detalles =$request->get('eliminar');
-	
-		foreach ($id_detalles as $key => $id_detalle) {
-			$detalle = detalleRevision::find($id_detalle);
+		$input  =  $request->get( 'data' );
 
+		foreach ($input as $key => $id_detalle) {
+			$detalle = detalleRevision::find($id_detalle);
 		if(empty($detalle))
 		{
 			Flash::error('detalle revision no encontrado');
-			return redirect(route('detalleRevisions.index'));
+			//return redirect(route('detalleRevisions.index'));
 		}
-
+		
 		$detalle->delete();
+
 	}
 		Flash::message('detalle revision eliminado exitosamente');
-		return redirect(route('detalleRevisions.index'));	
+		//return redirect(route('detalleRevisions.index'));	
+
 	}
 
 }
