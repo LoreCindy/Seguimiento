@@ -3,9 +3,9 @@
 @section('content')
 
 <style type="text/css">
-.recibido {  background-color: #E0ECFF; }
-.devolucion { background-color: rgb(100%, 88%, 88%); }
-.aprobado  { background-color: rgb(227, 255, 224);   }
+.recibido {  background-color: #AFD2F2; }
+.devolucion { background-color: #E7909B; }
+.aprobado  { background-color: #F5E8EA;   }
 .modal-body
 {
     background-color: #DAFDFD;
@@ -24,6 +24,8 @@
      background-color: #263963
    
 }
+
+
 
 </style>
     
@@ -115,8 +117,11 @@
                          {!! Form::open(['route' => 'send', 'method' => 'post']) !!} 
                         
                           <div class="form-group">
+                             <datalist id="email">
+                              <option value="cindychamorro@live.com">cindy</option>
+                            </datalist>
                             {!! Form::label('email', 'E-Mail') !!}
-                           {!!Form::input('email','email', null,array('class'=>'form-control', 'placeholder' => 'Correo electrónico  ' ))!!}
+                           {!!Form::input('list','email', null,array('class'=>'form-control', 'placeholder' => 'Correo electrónico ', 'list'=>'email'   ))!!}
                            {{ $errors->first('email', '<span class="error-message">:message</span>') }}
                           </div>
                           <div class="form-group">
