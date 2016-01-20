@@ -8,7 +8,6 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Laravel</title>
 
-
 	<link href="{{asset('css/app.css')}}" rel="stylesheet">
 	<script src="{{ asset('/vendors/ckeditor/ckeditor.js') }}"></script>
 
@@ -48,7 +47,7 @@
 
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
-					<li><a href="{!! asset('home')!!}"><i class="glyphicon glyphicon-home"></i></a></li>
+					<li><a href="{!! asset('app')!!}"><i class="glyphicon glyphicon-home"></i></a></li>
 					<li><a href="{!! asset('proyectos')!!}">proyecto</a></li>
 					<li><a  href="{!! asset('formatolistas')!!}">Formato</a></li>
 					<li><a  href="{!! asset ('revisions')!!}">Revisiones</a></li>
@@ -56,17 +55,22 @@
 				</ul>
 
 				<ul class="nav navbar-nav navbar-right">
-					@if (Auth::guest())
-						<li><a href="/auth/login">Login</a></li>
-						<li><a href="/auth/register">Register</a></li>
-					@else
-						<li class="dropdown">
+					@if (Auth::check())
+							<img src='{{url(Auth::user()->perfiles)}}'  class='img-circle' style='margin-left:10px;margin-top:3px;width:50px; max-width: 50px' />
+							
+					<li class="dropdown">
 							<a  href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ Auth::user()->name }} <span class="caret"></span></a>
 							<ul class="dropdown-menu" role="menu">
-								<li><a href="{!! asset('auth/logout')!!}">Logout</a></li>
+								<li><a href="{{url('user')}}">perfil</a></li>
+								<li><a href="{{url('logout')}}">cerrar sesion</a></li>
 							</ul>
 						</li>
+
+					@else
+ 						<li><a href="{{url('auth/login')}}">Iniciar sesión</a></li>
 					@endif
+
+							
 				</ul>
 			</div>
 		</div>
@@ -74,6 +78,7 @@
 
  <div class="container">
     <div class="jumbotron" style="margin-top: 70px;">
+  
 	@yield('content')
 	</div>
  </div>

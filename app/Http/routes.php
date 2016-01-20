@@ -19,11 +19,11 @@
 //-----------------------------------
 
 //Route::post('send', ['as' => 'send', 'uses' => 'detalleRevisionController@send'] );
+
+
 Route::get('eliminarVarios','detalleRevisionController@delete');
 Route::post('send', ['as' => 'send', 'uses' => 'detalleRevisionController@send'] );
 Route::get('index', ['as' => 'index', 'uses' => 'detalleRevisionController@index'] );
-
-
 
 Route::get('deleteProyectos', ['as' => 'deleteProyectos', 'uses' => 'proyectoController@delete'] );
 Route::get('deleteFormatoLista', ['as' => 'deleteFormatoLista', 'uses' => 'formatolistaController@delete'] );
@@ -41,13 +41,9 @@ Route::get('formato','revisionController@formato_lista');
 Route::get('legal','revisionController@formato_legalizacion');
 
 
-
-
 Route::get('/', 'HomeController@index');
-
 Route::get('app', 'HomeController@index');
 
-Route::get('home', 'HomeController@index');
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',
@@ -121,6 +117,7 @@ Route::get('detalleRevisions/{id}/delete', [
     'uses' => 'detalleRevisionController@destroy',
 ]);
 
+
 Route::resource('proyectoExcel','ExcelController');
 
 Route::get('formatoExcel','ExcelController@formato');
@@ -130,6 +127,31 @@ Route::get('chequeosExcel','ExcelController@chequeos');
 Route::get('revisionExcel','ExcelController@revision');
 
 Route::get('detalleExcel','ExcelController@detalle');
+
+
+
+Route::get('auth/register', 'Auth\AuthController@getRegister');
+Route::post('auth/register', 'Auth\AuthController@postRegister');
+Route::get('confirm/email/{email}/confirm_token/{confirm_token}', 'Auth\AuthController@confirmRegister');
+
+Route::get('logout', 'Auth\AuthController@getLogout');
+Route::get('auth/login', 'Auth\AuthController@getLogin');
+Route::post('auth/login', 'Auth\AuthController@postLogin');
+
+Route::get('password/email', 'Auth\PasswordController@getEmail');
+Route::post('password/email', 'Auth\PasswordController@postEmail');
+Route::get('password/reset/{token}', 'Auth\PasswordController@getReset');
+Route::post('password/reset', 'Auth\PasswordController@postReset');
+
+
+Route::get('user', 'UserController@user');
+Route::get('user/profile', 'UserController@profile');
+Route::post('user/updateprofile', 'UserController@updateProfile');
+
+Route::get('user/password', 'UserController@password');
+Route::post('user/updatepassword', 'UserController@updatePassword');
+
+
 
 
 

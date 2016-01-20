@@ -32,10 +32,14 @@ class proyectoController extends AppBaseController
 	 *
 	 * @return Response
 	 */
+
 	public function index(Request $request)
 	{
-
+		
 		$query = proyecto::name($request->only('name', 'tipo'));
+		//$users_id= $request->user()->id;
+		//$model = proyecto::where('users_id', '=', $users_id);
+		//dd($model);
 		$proyectos = $query->paginate(5);
 		$proyectos->setPath('/contratacion/public/proyectos');
 		
@@ -51,8 +55,7 @@ class proyectoController extends AppBaseController
                 $attributes[$attribute] =  null;
             }
         };
-
-     
+        
         return view('proyectos.index')
             ->with('attributes', $attributes)
             ->with('proyectos',$proyectos);
@@ -78,11 +81,8 @@ class proyectoController extends AppBaseController
 	public function store(CreateproyectoRequest $request)
 	{
         $input = $request->all();
-
 		$proyecto = proyecto::create($input);
-
 		Flash::message('proyecto saved successfully.');
-
 		return redirect(route('proyectos.index'));
 	}
 
@@ -102,7 +102,7 @@ class proyectoController extends AppBaseController
 			Flash::error('proyecto not found');
 			return redirect(route('proyectos.index'));
 		}
-
+		
 		return view('proyectos.show')->with('proyecto', $proyecto);
 	}
 

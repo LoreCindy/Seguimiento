@@ -150,4 +150,8 @@ return [
 
 	'secure' => false,
 
+
+	'expire_on_close' => true,
+
+
 ];

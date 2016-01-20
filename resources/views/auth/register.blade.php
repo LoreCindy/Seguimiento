@@ -29,55 +29,44 @@
 			<div class="panel panel-default">
 				<div class="panel-heading">Register</div>
 				<div class="panel-body">
-					@if (count($errors) > 0)
-						<div class="alert alert-danger">
-							<strong>Whoops!</strong> There were some problems with your input.<br><br>
-							<ul>
-								@foreach ($errors->all() as $error)
-									<li>{{ $error }}</li>
-								@endforeach
-							</ul>
-						</div>
-					@endif
+					
+
+<div class="text-info">
+    @if(Session::has('message'))
+        {{Session::get('message')}}
+    @endif
+</div>
+ 
 
 					<form class="form-horizontal" role="form" method="POST" action="/contratacion/public/auth/register">
 						<input type="hidden" name="_token" value="{{ csrf_token() }}">
 
-						<div class="form-group">
-							<label class="col-md-4 control-label">Name</label>
-							<div class="col-md-6">
-								<input type="text" class="form-control" name="name" value="{{ old('name') }}">
-							</div>
-						</div>
+    <div class='form-group'>
+        <label for="name">Nombre:</label>
+        <input type="text" name="name" class="form-control" value="{{ old('name') }}" />
+        <div class="text-danger">{{$errors->first('name')}}</div>
+    </div>
+ 
+    <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" name="email" class="form-control" value="{{ old('email') }}" />
+        <div class="text-danger">{{$errors->first('email')}}</div>
+    </div>
 
-						<div class="form-group">
-							<label class="col-md-4 control-label">E-Mail Address</label>
-							<div class="col-md-6">
-								<input type="email" class="form-control" name="email" value="{{ old('email') }}">
-							</div>
-						</div>
+    <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" class="form-control" name="password" />
+        <div class="text-danger">{{$errors->first('password')}}</div>
+    </div>
 
-						<div class="form-group">
-							<label class="col-md-4 control-label">Password</label>
-							<div class="col-md-6">
-								<input type="password" class="form-control" name="password">
-							</div>
-						</div>
+    <div class="form-group">
+        <label for="password_confirmation">Confirmar Password:</label>
+        <input type="password" class="form-control" name="password_confirmation" />
+    </div>
+    <div>
+        <button type="submit" class="btn btn-primary">Registrarme</button>
+    </div>
 
-						<div class="form-group">
-							<label class="col-md-4 control-label">Confirm Password</label>
-							<div class="col-md-6">
-								<input type="password" class="form-control" name="password_confirmation">
-							</div>
-						</div>
-
-						<div class="form-group">
-							<div class="col-md-6 col-md-offset-4">
-								<button type="submit" class="btn btn-primary">
-									Register
-								</button>
-							</div>
-						</div>
 					</form>
 				</div>
 			</div>

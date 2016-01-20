@@ -17,6 +17,10 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	 */
 	protected $table = 'users';
 
+	public function  proyectos()
+	{
+		return $this->hasMany('App\Models\proyecto', 'users_id');
+	}
 	/**
 	 * The attributes that are mass assignable.
 	 *

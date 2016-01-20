@@ -16,6 +16,11 @@ class proyecto extends Model
 		return $this->hasMany('App\Models\revision', 'proyecto_id');
 	}
 
+	public function  user()
+	{
+		return $this->belongsTo('App\User', 'users_id');
+	}
+
 	public function scopeName($query, $name)
     {
     
@@ -27,7 +32,8 @@ class proyecto extends Model
 	    "fecha_radicacion",
 		"nombre_contratatista",
 		"nombre_modalidad",
-		"nombre_tipoContratacion"
+		"nombre_tipoContratacion",
+		"users_id"
 	];
 
 	public static $rules = [

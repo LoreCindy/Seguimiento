@@ -25,6 +25,10 @@
    {!! Form::select('nombre_tipoContratacion', ['Contrato' => 'Contrato', 'Convenio' => 'Convenio'], null, ['class' => 'form-control']) !!}
 </div>
 
+<!--- Nombre Tipocontratacion Field --->
+<div class="form-group col-sm-6 col-lg-4">
+  <input style='visibility: hidden;' name='users_id' class='form-control' value='{{ Auth::user()->id }}'></input>
+</div>
 
 <!--- Submit Field --->
 <div class="form-group col-sm-12">

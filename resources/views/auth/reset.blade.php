@@ -18,7 +18,7 @@
 						</div>
 					@endif
 
-					<form class="form-horizontal" role="form" method="POST" action="/password/reset">
+					<form class="form-horizontal" role="form" method="POST" action="{{url('password/reset')}}">
 						<input type="hidden" name="_token" value="{{ csrf_token() }}">
 						<input type="hidden" name="token" value="{{ $token }}">
 
@@ -27,6 +27,8 @@
 							<div class="col-md-6">
 								<input type="email" class="form-control" name="email" value="{{ old('email') }}">
 							</div>
+							 <div class="text-danger">{{$errors->first('email')}}</div>
+
 						</div>
 
 						<div class="form-group">
@@ -34,6 +36,8 @@
 							<div class="col-md-6">
 								<input type="password" class="form-control" name="password">
 							</div>
+							  <div class="text-danger">{{$errors->first('password')}}</div>
+
 						</div>
 
 						<div class="form-group">
