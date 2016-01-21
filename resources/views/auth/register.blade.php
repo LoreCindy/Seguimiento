@@ -65,6 +65,7 @@
     </div>
     <div>
         <button type="submit" class="btn btn-primary">Registrarme</button>
+      <a style="left:inherit" href="/contratacion/public/auth/login" type="submit" class="btn btn-primary">Iniciar Sesión</a>
     </div>
 
 					</form>

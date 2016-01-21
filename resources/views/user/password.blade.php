@@ -1,6 +1,7 @@
 @extends('app')
 @section('content')
 <h2>Cambiar mi password</h2>
+<a href="/contratacion/public/auth/login" type="submit" >Iniciar Sesión</a>
 @if (Session::has('message'))
  <div class="text-danger">
  {{Session::get('message')}}
@@ -24,5 +25,6 @@
   <input type="password" name="password_confirmation" class="form-control">
  </div>
  <button type="submit" class="btn btn-primary">Cambiar mi password</button>
+ 
 </form>
 @endsection

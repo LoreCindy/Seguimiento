@@ -18,6 +18,7 @@
 <ul>
     <li><a href="{{url('user/profile')}}">Cambiar mi imagen de perfil</a></li>
      <li><a href="{{url('user/password')}}">Cambiar mi password</a></li>
+     <li><a href="/contratacion/public/auth/login" type="submit" >Iniciar Sesión</a></li>
 
 </ul>
 
