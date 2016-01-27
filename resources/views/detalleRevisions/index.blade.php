@@ -3,9 +3,8 @@
 @section('content')
 
 <style type="text/css">
-.recibido {  background-color: #AFD2F2; }
-.devolucion { background-color: #E7909B; }
-.aprobado  { background-color: #F5E8EA;   }
+.devolucion { background-color: #EB7777; }
+.aprobado  { background-color: #77C7EB;   }
 .modal-body
 {
     background-color: #DAFDFD;
@@ -63,24 +62,15 @@
       <button  id="btn" class="btn btn-link" type="submit" onclick="return confirm('esta usted seguro que desea eliminar?')"><i class="glyphicon glyphicon-trash"></i> <span class="hidden-xs floatL l5">Eliminar</span></button> 
       </th>
       <th>Estado</th>
-			<th>Fecha</th>
 			<th>Nombre Responsable</th>
-			<th>Dependencia Responsable</th>
-			<th>Revisión</th>
+		  <th>Fecha Revisión</th>
 			<th width="50px">Opciones</th>
                     </thead>
                     <tbody>
                      
                     @foreach($detalleRevisions as $key=> $detalleRevision)
                        
-                      
-                    @if($detalleRevision->estado=='Recibido')
-                        <tr class="recibido">
-                         <td>
-                        <input type="checkbox" class="proyectoEliminar" id="proyectoEliminar_{!! $key !!}" name="eliminar[]" value="{!! $detalleRevision->id !!}">
-                        </td>
-                       <td> Recibido</td>
-                    @elseif($detalleRevision->estado=='Devolucion')
+                      @if($detalleRevision->estado=='Devolucion')
                         <tr class="devolucion">
                         <td>
                         <input type="checkbox" class="proyectoEliminar" id="proyectoEliminar_{!! $key !!}" name="eliminar[]" value="{!! $detalleRevision->id !!}">
@@ -94,10 +84,8 @@
                        <td> Aprobado</td>
                     @endif
 
-					<td>{!! $detalleRevision->fecha !!}</td>
 					<td>{!! $detalleRevision->nombre_responsable !!}</td>
-					<td>{!! $detalleRevision->dependencia_responsable !!}</td>
-					<td>{!! $detalleRevision->revision->nombre_revision !!}</td>
+					<td>{!! $detalleRevision->revision->fecha_revision !!}</td>
 					
                             <td>
                                 <a href="{!! route('detalleRevisions.edit', [$detalleRevision->id]) !!}"><i class="glyphicon glyphicon-edit"></i></a>
@@ -133,20 +121,24 @@
                             {!! Form::label('body', 'Mensaje') !!}
                             {!! Form::textarea('body',null, ['class' => 'ckeditor' ]) !!}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
                           </div>
+
+                          <div class="form-group">
+                            {!! Form::label('estado', 'Estado Contrato') !!}
+                           <input name="estado" type="text" value="{{$detalleRevision->estado}}" id="name" class = 'form-control' disabled>
+                            {!!Form::hidden('estado',$detalleRevision->estado)!!}
+                          </div>
+
+
                           <div class="form-group">
                             {!! Form::label('name', 'Nombre Responsable') !!}
                            <input name="name" type="text" value="{{$detalleRevision->nombre_responsable}}" id="name" class = 'form-control' disabled>
                             {!!Form::hidden('name',$detalleRevision->nombre_responsable)!!}
                           </div>
+                          
                           <div class="form-group">
-                            {!! Form::label('dep', 'Dependecia Responsable') !!}
-                            <input name="dep" type="text" value="{{$detalleRevision->dependencia_responsable}}" id="dep" class = 'form-control' disabled>
-                            {!!Form::hidden('dep',$detalleRevision->dependencia_responsable)!!}
-                          </div>
-                          <div class="form-group">
-                            {!! Form::label('rev', 'Nombre Revision') !!}
-                           <input name="rev" type="text" value="{{$detalleRevision->revision->nombre_revision}}" id="dev" class = 'form-control' disabled>
-                            {!!Form::hidden('rev',$detalleRevision->revision->nombre_revision )!!}
+                            {!! Form::label('rev', 'Fecha Revision') !!}
+                           <input name="rev" type="text" value="{{$detalleRevision->revision->fecha_revision}}" id="dev" class = 'form-control' disabled>
+                            {!!Form::hidden('rev',$detalleRevision->revision->fecha_revision )!!}
                           </div>
                           <div class="form-group">
                            {!! Form::label('a', 'Observaciones') !!}

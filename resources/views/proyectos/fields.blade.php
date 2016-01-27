@@ -4,10 +4,22 @@
     {!! Form::input('date', 'fecha_radicacion', date('Y-m-d'), ['class' => 'form-control']) !!}
 </div>
 
+<!--- Numero Contrato Field --->
+<div class="form-group col-sm-6 col-lg-4">
+    {!! Form::label('numero_contrato', 'Número Contrato:') !!}
+     {!! Form::text('numero_contrato', null, ['class' => 'form-control']) !!}
+</div>
+
 <!--- Nombre Contratatista Field --->
 <div class="form-group col-sm-6 col-lg-4">
     {!! Form::label('nombre_contratatista', 'Nombre Contratatista:') !!}
     {!! Form::text('nombre_contratatista', null, ['class' => 'form-control']) !!}
+</div>
+
+<!---Dependencia Origen Field --->
+<div class="form-group col-sm-6 col-lg-4">
+    {!! Form::label('dependencia_origen', 'Dependencia de Origen:') !!}
+    {!! Form::text('dependencia_origen', null, ['class' => 'form-control']) !!}
 </div>
 
 <!--- Nombre Modalidad Field --->

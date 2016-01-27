@@ -17,7 +17,9 @@ class CreateproyectosTable extends Migration
 		{
 			$table->increments('id');
 			$table->date('fecha_radicacion')->nullable();
+			$table->string('numero_contrato')->nullable();
 			$table->string('nombre_contratatista')->nullable();
+			$table->string('dependecia_origen')->nullable();
 			$table->string('nombre_modalidad')->nullable();
 			$table->string('nombre_tipoContratacion')->nullable();
 			$table->timestamps();

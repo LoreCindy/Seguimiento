@@ -32,8 +32,11 @@
                 <table class="table table-bordered table-hover">
                     <thead>
             <th><input type="checkbox" id="checkTodos"/><button  id="btn" class="btn btn-link" type="submit" onclick="return confirm('esta usted seguro que desea eliminar?')"><i class="glyphicon glyphicon-trash"></i> <span class="hidden-xs floatL l5">Eliminar</span></button> </th>
+            <th>N°</th>
             <th class="con">Fecha Radicacion</th>
+            <th>Numero Contrato</th>
 			<th>Nombre Contratatista</th>
+            <th>Dependencia de Origen</th>
 			<th>Nombre Modalidad</th>
 			<th>Tipo Contratacion</th>
             <th width="50px">Opciones</th>
@@ -44,8 +47,11 @@
                     <td>
                     <input type="checkbox" class="proyectoEliminar" id="proyectoEliminar_{!! $key !!}" name="proyectoEliminar[]" value="{!! $proyecto->id !!}">
                     </td>
+                     <td>{!! $proyecto->id !!}</td>
                     <td>{!! $proyecto->fecha_radicacion !!}</td>
+                     <td>{!! $proyecto->numero_contrato !!}</td>                    
 					<td>{!! $proyecto->nombre_contratatista !!}</td>
+                     <td>{!! $proyecto->dependencia_origen !!}</td>                    
 					<td>{!! $proyecto->nombre_modalidad !!}</td>
 					<td>{!! $proyecto->nombre_tipoContratacion !!}</td>
                             <td>

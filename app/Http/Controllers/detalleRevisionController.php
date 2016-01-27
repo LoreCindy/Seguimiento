@@ -60,7 +60,7 @@ class detalleRevisionController extends AppBaseController
 	 */
 	public function create()
 	{
-		 $data = ['revision' =>\DB::table('revisions')->lists('nombre_revision', 'id')];
+		 $data = ['revision' =>\DB::table('revisions')->lists('fecha_revision', 'id')];
 		return view('detalleRevisions.create', $data);
 	}
 

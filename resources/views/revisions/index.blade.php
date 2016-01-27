@@ -57,7 +57,7 @@
                 <table class="table table-bordered table-hover">
                     <thead>
       <th><input type="checkbox" id="checkTodos"/><button  id="btn" class="btn btn-link" type="submit" onclick="return confirm('esta usted seguro que desea eliminar?')"><i class="glyphicon glyphicon-trash"></i> <span class="hidden-xs floatL l5">Eliminar</span></button> </th>
-      <th>Nombre Revision</th>
+      <th>Fecha Revision</th>
 			<th>Contratista </th>
 			<th>Formato Lista</th>
 			<th>Observaciones</th>
@@ -73,7 +73,7 @@
            <td>
                     <input type="checkbox" class="proyectoEliminar" id="proyectoEliminar_{!! $key !!}" name="eliminar[]" value="{!! $revision->id !!}">
                     </td>
-          <td>{!! $revision->nombre_revision !!}</td>
+          <td>{!! $revision->fecha_revision !!}</td>
 					<td  class="con">{!! $revision->proyecto->nombre_contratatista !!}</td>
 					<td class ="justifyText">{!! $revision->formato->nombre_formato !!}</td>
           <td class ="justifyText">{!! $revision->observaciones !!}</td>

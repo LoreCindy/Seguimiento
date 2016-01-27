@@ -48,7 +48,7 @@
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
 					<li><a href="{!! asset('app')!!}"><i class="glyphicon glyphicon-home"></i></a></li>
-					<li><a href="{!! asset('proyectos')!!}">proyecto</a></li>
+					<li><a href="{!! asset('proyectos')!!}">Contratos</a></li>
 					<li><a  href="{!! asset('formatolistas')!!}">Formato</a></li>
 					<li><a  href="{!! asset ('revisions')!!}">Revisiones</a></li>
 					<li><a  href="{!! asset('detalleRevisions')!!}">Detalle revisión</a></li>

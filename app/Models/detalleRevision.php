@@ -25,17 +25,13 @@ public function scopeName($query, $name)
 
 	public $fillable = [
 	    "estado",
-		"fecha",
 		"nombre_responsable",
-		"dependencia_responsable",
 		"revision_id"
 	];
 
 	public static $rules = [
 	    "estado" => "required",
-		"fecha" => "required",
 		"nombre_responsable" => "required",
-		"dependencia_responsable" => "required",
 		"revision_id" => "required"
 	];
 

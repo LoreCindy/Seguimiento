@@ -29,18 +29,24 @@ class proyecto extends Model
     }
 
 	public $fillable = [
+		"id",
 	    "fecha_radicacion",
 		"nombre_contratatista",
 		"nombre_modalidad",
 		"nombre_tipoContratacion",
-		"users_id"
+		"users_id",
+		"numero_contrato",
+		"dependencia_origen"
+
 	];
 
 	public static $rules = [
 	    "fecha_radicacion" => "required",
 		"nombre_contratatista" => "required",
 		"nombre_modalidad" => "required",
-		"nombre_tipoContratacion" => "required"
+		"nombre_tipoContratacion" => "required",
+		"numero_contrato" => "required",
+		"dependencia_origen" => "required"
 	];
 
 }

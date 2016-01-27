@@ -85,11 +85,11 @@ class PdfController extends Controller {
 	public function invoice(Request $Request) 
     {
         //$data = $this->getData();
-    //$proyectos=$Request->get('nombre_contratista');
-    dd($proyectos);
+    $proyectos=$Request->get('nombre_contratista');
+    
     $date = date('Y-m-d');
     $pdf = \App::make('dompdf.wrapper');
-	$view = \View::make('revisions.edit', compact('date'))->render();
+	$view = \View::make('pdf.invoice', compact('date'))->render();
 
     $nombre= $date;
      	

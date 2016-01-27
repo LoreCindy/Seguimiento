@@ -84,7 +84,7 @@ class revisionController extends AppBaseController
 	}
 
 	// funcion para regresar la información de las ciudades que pertenecen al estado selecionado
-    public function listaDatos()
+    /*public function listaDatos()
     {	
     	// Recibimos ID del estado selecionado
         $id = Request::input('id');
@@ -92,7 +92,7 @@ class revisionController extends AppBaseController
         $datosgenerales = datos_generales::where('formatolista_id',$id)->get();
 	//  Regresamos las ciudades obtenidas de la consulta
         return Response::json($datosgenerales);
-    }
+    }*/
 // funcion para el combo dependiente  de formato lista y datos generales
     public function formato_lista(Request $request)
     {
@@ -134,23 +134,23 @@ class revisionController extends AppBaseController
 		$input = $request->all();
 		$revision = revision::create($input);
 		$idRevision= $revision->id;
-		$datosGenerales = $request->get("datosGenerales");
+		//$datosGenerales = $request->get("datosGenerales");
 		$legalizacion = $request->get("legalizacion_id");
-		$nombreDatos = $request->get("nombre_datosGenerales");
+		//$nombreDatos = $request->get("nombre_datosGenerales");
 		$dacCheck= $request->get('dac');
 
-		foreach ($datosGenerales as $key => $dato) {
+		/*foreach ($datosGenerales as $key => $dato) {
 			$revision->general()->attach($dato);
 			$chequeodato= ["nombreChequeoDatos"=>$nombreDatos[$key],"datos_generales_id"=>$dato,"revision_id"=>$idRevision];
 			$chequeodatos = chequeoDatos::create($chequeodato);
-		}
+		}*/
 
-	  	$chequeosupervisor=$request->get("nombre_supervisor");
+	  	//$chequeosupervisor=$request->get("nombre_supervisor");
 		$chequeoobservacion= $request->get("observacion");
 
 		foreach ($legalizacion as $key => $value) {
 		$revision->legalizacion()->attach($value);
-	   	$chequeo= ["legalizacion_id"=>$value,"nombre_supervisor"=>$chequeosupervisor[$key],"dac"=>$dacCheck[$key],"revision_id"=>$idRevision,"observaciones"=>$chequeoobservacion[$key]];
+	   	$chequeo= ["legalizacion_id"=>$value,"dac"=>$dacCheck[$key],"revision_id"=>$idRevision,"observaciones"=>$chequeoobservacion[$key]];
 		$chequeos = chequeo::create($chequeo);
 		}
 
@@ -164,7 +164,6 @@ class revisionController extends AppBaseController
 
 	}
 
-	
 
 	/**
 	 * Display the specified revision.

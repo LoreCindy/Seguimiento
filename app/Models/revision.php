@@ -64,7 +64,7 @@ class revision extends Model
 
 	public $fillable = [
 		
-	    "nombre_revision",
+	    "fecha_revision",
 		"proyecto_id",
 		"formatoLista_id",
 		"observaciones",
@@ -73,7 +73,7 @@ class revision extends Model
 	];
 
 	public static $rules = [
-	    "nombre_revision" => "required",
+	    "fecha_revision" => "required",
 		"proyecto_id" => "required",
 		"formatoLista_id" => "required",
 		"observaciones" => "required",
