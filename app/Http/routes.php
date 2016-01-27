@@ -19,6 +19,9 @@
 //-----------------------------------
 
 //Route::post('send', ['as' => 'send', 'uses' => 'detalleRevisionController@send'] );
+Route::get('pdf', 'PdfController@invoice');
+
+
 
 
 Route::get('eliminarVarios','detalleRevisionController@delete');

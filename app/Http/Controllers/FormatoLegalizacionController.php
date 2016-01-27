@@ -31,7 +31,7 @@ class FormatoLegalizacionController extends AppBaseController
 	public function index(Request $request)
 	{
 		$query = FormatoLegalizacion::name($request->only('name', 'tipo'));
-		$formatoLegalizacions = $query->paginate(5);
+		$formatoLegalizacions = $query->paginate(8);
 		$formatoLegalizacions->setPath('/contratacion/public/formatoLegalizacions');
         $columns = Schema::getColumnListing('$TABLE_NAME$');
         $attributes = array();

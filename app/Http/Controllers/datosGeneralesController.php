@@ -31,7 +31,7 @@ class datosGeneralesController extends AppBaseController
 	public function index(Request $request)
 	{
 		$query = datosGenerales::name($request->only('name', 'tipo'));
-		$datosGenerales = $query->paginate(5);
+		$datosGenerales = $query->paginate(8);
 		$datosGenerales->setPath('/contratacion/public/datosGenerales');
         $columns = Schema::getColumnListing('$TABLE_NAME$');
         $attributes = array();

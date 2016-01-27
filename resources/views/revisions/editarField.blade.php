@@ -92,7 +92,10 @@
 <!--- Submit Field --->
 <div class="form-group col-sm-12">
     {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
-       {!! link_to(URL::previous(), 'Cancelar', ['class' => 'btn btn-danger']) !!}
+    {!! link_to(URL::previous(), 'Cancelar', ['class' => 'btn btn-danger']) !!}
+    <a href="{{url('pdf')}}">generar pdf</a>
+        
+        
 </div>
 
 

@@ -34,7 +34,7 @@ class formatolistaController extends AppBaseController
 		//$query = formatolista::query();
 
 		$query = formatolista::name($request->only('name', 'tipo'));
-		$formatolistas = $query->paginate(5);
+		$formatolistas = $query->paginate(8);
 		$formatolistas->setPath('/contratacion/public/formatolistas');
 
         $columns = Schema::getColumnListing('$TABLE_NAME$');

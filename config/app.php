@@ -140,6 +140,7 @@ return [
 		'Laracasts\Flash\FlashServiceProvider',
 		'Mitul\Generator\GeneratorServiceProvider',
 		'Maatwebsite\Excel\ExcelServiceProvider',
+		'Barryvdh\DomPDF\ServiceProvider',
 
 		/*
 		 * Application Service Providers...
@@ -202,7 +203,8 @@ return [
 		'Form'  => 'Illuminate\Html\FormFacade',
 		'HTML'  => 'Illuminate\Html\HtmlFacade',
 		'Flash' => 'Laracasts\Flash\Flash',
-		'Excel' => 'Maatwebsite\Excel\Facades\Excel'
+		'Excel' => 'Maatwebsite\Excel\Facades\Excel',
+		'PDF' => 'Barryvdh\DomPDF\Facade'
 
 	],
 

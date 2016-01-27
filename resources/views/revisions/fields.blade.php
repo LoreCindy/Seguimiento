@@ -9,7 +9,7 @@
 <!--- Proyecto Id Field --->
 <div class="form-group col-sm-6 col-lg-4">
     {!! Form::label('proyecto_id', 'Proyecto:') !!}
-<select class="selectpicker" name='proyecto_id' data-live-search="true" data-size="10"  data-header="Select a condiment">
+<select class="selectpicker" name='proyecto_id' data-live-search="true" data-size="10"  data-header="Seleccione un proyecto">
        @foreach($proyectos as $key => $proyecto)
         <option value='{!! $proyecto->id !!}' >{!! $proyecto->nombre_contratatista !!}</option>
     @endforeach
