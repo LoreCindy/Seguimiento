@@ -61,8 +61,7 @@
 			<th>Contratista </th>
 			<th>Formato Lista</th>
 			<th>Observaciones</th>
-			<th>Datos Generales</th>
-			<th>Formato Legalizacion</th>
+				<th>Formato Legalizacion</th>
       
                     <th width="50px">Opciones</th>
                     </thead>
@@ -77,28 +76,8 @@
 					<td  class="con">{!! $revision->proyecto->nombre_contratatista !!}</td>
 					<td class ="justifyText">{!! $revision->formato->nombre_formato !!}</td>
           <td class ="justifyText">{!! $revision->observaciones !!}</td>
-        <!--  boton Modal datos generales -->
-          <td><a href="#myModal{{$revision->id}}" class="btn btn-primary" data-backdrop="false"data-toggle="modal" data-target="#myModal{{$revision->id}}">detalles</a></td>
-
-        <!-- Modal datos generales -->
-          <div class="modal fade" id="myModal{{$revision->id}}"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel1">
-          <div class="modal-dialog" role="document">
-          <div class="modal-content">
-          <div class="modal-header">
-           <h4 class="modal-title" style="color:#E4E9F5" >Datos Generales</h4>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="false">&times;</span></button>
-          </div>
-          <div class="modal-body">
-         @foreach($revision->general as $dato_general)
-            <h4 class="modal-title" id="myModalLabel1"><i class="fa fa-plus-square"></i>Nombre: {!!$dato_general->nombre_dato!!}</h4>
-         @endforeach
-          </div>
-          <div class="modal-footer">
-         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-         </div>
-         </div>
-         </div>
-          </div>  
+        
+         
 
       <!-- boton Modal legalizacion  -->
       <td><a class="btn btn-primary" data-backdrop="false" href="#PlaceModal-{{$revision->id}}" data-toggle="modal">Detalles</a></td>

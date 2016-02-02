@@ -39,7 +39,7 @@ class revisionController extends AppBaseController
 		//$revisions= \DB::table('revisions')->paginate();
 
 		$query = revision::name($request->only('name', 'tipo'))->with('general');
-		$revisions = $query->paginate(8);
+		$revisions = $query->paginate(6);
 		//dd($revisions>toArray()[2]['general']);
 		
 
@@ -203,7 +203,7 @@ class revisionController extends AppBaseController
 		$datosGenerales=$revision->chequeoDatos;
 		$datosGeneralesformato=$revision->general;
 
-		$proyectos = ['proyectos' =>\DB::table('proyectos')->lists('nombre_contratatista', 'id')];
+		$proyectos = ['proyectos' =>\DB::table('proyectos')->lists( 'nombre_contratatista', 'id')];
  		$formatolista= ['formatolista' =>\DB::table('formatolistas')->lists('nombre_formato', 'id')];
 		if(empty($revision))
 		{
@@ -230,39 +230,51 @@ class revisionController extends AppBaseController
 	 *
 	 * @return Response
 	 */
-	public function update($id, CreaterevisionRequest $request)
+	public function update($id, Request $request)
 	{
 		/** @var revision $revision */
 		$revision = revision::find($id);
+		//dd($revision);
 		$idChequeo= $request->get('id');
+
 		$buscarChequeo= chequeo::find($idChequeo);
-		$chequeos = $request->only('nombre_supervisor','observacion','dac');
+	
+		$chequeos = $request->only('observacion','dac');
 		
-		$idDatos= $request->get('id_datos');
-		$buscarDatos= chequeoDatos::find($idDatos);
-		$datos = $request->only('nombreChequeoDatos');
+		//$idDatos= $request->get('id_datos');
+
+		//$buscarDatos= chequeoDatos::find($idDatos);
+		//$datos = $request->only('nombreChequeoDatos');
 		
 		if(empty($revision))
 		{
 			Flash::error('revision not found');
 			return redirect(route('revisions.index'));
 		}
+		$fecha=revisions::get('fecha_revision')->format(Y-m-d);
 
-		$revision->fill($request->all());
+		$idM= $request->get('fecha_revision');
+		$proyectoId= $request->get('proyecto_id');
+		$fomatoId= $request->get('formatoLista_id');
+		$observacions= $request->get('observaciones');
+
+		 $datos= ['fecha_revision'=>$idM, 'proyecto_id'=>$proyectoId,'formatoLista_id'=>$fomatoId, 'observaciones'=>$observacions];
+
+		$revision->fill($datos);
 		$revision->save();
 		foreach ($buscarChequeo as $key => $chequeo) {
 
 			$observacion=$chequeos['observacion'][$key];
-			$nombre=$chequeos['nombre_supervisor'][$key];
+			
 			$dac=$chequeos['dac'][$key];
-			$nombre_supervisor=['nombre_supervisor'=>$nombre,'observaciones'=>$observacion ,'dac'=>$dac];
+			$nombre_supervisor=['observaciones'=>$observacion ,'dac'=>$dac];
 			
 			$chequeo->fill($nombre_supervisor);
 			$chequeo->save();
 	
 		}
 
-		foreach ($buscarDatos as $key => $dato) {
+		/*foreach($buscarDatos as $key => $dato) {
 
 			$nombreChequeo=$datos['nombreChequeoDatos'][$key];
 		
@@ -271,7 +283,7 @@ class revisionController extends AppBaseController
 			$dato->fill($nombreChequeoDatos);
 			$dato->save();
 	
-		}
+		}*/
 
 		Flash::message('revision updated successfully.');
 		return redirect(route('revisions.index'));

@@ -5,10 +5,9 @@
      <ul class="nav nav-tabs">
       <li role="presentation"class="active"><a href="{!! asset('formatolistas')!!}">Nombre Formato</a></li>
       @if($formatolistas->isEmpty())
-      <li role="presentation"><a class="btn btn-primary btn-lg disabled" href="{!! asset('datosGenerales')!!}">Datos Generales</a></li>
       <li role="presentation"><a class="btn btn-primary btn-lg disabled" href="{!! asset('formatoLegalizacions')!!}">Datos Legalizacion</a></li>
      @else
-     <li role="presentation"><a href="{!! asset('datosGenerales')!!}">Datos Generales</a></li>
+    
       <li role="presentation"><a href="{!! asset('formatoLegalizacions')!!}">Datos Legalizacion</a></li>
        @endif
     </ul>

@@ -35,7 +35,7 @@
 	<nav class="navbar navbar-default navbar-fixed-top" role="navigation" >
 		<div class="container-fluid">
 			<div class="navbar-header">
-			<img style="padding-top:5px; margin-left:5px;width:128px;height:40" src="{!! asset('images/logo.png')!!}">
+			<img style="padding-top:5px; margin-left:5px;width:128px;height:60" src="{!! asset('images/logoxx.png')!!}">
 			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
 					<span class="sr-only"></span>
 					<span class="icon-bar"></span>
@@ -52,6 +52,7 @@
 					<li><a  href="{!! asset('formatolistas')!!}">Formato</a></li>
 					<li><a  href="{!! asset ('revisions')!!}">Revisiones</a></li>
 					<li><a  href="{!! asset('detalleRevisions')!!}">Detalle revisión</a></li>
+					<li><a  href="{!! asset('informes')!!}">Informes</a></li>
 				</ul>
 
 				<ul class="nav navbar-nav navbar-right">

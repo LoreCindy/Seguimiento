@@ -23,6 +23,9 @@ Route::get('pdf', 'PdfController@invoice');
 
 
 
+Route::resource('informes', 'informesController');
+Route::resource('consultar', 'informesController@informe');
+
 
 Route::get('eliminarVarios','detalleRevisionController@delete');
 Route::post('send', ['as' => 'send', 'uses' => 'detalleRevisionController@send'] );

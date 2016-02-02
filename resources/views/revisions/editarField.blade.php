@@ -1,7 +1,7 @@
 <!--- Nombre Revision Field --->
 <div class="form-group col-sm-6 col-lg-4">
     {!! Form::label('fecha_revision', 'Fecha Revision:') !!}
-    {!! Form::input('Date','fecha_revision', date('Y-m-d'), ['class' => 'form-control']) !!}
+      {!! Form::input('Date','fecha_revision',$revision->fecha_revision, ['class' => 'form-control']) !!}
 </div>
 <!--- Proyecto Id Field --->
 <div class="form-group col-sm-6 col-lg-6">

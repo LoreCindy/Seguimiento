@@ -31,7 +31,6 @@ class chequeo extends Model
 
 	public $fillable = [
 	    "legalizacion_id",
-		"nombre_supervisor",
 		"dac",
 		"revision_id",
 		"observaciones"
@@ -39,7 +38,6 @@ class chequeo extends Model
 
 	public static $rules = [
 	    "legalizacion_id" => "required",
-		"nombre_supervisor" => "required",
 		"dac" => "required",
 		"revision_id"=>"required",
 		"observaciones" => "required"
