@@ -1,7 +1,7 @@
 <!--- Fecha Radicacion Field --->
 <div class="form-group col-sm-6 col-lg-4">
     {!! Form::label('fecha_radicacion', 'Fecha Radicacion:') !!}
-    {!! Form::input('date', 'fecha_radicacion', date('Y-m-d'), ['class' => 'form-control']) !!}
+    {!! Form::input('date', 'fecha_radicacion',$proyecto->fecha_radicacion, ['class' => 'form-control', 'date'=>'Y-m-d']) !!}
 </div>
 
 <!--- Numero Contrato Field --->
@@ -47,5 +47,4 @@
     {!! Form::submit('Guardar', ['class' => 'btn btn-primary']) !!}
     {!! link_to(URL::previous(), 'Cancelar', ['class' => 'btn btn-danger']) !!}
 </div>
-
 

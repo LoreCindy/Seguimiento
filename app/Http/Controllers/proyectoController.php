@@ -114,6 +114,7 @@ class proyectoController extends AppBaseController
 	 */
 	public function edit($id)
 	{
+		
 		$proyecto = proyecto::find($id);
 
 		if(empty($proyecto))
