@@ -31,7 +31,7 @@
       { option: $(this).val() },
       function(data) {
         $('#legalizacion').empty();
-        $('#legalizacion').append("<thead><th>Documentos</th><th>dac</th><th>Observaciones</th></thead>");
+        $('#legalizacion').append("<thead><th>Documentos</th><th>Si</th><th>Observaciones</th></thead>");
         $.each(data, function(key, element) {
          $('#legalizacion').append(" <tbody><tr class='css_"+key+"'><td><input type='text' style='width:10px;visibility:hidden'  name='legalizacion_id[]' value='"+element.id+"' id='legalizacion_id'/>" + element.documentos_legalizacion + "</td><td ><label class='check_"+key+"'><input class='input' type='checkbox' id='dac_"+key+"'/></label><input style='width:10px;visibility:hidden' type='text' class='form-control' name='dac[]' value='false' id='datos_"+key+"'/></td><td><textarea rows='3' class='form-control' id='observacion' name='observacion[]'></textarea></td></tr> </tbody>");
        
@@ -72,7 +72,7 @@
     <table class="table table-bordered" id="legalizacion">
       <thead>
       <th>Documentos</th>
-      <th>data-size</th>
+      <th>si</th>
       <th>Observaciones</th>
       </thead>
       <tbody>

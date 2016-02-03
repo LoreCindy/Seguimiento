@@ -7,7 +7,7 @@
 
     {!! Form::model($proyecto, ['route' => ['proyectos.update', $proyecto->id], 'method' => 'patch']) !!}
 
-        @include('proyectos.fields')
+        @include('proyectos.editarField')
 
     {!! Form::close() !!}
 </div>
