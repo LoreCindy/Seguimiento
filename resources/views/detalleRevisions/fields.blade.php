@@ -1,7 +1,7 @@
 <!--- Estado Field --->
 <div class="form-group col-sm-6 col-lg-4">
     {!! Form::label('estado', 'Estado:') !!}
-    {!! Form::select('estado', ['Recibido' => 'Recibido', 'Devolucion' => 'Devolución', 'Aprobado' => 'Aprobado'], null, ['class' => 'form-control']) !!}
+    {!! Form::select('estado', ['Devolucion' => 'Devolución', 'Aprobado' => 'Aprobado'], null, ['class' => 'form-control']) !!}
 </div>
 
 <!--- Nombre Responsable Field --->

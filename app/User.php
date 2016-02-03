@@ -21,6 +21,16 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	{
 		return $this->hasMany('App\Models\proyecto', 'users_id');
 	}
+
+		public function  revision()
+	{
+		return $this->hasMany('App\Models\revision', 'users_id');
+	}
+
+	public function  detalleRevision()
+	{
+		return $this->hasMany('App\Models\detalleRevision', 'users_id');
+	}
 	/**
 	 * The attributes that are mass assignable.
 	 *

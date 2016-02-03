@@ -4,7 +4,6 @@
 
     <ul class="nav nav-tabs">
           <li role="presentation"><a href="{!! asset('formatolistas')!!}">Nombre Formato</a></li>
-          <li role="presentation" ><a href="{!! asset('datosGenerales')!!}">Datos Generales</a></li>
           <li role="presentation" class="active"><a href="{!! asset('formatoLegalizacions')!!}">Datos Legalizacion</a></li>
         </ul>
         @include('flash::message')

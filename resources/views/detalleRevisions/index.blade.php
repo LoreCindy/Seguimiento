@@ -59,7 +59,7 @@
                 <table class="table table-bordered table-hover">
                     <thead>
       <th><input type="checkbox" id="checkTodos" name='eliminar[]'/>
-      <button  id="btn" class="btn btn-link" type="submit" onclick="return confirm('esta usted seguro que desea eliminar?')"><i class="glyphicon glyphicon-trash"></i> <span class="hidden-xs floatL l5">Eliminar</span></button> 
+      <button  id="btn" class="btn btn-link" type="submit"><i class="glyphicon glyphicon-trash"></i> <span class="hidden-xs floatL l5">Eliminar</span></button> 
       </th>
       <th>Estado</th>
 			<th>Nombre Responsable</th>
@@ -173,6 +173,9 @@
           $(document).ready(function(){
             var array = new Array();
             $('#btn').on( 'click', function() {
+
+                if(confirm('esta usted seguro que desea eliminar?')== true)
+             {
               $(".proyectoEliminar:checked").each(function() {
                 array.push($(this).val());
                });
@@ -185,6 +188,8 @@
                     //$("#resultado").html(response);
                   }
                 });
+
+               }
               });
             });
         </script>

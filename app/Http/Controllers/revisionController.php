@@ -36,14 +36,9 @@ class revisionController extends AppBaseController
 	 */
 	public function index(Request $request)
 	{
-		//$revisions= \DB::table('revisions')->paginate();
-
-		$query = revision::name($request->only('name', 'tipo'))->with('general');
-		$revisions = $query->paginate(6);
-		//dd($revisions>toArray()[2]['general']);
-		
-
-	
+		$users_id= $request->user()->id;
+		$query= revision::where('users_id','=',$users_id)->name($request->only('name', 'tipo'))->with('general');
+		$revisions = $query->paginate(20);
 		$revisions->setPath('/contratacion/public/revisions');
         $columns = Schema::getColumnListing('$TABLE_NAME$');
         $attributes = array();
@@ -70,14 +65,13 @@ class revisionController extends AppBaseController
 	 *
 	 * @return Response
 	 */
-	public function create()
+	public function create(Request $request)
 	{	
 
-		//$= ['chequeos'=>\DB::table('chequeos')->lists('nombre_supervisor', 'id')];
-		 $formatos= ['formatolista' =>\DB::table('formatolistas')->lists('nombre_formato', 'id')];
+		$users_id= $request->user()->id;
+		$formatos= ['formatolista' =>\DB::table('formatolistas')->lists('nombre_formato', 'id')];
+		$proyectos= proyecto::where('users_id', '=', $users_id)->get();
 		
-		$proyectos= proyecto::all();
-		//$proyectos = ['proyectos' =>\DB::table('proyectos')->lists('nombre_contratatista', 'id')];
 		return view('revisions.create')
 		->with('proyectos',$proyectos)
 		->with($formatos);
@@ -128,11 +122,17 @@ class revisionController extends AppBaseController
 	 */
 	public function store(CreaterevisionRequest $request)
 	{
-        try {
+       try {
        
-       
-		$input = $request->all();
+      	$users_id= $request->user()->id;
+		$nombre = $request->fecha_revision;
+		$proyecto_id=$request->proyecto_id;
+		$formatoLista_id= $request->formatoLista_id;
+		$observaciones= $request->observaciones;
+		$input=['fecha_revision'=>$nombre,'proyecto_id'=>$proyecto_id,'formatoLista_id'=>$formatoLista_id,'observaciones'=>$observaciones,'users_id'=>$users_id];
+		
 		$revision = revision::create($input);
+		
 		$idRevision= $revision->id;
 		//$datosGenerales = $request->get("datosGenerales");
 		$legalizacion = $request->get("legalizacion_id");
@@ -153,7 +153,7 @@ class revisionController extends AppBaseController
 	   	$chequeo= ["legalizacion_id"=>$value,"dac"=>$dacCheck[$key],"revision_id"=>$idRevision,"observaciones"=>$chequeoobservacion[$key]];
 		$chequeos = chequeo::create($chequeo);
 		}
-
+		
 		Flash::message('revision saved successfully.');
 		return redirect(route('revisions.index'));
 			
@@ -161,7 +161,6 @@ class revisionController extends AppBaseController
 			Flash::message('no se ha podido guardar la revision');
 			
 		}
-
 	}
 
 

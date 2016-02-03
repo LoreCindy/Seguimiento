@@ -9,53 +9,29 @@
 			<div class="well">
             
                <form class="form-horizontal" role="form" method="POST" action="{{url('consultar')}}">
+			<input type="hidden" name="_token" value="{{ csrf_token() }}">
 			<div class="alert alert-error" id="alert" style="display: none;">
 				<strong>la fecha de finalizacion no puede ser inferior a la fecha inicio</strong>
 			  </div>
 			<table class="table">
 				<thead>
 					<tr>
-						<p>
-						Desde:
-						<input type="text" id="from" name="from" />
-						Hasta:
-						<input type="text" id="to" name="to" />
-						</p>
-
-						
-					 
+					
+						<th>Desde:{!! Form::input('date', 'fecha_inicio', date('Y-m-d'), ['class' => 'form-control']) !!}</th>
+						<th>Hasta:{!! Form::input('date', 'fecha_fin', date('Y-m-d'), ['class' => 'form-control']) !!}</th>
+						<th>{!! Form::submit('Consultar', ['class' => 'btn btn-primary']) !!}</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
 						
-						<td> {!! Form::submit('Consultar', ['class' => 'btn btn-primary']) !!}</td>
 					</tr>
 				</tbody>
 			</table>
-         
+			
             </form>
              </div>
- <script>
-	$(function () {
-	$("#from").datepicker({
-	onClose: function (selectedDate) {
-	$("#to").datepicker("option", "minDate", selectedDate);
-	}
-	});
-	$("#to").datepicker({
-	onClose: function (selectedDate) {
-	$("#from").datepicker("option", "maxDate", selectedDate);
-	}
-	});
-	});
-	</script>
-
-
  
-
-
-
 
 
 @endsection

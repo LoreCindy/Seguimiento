@@ -3,6 +3,7 @@
 use App\Http\Requests;
 use App\Http\Requests\CreatedetalleRevisionRequest;
 use App\Models\detalleRevision;
+use App\Models\revision;
 use Illuminate\Http\Request;
 use Validator,Input,redirect;
 use Mitul\Controller\AppBaseController;
@@ -30,7 +31,8 @@ class detalleRevisionController extends AppBaseController
 	 */
 	public function index(Request $request)
 	{
-		$query = detalleRevision::name($request->only('name', 'tipo', 'nombre_revision'));
+		$users_id= $request->user()->id;
+		$query = detalleRevision::where('users_id','=',$users_id)->name($request->only('name', 'tipo', 'nombre_revision'));
 		$detalleRevisions = $query->paginate(5);
 		$detalleRevisions->setPath('/contratacion/public/detalleRevisions');
         $columns = Schema::getColumnListing('$TABLE_NAME$');
@@ -58,10 +60,12 @@ class detalleRevisionController extends AppBaseController
 	 *
 	 * @return Response
 	 */
-	public function create()
+	public function create(Request $request)
 	{
-		 $data = ['revision' =>\DB::table('revisions')->lists('fecha_revision', 'id')];
-		return view('detalleRevisions.create', $data);
+		$users_id=$request->user()->id;
+		$revisiones= revision::where('users_id','=',$users_id)->lists('fecha_revision', 'id');
+		return view('detalleRevisions.create')
+				->with('revision',$revisiones);
 	}
 
 	/**

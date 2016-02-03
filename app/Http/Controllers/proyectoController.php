@@ -36,16 +36,13 @@ class proyectoController extends AppBaseController
 	public function index(Request $request)
 	{
 		
-		$query = proyecto::name($request->only('name', 'tipo'));
-		//$users_id= $request->user()->id;
-		//$model = proyecto::where('users_id', '=', $users_id);
-		//dd($model);
-		$proyectos = $query->paginate(5);
+		$users_id= $request->user()->id;
+		$query = proyecto::where('users_id', '=', $users_id)->name($request->only('name', 'tipo'));
+		$proyectos = $query->paginate(20);
 		$proyectos->setPath('/contratacion/public/proyectos');
 		
         $columns = Schema::getColumnListing('$TABLE_NAME$');
         $attributes = array();
-
         foreach($columns as $attribute){
             if($request[$attribute] == true)
             {

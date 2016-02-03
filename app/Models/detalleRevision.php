@@ -11,6 +11,11 @@ class detalleRevision extends Model
     
 	public $timestamps = true;
 
+	public function  user()
+	{
+		return $this->belongsTo('App\User', 'users_id');
+	}
+
 	public function  revision()
 		{
 			return $this->belongsTo('App\Models\revision', 'revision_id');
@@ -26,7 +31,8 @@ public function scopeName($query, $name)
 	public $fillable = [
 	    "estado",
 		"nombre_responsable",
-		"revision_id"
+		"revision_id",
+		"users_id"
 	];
 
 	public static $rules = [

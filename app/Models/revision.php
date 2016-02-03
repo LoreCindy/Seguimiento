@@ -11,7 +11,10 @@ class revision extends Model
     
 	public $timestamps = true;
 
-
+	public function  user()
+	{
+		return $this->belongsTo('App\User', 'users_id');
+	}
 	public function  detalle()
 	{
 		return $this->hasMany('App\Models\detalleRevision', 'revision_id');
@@ -63,11 +66,11 @@ class revision extends Model
 
 
 	public $fillable = [
-		
 	    "fecha_revision",
 		"proyecto_id",
 		"formatoLista_id",
 		"observaciones",
+		"users_id"
 		//"datosGenerales_id",
 		//"chequeo_id"
 	];
