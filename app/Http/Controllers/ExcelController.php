@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\proyecto;
 use App\Models\formatolista;
+use App\Models\FormatoLegalizacion;
 use App\Models\chequeo;
 use App\Models\revision;
 use App\Models\detalleRevision;
@@ -25,14 +26,14 @@ class ExcelController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function index()
+	public function index(Request $request)
 	{
-		Excel::create('Proyectos', function($excel) {
+		$user_id= $request->user()->id;
+		Excel::create('Contratos', function($excel) use ($user_id){
  			
-            $excel->sheet('Proyectos', function($sheet) {
+            $excel->sheet('Contratos', function($sheet) use ($user_id) {
  				
-                $proyectos = proyecto::all();
- 				
+                $proyectos = proyecto::where('users_id','=',$user_id)->get();
                 $sheet->fromArray($proyectos);
  				
             });
@@ -48,53 +49,44 @@ class ExcelController extends Controller {
 	 */
 	public function formato()
 	{
+
 		Excel::create('formatos', function($excel) {
  
             $excel->sheet('formatos', function($sheet) {
  
                 $formatos = formatolista::all();
- 
-                $sheet->fromArray($formatos);
+                foreach ($formatos as $key => $formato) {
+                	$formatosLegalizacion= FormatoLegalizacion::where('formatolista_id','=',$formato->id)->get();
+                }
+
+                $sheet->fromArray($formatosLegalizacion);
  
             });
 
         })->download('xls');
 	}
 
-	/**
-	 * Display the specified resource
-	 * @return Response
-	 */
-	public function chequeos()
-	{
-		Excel::create('chequeos', function($excel) {
- 
-            $excel->sheet('chequeos', function($sheet) {
- 
-                $chequeos = chequeo::all();
- 
-                $sheet->fromArray($chequeos);
- 
-            });
-
-        })->download('xls');
-		
-	}
-
+	
 	/**
 	 * Show the form for editing the specified resource.
 	 *
 	 * @return Response
 	 */
-	public function revision()
+	public function revision(Request $request)
 	{
-	Excel::create('revisiones', function($excel) {
+
+		$user_id= $request->user()->id;
+	Excel::create('revisiones', function($excel) use($user_id){
  
-            $excel->sheet('revisiones', function($sheet) {
- 
-                $revisiones = revision::all();
- 
-                $sheet->fromArray($revisiones);
+            $excel->sheet('revisiones', function($sheet) use($user_id) {
+ 			
+            $revisiones= revision::join('proyectos', 'revisions.proyecto_id', '=', 'proyectos.id')
+            ->join('formatolistas','revisions.formatoLista_id','=','formatolistas.id')
+            ->select('revisions.fecha_revision','proyectos.nombre_contratatista','proyectos.numero_contrato','formatolistas.nombre_formato','revisions.observaciones')
+            ->where('revisions.users_id','=',$user_id)
+        	->get();
+       
+			$sheet->fromArray($revisiones);
  
             });
 
@@ -106,15 +98,22 @@ class ExcelController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function detalle()
+	public function detalle(Request $request)
 	{
-		Excel::create('detalle', function($excel) {
+
+		$user_id= $request->user()->id;
+		Excel::create('detalle', function($excel) use ($user_id){
  
-            $excel->sheet('detalle', function($sheet) {
+            $excel->sheet('detalle', function($sheet) use($user_id){
  
-                $detalles = detalleRevision::all();
+            $detalleRevision= detalleRevision::join('revisions', 'detalle_revisions.revision_id', '=', 'revisions.id')
+            ->join('proyectos','revisions.proyecto_id','=','proyectos.id')
+            ->select('detalle_revisions.estado','detalle_revisions.nombre_responsable','proyectos.nombre_contratatista','proyectos.numero_contrato','revisions.fecha_revision')
+            ->where('detalle_revisions.users_id','=',$user_id)
+        	->get();
+       
+			$sheet->fromArray($detalleRevision);
  
-                $sheet->fromArray($detalles);
  
             });
 

@@ -7,7 +7,7 @@
 <script src="{{asset('js/seleccionarVariosDelete.js')}}"></script>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
          <div class="row">
-         <a class="btn btn-primary pull-left" style="margin-top: 10px" href="{!! route('proyectos.create') !!}"><i class="glyphicon glyphicon-plus"></i> &nbsp; Agregar Proyecto</a>
+         <a class="btn btn-primary pull-left" style="margin-top: 10px" href="{!! route('proyectos.create') !!}"><i class="glyphicon glyphicon-plus"></i> &nbsp; Agregar Contrato</a>
          <a class="btn btn-primary pull-left"  href="proyectoExcel" style="margin-top:10px; margin-left:5px"data-url="">
         <i class="glyphicon glyphicon-download-alt"></i>
                <span class="hidden-xs floatL l5">Exportar</span>
@@ -16,7 +16,7 @@
            {!! Form::open(['route' => 'proyectos.index', 'method' => 'GET', 'class' => 'navbar-form navbar-right', 'role' => 'search']) !!}
                 <div class="form-group">
                     {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'busqueda']) !!}
-                    {!! Form::select('tipo', ['0'=>'seleccione campo','nombre_contratatista' => 'nombre contratatista','nombre_modalidad'=>'nombre modalidad','fecha_radicacion'=>'fecha radicacion', 'nombre_tipoContratacion'=>'tipo Contratacion'], null, ['class' => 'form-control'])!!}
+                    {!! Form::select('tipo', ['0'=>'seleccione campo','nombre_contratatista' => 'nombre contratista','nombre_modalidad'=>'nombre modalidad','fecha_radicacion'=>'fecha radicacion', 'nombre_tipoContratacion'=>'tipo contratacion','dependencia_origen'=>'dependencia origen','numero_contrato'=>'numero contrato'], null, ['class' => 'form-control'])!!}
                 </div>
                 <button type="submit" class="btn search-button t5 btn-primary"><i class="glyphicon glyphicon-search"></i></button>
             {!! Form::close() !!}

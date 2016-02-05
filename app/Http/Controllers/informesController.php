@@ -55,10 +55,10 @@ class informesController extends Controller {
             ->whereBetween('proyectos.fecha_radicacion',array($fecha_inicio,$fecha_fin))
             ->groupby('detalle_revisions.revision_id')
             ->count();
-
+            
             $nombre_informe='Informe_Desde_'.$fecha_inicio.'_Hasta_'.$fecha_fin;
             $contratos = array(
-    		array('Proyectos Aprobados', 'Proyectos Devueltos'),
+    		array('Contratos Aprobados', 'Contratos Devueltos'),
     		array($aprobado, $devuelto) );
                
                Excel::create($nombre_informe, function($excel) use($contratos){

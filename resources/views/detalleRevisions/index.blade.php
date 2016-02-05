@@ -64,6 +64,7 @@
       <th>Estado</th>
 			<th>Nombre Responsable</th>
 		  <th>Fecha Revisión</th>
+      <th>Numero Contrato</th>
 			<th width="50px">Opciones</th>
                     </thead>
                     <tbody>
@@ -86,6 +87,7 @@
 
 					<td>{!! $detalleRevision->nombre_responsable !!}</td>
 					<td>{!! $detalleRevision->revision->fecha_revision !!}</td>
+            <td>{!! $detalleRevision->revision->proyecto->numero_contrato !!}</td>
 					
                             <td>
                                 <a href="{!! route('detalleRevisions.edit', [$detalleRevision->id]) !!}"><i class="glyphicon glyphicon-edit"></i></a>

@@ -79,7 +79,7 @@ class proyectoController extends AppBaseController
 	{
         $input = $request->all();
 		$proyecto = proyecto::create($input);
-		Flash::message('proyecto saved successfully.');
+		Flash::message('el contrato ha sido guardado exitosamente.');
 		return redirect(route('proyectos.index'));
 	}
 
@@ -96,7 +96,7 @@ class proyectoController extends AppBaseController
 
 		if(empty($proyecto))
 		{
-			Flash::error('proyecto not found');
+			Flash::error('contrato no encontrado');
 			return redirect(route('proyectos.index'));
 		}
 		
@@ -111,12 +111,11 @@ class proyectoController extends AppBaseController
 	 */
 	public function edit($id)
 	{
-		
 		$proyecto = proyecto::find($id);
 
 		if(empty($proyecto))
 		{
-			Flash::error('proyecto not found');
+			Flash::error('contrato no encontrado');
 			return redirect(route('proyectos.index'));
 		}
 
@@ -138,14 +137,14 @@ class proyectoController extends AppBaseController
 
 		if(empty($proyecto))
 		{
-			Flash::error('proyecto not found');
+			Flash::error('contrato no encontrado');
 			return redirect(route('proyectos.index'));
 		}
 
 		$proyecto->fill($request->all());
 		$proyecto->save();
 
-		Flash::message('proyecto updated successfully.');
+		Flash::message('el contrato ha sido actualizado exitosamente');
 
 		return redirect(route('proyectos.index'));
 	}
@@ -173,7 +172,7 @@ class proyectoController extends AppBaseController
 
 		$proyecto->delete();
 	}
-		Flash::message('proyecto deleted successfully.');
+		Flash::message('los contratos han sido eliminados exitosamente.');
 		return redirect(route('proyectos.index'));	
 	}
 	
@@ -185,13 +184,13 @@ class proyectoController extends AppBaseController
 
 		if(empty($proyecto))
 		{
-			Flash::error('proyecto not found');
+			Flash::error('contrato no encontrado');
 			return redirect(route('proyectos.index'));
 		}
 
 		$proyecto->delete();
 
-		Flash::message('proyecto deleted successfully.');
+		Flash::message('el contrato ha sido eliminado exitosamente.');
 
 		return redirect(route('proyectos.index'));
 	}

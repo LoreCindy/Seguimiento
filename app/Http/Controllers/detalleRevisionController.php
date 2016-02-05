@@ -77,8 +77,12 @@ class detalleRevisionController extends AppBaseController
 	 */
 	public function store(CreatedetalleRevisionRequest $request)
 	{
-        $input = $request->all();
-
+        
+      	$user_id=$request->user()->id;
+      	$estado= $request->get('estado');
+      	$nombreR=$request->get('nombre_responsable');
+      	$revision=$request->get('revision_id');
+      	$input=['estado'=>$estado,'nombre_responsable'=>$nombreR,'revision_id'=>$revision,'users_id'=>$user_id];
 		$detalleRevision = detalleRevision::create($input);
 
 		Flash::message('detalleRevision saved successfully.');
@@ -115,7 +119,7 @@ class detalleRevisionController extends AppBaseController
 	public function edit($id)
 	{
 		$detalleRevision = detalleRevision::find($id);
- 		$data = ['revision' =>\DB::table('revisions')->lists('nombre_revision', 'id')];
+ 		$data = ['revision' =>\DB::table('revisions')->lists('fecha_revision', 'id')];
 		if(empty($detalleRevision))
 		{
 			Flash::error('detalleRevision not found');

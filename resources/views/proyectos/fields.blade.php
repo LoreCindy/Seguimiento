@@ -1,11 +1,7 @@
 <!--- Fecha Radicacion Field --->
 <div class="form-group col-sm-6 col-lg-4">
     {!! Form::label('fecha_radicacion', 'Fecha Radicacion:') !!}
-<<<<<<< HEAD
     {!! Form::input('date', 'fecha_radicacion',null, ['class' => 'form-control', 'date'=>'Y-m-d']) !!}
-=======
-    {!! Form::input('date', 'fecha_radicacion', date('Y-m-d'), ['class' => 'form-control']) !!}
->>>>>>> origin/master
 </div>
 
 <!--- Numero Contrato Field --->
