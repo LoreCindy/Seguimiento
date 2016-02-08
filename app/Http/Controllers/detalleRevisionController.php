@@ -63,10 +63,13 @@ class detalleRevisionController extends AppBaseController
 	public function create(Request $request)
 	{
 		$users_id=$request->user()->id;
+		$proyecto=$request->get('nombre_contratatista');
 		$revisiones= revision::where('users_id','=',$users_id)->lists('fecha_revision', 'id');
+		
 		return view('detalleRevisions.create')
-				->with('revision',$revisiones);
-	}
+				->with('revision',$revisiones)
+				;
+			}
 
 	/**
 	 * Store a newly created detalleRevision in storage.

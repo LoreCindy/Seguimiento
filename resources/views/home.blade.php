@@ -17,21 +17,24 @@
      
       <!-- Wrapper for slides -->
       <div class="carousel-inner" role="listbox">
+
+        <div class="item">
+          <img src="images/XL.jpg" alt="Flo" width="100" height="150">
+        </div>
+
         <div class="item active">
-          <img src="http://www.abogama.com/wp-content/uploads/2015/01/contrato.jpg" alt="Chania" width="100" height="150">
+          <img src="images/contratos.jpg" alt="Flower" width="100" height="150">
         </div>
 
         <div class="item">
-          <img src="http://www.spicegourmet.com.br/site/media/k2/items/cache/245effadf41c6129f4fe7accc564ef86_XL.jpg" alt="Chania" width="100" height="150">
+          <img src="images/3.jpg" alt="Chania" width="100" height="150">
+        </div>
+
+        <div class="item">
+          <img src="images/contrato.jpg" alt="Ch" width="100" height="150">
         </div>
       
-        <div class="item">
-          <img src="http://www.contratosdeformacionyaprendizaje.es/images/contrato.jpg" alt="Flower" width="100" height="150">
-        </div>
-
-        <div class="item">
-          <img src="http://diarioresponsable.com/images/stories/contrato.jpg" alt="Flower" width="100" height="150">
-        </div>
+        
       </div>
 
       <!-- Left and right controls -->
