@@ -14,10 +14,12 @@
 <!--- Revision Id Field --->
 <div class="form-group col-sm-6 col-lg-4">
     {!! Form::label('revision_id', 'Revision:') !!}
-    {!! Form::select('revision_id', $revision,null, ['class' => 'selectpicker show-tick','data-live-search'=>'true', 'data-size'=>'10', 'data-header'=>'Seleccione:']) !!}
+    <select name= 'revision_id' class='selectpicker show-tick', data-live-search='true', data-size='10', data-header='Seleccione:'>
+     @foreach($revision as $key=> $revision)
+     <option value='{!! $revision->id!!}'>{!! $revision->nombre_contratatista !!}</option>
+      @endforeach
+    </select>
 </div>
-
-
 
 
 <!--- Submit Field --->

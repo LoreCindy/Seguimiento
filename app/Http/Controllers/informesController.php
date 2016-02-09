@@ -42,10 +42,9 @@ class informesController extends Controller {
             ->where('detalle_revisions.users_id','=',$users_id)
             ->where('detalle_revisions.estado','LIKE','aprobado')
             ->whereBetween('proyectos.fecha_radicacion',array($fecha_inicio,$fecha_fin))
-           ->groupby('detalle_revisions.revision_id')
             ->count();
             
-
+            
        	$devuelto= \DB::table('detalle_revisions')
             ->join('revisions', 'detalle_revisions.revision_id', '=', 'revisions.id')
             ->join('proyectos', 'revisions.proyecto_id', '=', 'proyectos.id')
@@ -53,7 +52,6 @@ class informesController extends Controller {
             ->where('detalle_revisions.users_id','=',$users_id)
             ->where('detalle_revisions.estado','LIKE','devolucion')
             ->whereBetween('proyectos.fecha_radicacion',array($fecha_inicio,$fecha_fin))
-            ->groupby('detalle_revisions.revision_id')
             ->count();
             
             $nombre_informe='Informe_Desde_'.$fecha_inicio.'_Hasta_'.$fecha_fin;

@@ -187,7 +187,6 @@
                   data:{data:array},
                   success: function() {
                   location.reload();
-                    //$("#resultado").html(response);
                   }
                 });
 

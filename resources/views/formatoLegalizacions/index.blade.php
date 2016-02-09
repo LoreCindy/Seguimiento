@@ -9,18 +9,20 @@
         @include('flash::message')
 
         <div class="row">
+        <div class="form-group col-sm-2 col-lg-2">
             <a class="btn btn-primary pull-left" style="margin-top: 10px"href="{!! route('formatoLegalizacions.create') !!}"><i class="glyphicon glyphicon-plus"></i> &nbsp;Agregar Legalización</a>
-             {!! Form::open(['route' => 'formatoLegalizacions.index', 'method' => 'GET', 'class' => 'navbar-form navbar-right', 'role' => 'search']) !!}
+           </div>
+          {!! Form::open(['route' => 'formatoLegalizacions.index', 'method' => 'GET', 'class' => 'navbar-form navbar-right', 'role' => 'search']) !!}
                 <div class="form-group">
-                    {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'busqueda']) !!}
-                    {!! Form::select('tipo', ['0'=>'seleccione campo','documentos_legalizacion' => 'Nombre Documento'], null, ['class' => 'form-control'])!!}
+                {!! Form::select('name',$formatolista, null, ['class' => 'selectpicker show-tick','data-live-search'=>'true', 'data-size'=>'10', 'data-header'=>'Select a condiment']) !!}
                  </div>
                 <button type="submit" class="btn search-button t5 btn-primary"><i class="glyphicon glyphicon-search"></i></button>
+            
             {!! Form::close() !!}
         </div>
         <div class="row">
             @if($formatoLegalizacions->isEmpty())
-                <div class="well text-center">No FormatoLegalizacions found.</div>
+                <div class="well text-center">Documentos Legalizacion no encontrados</div>
             @else
             {!! Form::open(['route' => 'deleteFormatoLegalizacion', 'method' => 'get']) !!}
                 <table class="table table-bordered table-hover">
@@ -46,12 +48,13 @@
                         </tr>
                     @endforeach
                     <td> 
-                     {!! $formatoLegalizacions->appends(Request::only(['name','tipo']))->render()!!}
+                     {!! $formatoLegalizacions->appends(Request::only(['name']))->render()!!}
                     </tbody>
                 </table>
             @endif
         </div>
 
            <script src="{{asset('js/seleccionarVariosDelete.js')}}"></script>
+          
 
 @endsection

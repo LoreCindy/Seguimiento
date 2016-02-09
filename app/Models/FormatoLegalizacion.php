@@ -29,8 +29,8 @@ class FormatoLegalizacion extends Model
 	public function scopeName($query, $name)
     {
     
-	if(trim($name['name'])!= "" && trim($name['tipo'])!= "" && $name['tipo']!='0')
-   	$query->where($name['tipo'],"LIKE",$name['name']);
+	if(trim($name['name'])!= "") 
+   	$query->where('formatolista_id',"LIKE",$name['name']);
     }
 
 	public $fillable = [

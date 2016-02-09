@@ -30,9 +30,6 @@ class formatolistaController extends AppBaseController
 	 */
 	public function index(Request $request)
 	{
-		//$formatolista= \DB::table('formatolistas')->paginate(5);
-		//$query = formatolista::query();
-
 		$query = formatolista::name($request->only('name', 'tipo'));
 		$formatolistas = $query->paginate(8);
 		$formatolistas->setPath('/contratacion/public/formatolistas');
@@ -49,8 +46,6 @@ class formatolistaController extends AppBaseController
                 $attributes[$attribute] =  null;
             }
         };
-
-       // $formatolistas = $query->get();
 
         return view('formatolistas.index')
             ->with('formatolistas', $formatolistas)
@@ -80,7 +75,7 @@ class formatolistaController extends AppBaseController
 
 		$formatolista = formatolista::create($input);
 
-		Flash::message('formatolista saved successfully.');
+		Flash::message('formato lista guardado exitosamente.');
 
 		return redirect(route('formatolistas.index'));
 	}
@@ -98,7 +93,7 @@ class formatolistaController extends AppBaseController
 
 		if(empty($formatolista))
 		{
-			Flash::error('formatolista not found');
+			Flash::error('formato lista no se ha encontrado');
 			return redirect(route('formatolistas.index'));
 		}
 
@@ -117,7 +112,7 @@ class formatolistaController extends AppBaseController
 
 		if(empty($formatolista))
 		{
-			Flash::error('formatolista not found');
+			Flash::error('formato lista no se ha encontrado');
 			return redirect(route('formatolistas.index'));
 		}
 
@@ -134,19 +129,18 @@ class formatolistaController extends AppBaseController
 	 */
 	public function update($id, CreateformatolistaRequest $request)
 	{
-		/** @var formatolista $formatolista */
 		$formatolista = formatolista::find($id);
 
 		if(empty($formatolista))
 		{
-			Flash::error('formatolista not found');
+			Flash::error('formato lista no se ha encontrado');
 			return redirect(route('formatolistas.index'));
 		}
 
 		$formatolista->fill($request->all());
 		$formatolista->save();
 
-		Flash::message('formatolista updated successfully.');
+		Flash::message('formato lista se ha actualizado exitosamente.');
 
 		return redirect(route('formatolistas.index'));
 	}
@@ -165,13 +159,13 @@ class formatolistaController extends AppBaseController
 
 		if(empty($formatolista))
 		{
-			Flash::error('formatolista not found');
+			Flash::error('formato lista no se ha encontrado.');
 			return redirect(route('formatolistas.index'));
 		}
 
 		$formatolista->delete();
 
-		Flash::message('formatolista deleted successfully.');
+		Flash::message('formato lista se ha eliminado exitosamente.');
 
 		return redirect(route('formatolistas.index'));
 	}
@@ -192,7 +186,7 @@ class formatolistaController extends AppBaseController
 
 		$formato->delete();
 	}
-		Flash::message('formato eliminado exitosamente');
+		Flash::message('formato lista eliminado exitosamente');
 		return redirect(route('formatolistas.index'));	
 	}
 }

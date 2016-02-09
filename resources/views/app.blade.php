@@ -49,7 +49,6 @@
 				<ul class="nav navbar-nav">
 					<li><a href="{!! asset('app')!!}"><i class="glyphicon glyphicon-home"></i></a></li>
 					<li><a href="{!! asset('proyectos')!!}">Contratos</a></li>
-					<li><a  href="{!! asset('formatolistas')!!}">Formato</a></li>
 					<li><a  href="{!! asset ('revisions')!!}">Revisiones</a></li>
 					<li><a  href="{!! asset('detalleRevisions')!!}">Detalle revisión</a></li>
 					<li><a  href="{!! asset('informes')!!}">Informes</a></li>
@@ -63,6 +62,7 @@
 							<a  href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ Auth::user()->name }} <span class="caret"></span></a>
 							<ul class="dropdown-menu" role="menu">
 								<li><a href="{{url('user')}}">perfil</a></li>
+								<li><a  href="{!! asset('formatolistas')!!}">Formatos</a></li>
 								<li><a href="{{url('logout')}}">cerrar sesion</a></li>
 							</ul>
 						</li>

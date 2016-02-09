@@ -5,7 +5,6 @@ use App\Http\Requests\CreaterevisionRequest;
 use App\Models\revision;
 use App\Models\chequeo;
 use App\Models\proyecto;
-use App\Models\chequeoDatos;
 use App\Models\formatolista;
 use App\Models\FormatoLegalizacion;
 use Illuminate\Http\Request;
@@ -37,7 +36,7 @@ class revisionController extends AppBaseController
 	public function index(Request $request)
 	{
 		$users_id= $request->user()->id;
-		$query= revision::where('users_id','=',$users_id)->name($request->only('name', 'tipo'))->with('general');
+		$query= revision::where('users_id','=',$users_id)->name($request->only('name', 'tipo'));
 		$revisions = $query->paginate(20);
 		$revisions->setPath('/contratacion/public/revisions');
         $columns = Schema::getColumnListing('$TABLE_NAME$');
@@ -55,7 +54,6 @@ class revisionController extends AppBaseController
         };
 
         return view('revisions.index')
-           // ->with('revisions', $revisions)
             ->with('attributes', $attributes)
             ->with('revisions', $revisions);
 	}
@@ -67,7 +65,6 @@ class revisionController extends AppBaseController
 	 */
 	public function create(Request $request)
 	{	
-
 		$users_id= $request->user()->id;
 		$formatos= ['formatolista' =>\DB::table('formatolistas')->lists('nombre_formato', 'id')];
 		$proyectos= proyecto::where('users_id', '=', $users_id)->get();
@@ -76,41 +73,22 @@ class revisionController extends AppBaseController
 		->with('proyectos',$proyectos)
 		->with($formatos);
 	}
-
-	// funcion para regresar la información de las ciudades que pertenecen al estado selecionado
-    /*public function listaDatos()
-    {	
-    	// Recibimos ID del estado selecionado
-        $id = Request::input('id');
-        // buscamos las ciudades que pertenecen al estado
-        $datosgenerales = datos_generales::where('formatolista_id',$id)->get();
-	//  Regresamos las ciudades obtenidas de la consulta
-        return Response::json($datosgenerales);
-    }*/
-// funcion para el combo dependiente  de formato lista y datos generales
-    public function formato_lista(Request $request)
+	
+   	public function formato_lista(Request $request)
     {
 	   $input  =  $request->get( 'option' );
-
 	   $formatolista  =  formatolista::find($input);
-	   //dd($formatolista);
-
 	   $datosGenerales =  $formatolista->datos(); 
-	   
 	   return  Response::make( $datosGenerales->get([ 'id' , 'nombre_dato' ]));
 	   
 
     }
-// funcion para el combo dependiente  de formato lista y formato legalizacion
     public function formato_legalizacion(Request $request)
     {
      	$input  =  $request->get( 'option' );
-
      	$formatolista=  formatolista::find($input);
-	   //dd($formatolista);
-	   $FormatoLegalizacion =  $formatolista->legalizacion(); 
-	 
-	   return  Response::make(  $FormatoLegalizacion->get([ 'id' , 'documentos_legalizacion' ])); 
+	    $FormatoLegalizacion =  $formatolista->legalizacion(); 
+	    return  Response::make(  $FormatoLegalizacion->get([ 'id' , 'documentos_legalizacion' ])); 
     }
 
 	/**
@@ -132,31 +110,26 @@ class revisionController extends AppBaseController
 		$input=['fecha_revision'=>$nombre,'proyecto_id'=>$proyecto_id,'formatoLista_id'=>$formatoLista_id,'observaciones'=>$observaciones,'users_id'=>$users_id];
 		
 		$revision = revision::create($input);
-		
 		$idRevision= $revision->id;
-		//$datosGenerales = $request->get("datosGenerales");
 		$legalizacion = $request->get("legalizacion_id");
-		//$nombreDatos = $request->get("nombre_datosGenerales");
 		$dacCheck= $request->get('dac');
-
-		/*foreach ($datosGenerales as $key => $dato) {
-			$revision->general()->attach($dato);
-			$chequeodato= ["nombreChequeoDatos"=>$nombreDatos[$key],"datos_generales_id"=>$dato,"revision_id"=>$idRevision];
-			$chequeodatos = chequeoDatos::create($chequeodato);
-		}*/
-
-	  	//$chequeosupervisor=$request->get("nombre_supervisor");
 		$chequeoobservacion= $request->get("observacion");
 
+		if(empty($legalizacion))
+		{
+			return redirect(route('revisions.create'))->with('message','debe seleccionar un formato para realizar la revision del contrato');
+		}
+		else{ 
 		foreach ($legalizacion as $key => $value) {
 		$revision->legalizacion()->attach($value);
 	   	$chequeo= ["legalizacion_id"=>$value,"dac"=>$dacCheck[$key],"revision_id"=>$idRevision,"observaciones"=>$chequeoobservacion[$key]];
 		$chequeos = chequeo::create($chequeo);
 		}
 		
-		Flash::message('revision saved successfully.');
+		Flash::message('La revision del contrato se ha guardado exitosamente.');
 		return redirect(route('revisions.index'));
 			
+			}
 		} catch (Exception $e) {
 			Flash::message('no se ha podido guardar la revision');
 			
@@ -177,7 +150,7 @@ class revisionController extends AppBaseController
 
 		if(empty($revision))
 		{
-			Flash::error('revision not found');
+			Flash::error('revision no encontrada.');
 			return redirect(route('revisions.index'));
 		}
 
@@ -192,29 +165,28 @@ class revisionController extends AppBaseController
 	 */
 	public function edit($id)
 	{
-		//$query = revision->consulta($id);
 		$revision = revision::find($id);
 
 		$legalizaciones =$revision->chequeo;
 		$legalizacionFormato=$revision->legalizacion;
-		$ejemplo=$revision->formato->legalizacion;
-		//dd($ejemplo);
-		$datosGenerales=$revision->chequeoDatos;
-		$datosGeneralesformato=$revision->general;
+		$formatolista=$revision->formato->lists('nombre_formato', 'id');
+		$proyecto=$revision->proyecto->where('users_id','=',$revision->users_id)->lists('nombre_contratatista','id');
+		//$datosGenerales=$revision->chequeoDatos;
+		//$datosGeneralesformato=$revision->general;
 
-		$proyectos = ['proyectos' =>\DB::table('proyectos')->lists( 'nombre_contratatista', 'id')];
- 		$formatolista= ['formatolista' =>\DB::table('formatolistas')->lists('nombre_formato', 'id')];
+		//$proyectos = ['proyectos' =>\DB::table('proyectos')->lists( 'nombre_contratatista', 'id')];
+ 		//$formatolista= ['formatolista' =>\DB::table('formatolistas')->lists('nombre_formato', 'id')];
 		if(empty($revision))
 		{
-			Flash::error('revision not found');
+			Flash::error('revision no encontrada');
 			return redirect(route('revisions.index'));
 		}
 
 		return view('revisions.edit')->with('revision', $revision)
-		->with($proyectos)
-		->with($formatolista)
-		->with('datosGeneralesFormato',$datosGeneralesformato)
-		->with('datosGenerales',$datosGenerales)
+		->with('proyecto',$proyecto)
+		->with('formatolista',$formatolista)
+		//->with('datosGeneralesFormato',$datosGeneralesformato)
+		//->with('datosGenerales',$datosGenerales)
 		->with('legalizaciones',$legalizaciones)
 		->with('legalizacionesFormato',$legalizacionFormato);
        
@@ -231,60 +203,35 @@ class revisionController extends AppBaseController
 	 */
 	public function update($id, Request $request)
 	{
-		/** @var revision $revision */
 		$revision = revision::find($id);
-		//dd($revision);
 		$idChequeo= $request->get('id');
-
 		$buscarChequeo= chequeo::find($idChequeo);
-	
 		$chequeos = $request->only('observacion','dac');
-		
-		//$idDatos= $request->get('id_datos');
-
-		//$buscarDatos= chequeoDatos::find($idDatos);
-		//$datos = $request->only('nombreChequeoDatos');
 		
 		if(empty($revision))
 		{
-			Flash::error('revision not found');
+			Flash::error('revision no encontrada');
 			return redirect(route('revisions.index'));
 		}
-		$fecha=revisions::get('fecha_revision')->format(Y-m-d);
-
+	
 		$idM= $request->get('fecha_revision');
 		$proyectoId= $request->get('proyecto_id');
 		$fomatoId= $request->get('formatoLista_id');
 		$observacions= $request->get('observaciones');
-
-		 $datos= ['fecha_revision'=>$idM, 'proyecto_id'=>$proyectoId,'formatoLista_id'=>$fomatoId, 'observaciones'=>$observacions];
+		$datos= ['fecha_revision'=>$idM, 'proyecto_id'=>$proyectoId,'formatoLista_id'=>$fomatoId, 'observaciones'=>$observacions];
 
 		$revision->fill($datos);
 		$revision->save();
 		foreach ($buscarChequeo as $key => $chequeo) {
-
 			$observacion=$chequeos['observacion'][$key];
-			
 			$dac=$chequeos['dac'][$key];
 			$nombre_supervisor=['observaciones'=>$observacion ,'dac'=>$dac];
-			
 			$chequeo->fill($nombre_supervisor);
 			$chequeo->save();
 	
 		}
 
-		/*foreach($buscarDatos as $key => $dato) {
-
-			$nombreChequeo=$datos['nombreChequeoDatos'][$key];
-		
-			$nombreChequeoDatos=['nombreChequeoDatos'=>$nombreChequeo];
-		
-			$dato->fill($nombreChequeoDatos);
-			$dato->save();
-	
-		}*/
-
-		Flash::message('revision updated successfully.');
+		Flash::message('revision se ha actualizado exitosamente.');
 		return redirect(route('revisions.index'));
 	}
 
@@ -297,20 +244,19 @@ class revisionController extends AppBaseController
 	 */
 	public function destroy($id)
 	{
-		/** @var revision $revision */
 		$revision = revision::find($id);
 		$datos=$revision->general()->lists('id');
 		
 		if(empty($revision))
 		{
-			Flash::error('revision not found');
+			Flash::error('revision no encontrada');
 			return redirect(route('revisions.index'));
 		}
 
 		$revision->general()->detach($datos);
 		$revision->delete();
 
-		Flash::message('revision deleted successfully.');
+		Flash::message('revision eliminada exitosamente.');
 
 		return redirect(route('revisions.index'));
 	}
@@ -321,7 +267,7 @@ class revisionController extends AppBaseController
 	
 		foreach ($id_revisions as $key => $id_revision) {
 			$revision = revision::find($id_revision);
-			$datos=$revision->general()->lists('id');
+			
 
 		if(empty($revision))
 		{
@@ -329,10 +275,10 @@ class revisionController extends AppBaseController
 			return redirect(route('revisions.index'));
 		}
 
-		$revision->general()->detach($datos);
+		
 		$revision->delete();
 	}
-		Flash::message('proyecto deleted successfully.');
+		Flash::message('revision eliminada exitosamente.');
 		return redirect(route('revisions.index'));	
 	}
 	

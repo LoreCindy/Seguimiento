@@ -6,7 +6,7 @@
 
 <!--- Proyecto Id Field --->
 <div class="form-group col-sm-6 col-lg-4">
-    {!! Form::label('proyecto_id', 'Nombre Contratista:') !!}
+    {!! Form::label('proyecto_id', 'Contratista:') !!}
 <select class="selectpicker" name='proyecto_id' data-live-search="true" data-size="10"  data-header="Seleccione un proyecto">
        @foreach($proyectos as $key => $proyecto)
         <option value='{!! $proyecto->id !!}' >{!! $proyecto->nombre_contratatista !!}</option>
@@ -23,8 +23,6 @@
 
 <script>
  $(document).ready(function(){
-
-    
 
      $('#nombre_formato').change(function(){
       $.get("{{ url('legal')}}",
@@ -68,7 +66,6 @@
    {!! Form::label('legalizacion', 'Legalización de contratos') !!}
     
     <div class="table-responsive">
-
     <table class="table table-bordered" id="legalizacion">
       <thead>
       <th>Documentos</th>
@@ -81,8 +78,8 @@
       </tr>  
       </tbody>
     </table>
+  </div>
 </div>
-   </div>
 
 
   <!--- Observaciones Field --->

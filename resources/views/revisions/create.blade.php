@@ -5,6 +5,14 @@
 
     @include('common.errors')
 
+     @if (Session::has('message'))
+
+   <div class="alert alert-danger">
+	{{Session::get('message')}}
+	</div>
+
+  @endif
+
     {!! Form::open(['route' => 'revisions.store']) !!}
 
         @include('revisions.fields')

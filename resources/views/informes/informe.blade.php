@@ -7,7 +7,7 @@
 
          
 			<div class="well">
-            
+            <h3>Informe de contratos aprobados y devueltos</h3>
                <form class="form-horizontal" role="form" method="POST" action="{{url('consultar')}}">
 			<input type="hidden" name="_token" value="{{ csrf_token() }}">
 			<div class="alert alert-error" id="alert" style="display: none;">

@@ -31,11 +31,6 @@ class revision extends Model
 	}
 
 
-	public function general()
-	{
-		return $this->belongsToMany('App\Models\datosGenerales');
-	}
-
 	public function  legalizacion()
 	{
 		return $this->belongsToMany('App\Models\FormatoLegalizacion');
@@ -46,10 +41,7 @@ class revision extends Model
 		return $this->hasMany('App\Models\chequeo', 'revision_id');
 	}
 
-	public function  chequeoDatos()
-	{
-		return $this->hasMany('App\Models\chequeoDatos', 'revision_id');
-	}
+
 
 		
 		
@@ -83,6 +75,13 @@ class revision extends Model
 		//"datosGenerales_id" => "required",
 		//"chequeo_id" => "required"
 	];
+
+	public static $errors = [
+            'fecha_revision.required' => 'El campo fecha revision es requerido',
+            'proyecto_id.required' => 'El campo contratista es requerido',
+            'formatoLista_id.required' => 'El campo formato lista es requerido',
+            'observaciones.required' => 'El campo observaciones es requerido',
+        ];
 
 	
 

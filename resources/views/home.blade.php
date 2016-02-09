@@ -17,24 +17,21 @@
      
       <!-- Wrapper for slides -->
       <div class="carousel-inner" role="listbox">
-
-        <div class="item">
-          <img src="images/XL.jpg" alt="Flo" width="100" height="150">
-        </div>
-
         <div class="item active">
-          <img src="images/contratos.jpg" alt="Flower" width="100" height="150">
+          <img src="images/contratos.jpg" alt="contratacion" width="100" height="150">
         </div>
 
         <div class="item">
-          <img src="images/3.jpg" alt="Chania" width="100" height="150">
-        </div>
-
-        <div class="item">
-          <img src="images/contrato.jpg" alt="Ch" width="100" height="150">
+          <img src="images/3.jpg" alt="contratacion" width="100" height="150">
         </div>
       
-        
+        <div class="item">
+          <img src="images/XL.jpg" alt="contratacion" width="100" height="150">
+        </div>
+
+        <div class="item">
+          <img src="images/contrato.jpg" alt="Flower" width="100" height="150">
+        </div>
       </div>
 
       <!-- Left and right controls -->

@@ -26,7 +26,7 @@
         </div>
         <div class="row">
             @if($proyectos->isEmpty())
-                <div class="well text-center">No hay proyectos.</div>
+                <div class="well text-center">No hay contratos.</div>
             @else
              {!! Form::open(['route' => 'deleteProyectos', 'method' => 'get']) !!}
                 <table class="table table-bordered table-hover">

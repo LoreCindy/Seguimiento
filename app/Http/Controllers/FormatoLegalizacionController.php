@@ -3,6 +3,7 @@
 use App\Http\Requests;
 use App\Http\Requests\CreateFormatoLegalizacionRequest;
 use App\Models\FormatoLegalizacion;
+use App\Models\formatolista;
 use Illuminate\Http\Request;
 use Mitul\Controller\AppBaseController;
 use Response;
@@ -30,8 +31,9 @@ class FormatoLegalizacionController extends AppBaseController
 	 */
 	public function index(Request $request)
 	{
-		$query = FormatoLegalizacion::name($request->only('name', 'tipo'));
+		$query = FormatoLegalizacion::name($request->only('name'));
 		$formatoLegalizacions = $query->paginate(8);
+		$formatolista =\DB::table('formatolistas')->lists('nombre_formato', 'id');
 		$formatoLegalizacions->setPath('/contratacion/public/formatoLegalizacions');
         $columns = Schema::getColumnListing('$TABLE_NAME$');
         $attributes = array();
@@ -46,10 +48,9 @@ class FormatoLegalizacionController extends AppBaseController
             }
         };
 
-     
-
         return view('formatoLegalizacions.index')
             ->with('formatoLegalizacions', $formatoLegalizacions)
+            ->with('formatolista', $formatolista)
             ->with('attributes', $attributes);
 	}
 
@@ -77,7 +78,7 @@ class FormatoLegalizacionController extends AppBaseController
 
 		$formatoLegalizacion = FormatoLegalizacion::create($input);
 
-		Flash::message('FormatoLegalizacion saved successfully.');
+		Flash::message('descripcion documentos de legalizacion guardado exitosamente.');
 
 		return redirect(route('formatoLegalizacions.index'));
 	}
@@ -95,7 +96,7 @@ class FormatoLegalizacionController extends AppBaseController
 
 		if(empty($formatoLegalizacion))
 		{
-			Flash::error('FormatoLegalizacion not found');
+			Flash::error('descripcion documentos de legalizacion no se ha encontrado');
 			return redirect(route('formatoLegalizacions.index'));
 		}
 
@@ -114,7 +115,7 @@ class FormatoLegalizacionController extends AppBaseController
 		 $data = ['formatolistas' =>\DB::table('formatolistas')->lists('nombre_formato', 'id')];
 		if(empty($formatoLegalizacion))
 		{
-			Flash::error('FormatoLegalizacion not found');
+			Flash::error('descripcion documentos de legalizacion no se ha encontrado.');
 			return redirect(route('formatoLegalizacions.index'));
 		}
 
@@ -137,14 +138,14 @@ class FormatoLegalizacionController extends AppBaseController
 
 		if(empty($formatoLegalizacion))
 		{
-			Flash::error('FormatoLegalizacion not found');
+			Flash::error('descripcion documentos de legalizacion no se ha encontrado');
 			return redirect(route('formatoLegalizacions.index'));
 		}
 
 		$formatoLegalizacion->fill($request->all());
 		$formatoLegalizacion->save();
 
-		Flash::message('FormatoLegalizacion updated successfully.');
+		Flash::message('descripcion documentos de legalizacion se ha actualizado exitosamente.');
 
 		return redirect(route('formatoLegalizacions.index'));
 	}
@@ -163,13 +164,13 @@ class FormatoLegalizacionController extends AppBaseController
 
 		if(empty($formatoLegalizacion))
 		{
-			Flash::error('FormatoLegalizacion not found');
+			Flash::error('descripcion documentos de legalizacion no se ha encontrado');
 			return redirect(route('formatoLegalizacions.index'));
 		}
 
 		$formatoLegalizacion->delete();
 
-		Flash::message('FormatoLegalizacion deleted successfully.');
+		Flash::message('descripcion documentos de legalizacion se ha eliminado exitosamente');
 
 		return redirect(route('formatoLegalizacions.index'));
 	}
@@ -178,8 +179,9 @@ class FormatoLegalizacionController extends AppBaseController
 	public function delete (Request $request)
 	{
 		$id_formatos =$request->get('eliminar');
+		
 	
-		foreach ($id_formatos as $key => $id_foramto) {
+		foreach ($id_formatos as $key => $id_formato) {
 			$formato= formatoLegalizacion::find($id_formato);
 
 		if(empty($formato))
@@ -190,7 +192,15 @@ class FormatoLegalizacionController extends AppBaseController
 
 		$formato->delete();
 	}
-		Flash::message('formato legalizacion eliminado exitosamente');
+		Flash::message('descripcion documentos de legalizacion se ha eliminado exitosamente.');
 		return redirect(route('formatoLegalizacions.index'));	
+	}
+
+
+	public function listarLegalizaciones(Request $request)
+	{
+		$input  =  $request->get( 'data' );
+		dd($input);
+		//return view('formatoLegalizacions.create');
 	}
 }

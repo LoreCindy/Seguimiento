@@ -28,6 +28,7 @@ Route::resource('consultar', 'informesController@informe');
 
 
 Route::get('eliminarVarios','detalleRevisionController@delete');
+Route::get('listarLegalizaciones','FormatoLegalizacionController@listarLegalizaciones');
 Route::post('send', ['as' => 'send', 'uses' => 'detalleRevisionController@send'] );
 Route::get('index', ['as' => 'index', 'uses' => 'detalleRevisionController@index'] );
 

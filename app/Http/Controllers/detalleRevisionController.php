@@ -63,13 +63,14 @@ class detalleRevisionController extends AppBaseController
 	public function create(Request $request)
 	{
 		$users_id=$request->user()->id;
-		$proyecto=$request->get('nombre_contratatista');
-		$revisiones= revision::where('users_id','=',$users_id)->lists('fecha_revision', 'id');
+		$revisiones=revision::join('proyectos', 'revisions.proyecto_id', '=', 'proyectos.id')
+		->where('revisions.users_id','=',$users_id)
+		->select('proyectos.nombre_contratatista','revisions.id')
+		->get();
 		
 		return view('detalleRevisions.create')
-				->with('revision',$revisiones)
-				;
-			}
+				->with('revision',$revisiones);
+	}
 
 	/**
 	 * Store a newly created detalleRevision in storage.
@@ -88,7 +89,7 @@ class detalleRevisionController extends AppBaseController
       	$input=['estado'=>$estado,'nombre_responsable'=>$nombreR,'revision_id'=>$revision,'users_id'=>$user_id];
 		$detalleRevision = detalleRevision::create($input);
 
-		Flash::message('detalleRevision saved successfully.');
+		Flash::message('el detalle de la revision se ha guardado exitosamente.');
 
 		return redirect(route('detalleRevisions.index'));
 	}
@@ -106,7 +107,7 @@ class detalleRevisionController extends AppBaseController
 
 		if(empty($detalleRevision))
 		{
-			Flash::error('detalleRevision not found');
+			Flash::error('detalle de revision no encontrado');
 			return redirect(route('detalleRevisions.index'));
 		}
 
@@ -122,15 +123,20 @@ class detalleRevisionController extends AppBaseController
 	public function edit($id)
 	{
 		$detalleRevision = detalleRevision::find($id);
- 		$data = ['revision' =>\DB::table('revisions')->lists('fecha_revision', 'id')];
+		$users_id=$detalleRevision->users_id;
+ 		$revisiones=revision::join('proyectos', 'revisions.proyecto_id', '=', 'proyectos.id')
+		->where('revisions.users_id','=',$users_id)
+		->where('revisions.id','=',$detalleRevision->revision_id)
+		->select('proyectos.nombre_contratatista','revisions.id')
+		->get();
 		if(empty($detalleRevision))
 		{
-			Flash::error('detalleRevision not found');
+			Flash::error('detalle de revision no encontrado');
 			return redirect(route('detalleRevisions.index'));
 		}
 
 		return view('detalleRevisions.edit')->with('detalleRevision', $detalleRevision)
-		  ->with($data);
+		  ->with('revision',$revisiones);
 	}
 
 	/**
@@ -143,19 +149,18 @@ class detalleRevisionController extends AppBaseController
 	 */
 	public function update($id, CreatedetalleRevisionRequest $request)
 	{
-		/** @var detalleRevision $detalleRevision */
 		$detalleRevision = detalleRevision::find($id);
 
 		if(empty($detalleRevision))
 		{
-			Flash::error('detalleRevision not found');
+			Flash::error('detalle de revision no encontrado');
 			return redirect(route('detalleRevisions.index'));
 		}
 
 		$detalleRevision->fill($request->all());
 		$detalleRevision->save();
 
-		Flash::message('detalleRevision updated successfully.');
+		Flash::message('el detalle de la revision se ha actualizado exitosamente.');
 
 		return redirect(route('detalleRevisions.index'));
 	}
@@ -169,18 +174,17 @@ class detalleRevisionController extends AppBaseController
 	 */
 	public function destroy($id)
 	{
-		/** @var detalleRevision $detalleRevision */
 		$detalleRevision = detalleRevision::find($id);
 
 		if(empty($detalleRevision))
 		{
-			Flash::error('detalleRevision not found');
+			Flash::error('detalle de revision no encontrado');
 			return redirect(route('detalleRevisions.index'));
 		}
 
 		$detalleRevision->delete();
 
-		Flash::message('detalleRevision deleted successfully.');
+		Flash::message('el detalle de la revision se ha eliminado exitosamente.');
 
 		return redirect(route('detalleRevisions.index'));
 	}
@@ -188,11 +192,9 @@ class detalleRevisionController extends AppBaseController
 	
 	public function send(Request $request)
    {
-      	$data = $request->all();
+    $data = $request->all();
    	$rules=['email'=>'required|email'];
     $validator=Validator::make($data, $rules);
-      
-			
 	if ($validator->fails())
    	{	Flash::error('Ingrese una dirección de correo correcta');
     	 return redirect(route('detalleRevisions.index'));
@@ -202,19 +204,12 @@ class detalleRevisionController extends AppBaseController
 	
     \Mail::send('contacto.email', $data, function($message) use ($request)
        {
-       	
-
            //remitente
            $message->from("legalizacion0@gmail.com");
- 			//nombre
-          // $message->text($request->text);
            //asunto
            $message->subject($request->subject);
- 
            //receptor
            $message->to($request->email);
-           //dd($message);
- 
        });
 
        Flash::message('Su correo se ha enviado con exito.');
@@ -232,15 +227,12 @@ class detalleRevisionController extends AppBaseController
 		if(empty($detalle))
 		{
 			Flash::error('detalle revision no encontrado');
-			//return redirect(route('detalleRevisions.index'));
 		}
 		
 		$detalle->delete();
 
 	}
 		Flash::message('detalle revision eliminado exitosamente');
-		//return redirect(route('detalleRevisions.index'));	
-
 	}
 
 }

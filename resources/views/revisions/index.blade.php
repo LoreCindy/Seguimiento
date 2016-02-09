@@ -58,7 +58,7 @@
                     <thead>
       <th><input type="checkbox" id="checkTodos"/><button  id="btn" class="btn btn-link" type="submit" onclick="return confirm('esta usted seguro que desea eliminar?')"><i class="glyphicon glyphicon-trash"></i> <span class="hidden-xs floatL l5">Eliminar</span></button> </th>
       <th>Fecha Revision</th>
-			<th> Nombre Contratista </th>
+			<th>Contratista </th>
 			<th>Formato Lista</th>
 			<th>Observaciones</th>
 				<th>Formato Legalizacion</th>

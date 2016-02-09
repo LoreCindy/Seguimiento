@@ -5,7 +5,7 @@
 </div>
 
 <!--- Formatolista Id Field --->
-<div class="form-group col-sm-6 col-lg-4"
+<div class="form-group col-sm-6 col-lg-4">
  {!! Form::label('formatoLista_id', 'Formato Lista:') !!}
     {!! Form::select('formatoLista_id', $formatolistas, null, ['class' => 'selectpicker show-tick','data-live-search'=>'true', 'data-size'=>'10', 'data-header'=>'Select a condiment']) !!}
 </div>
